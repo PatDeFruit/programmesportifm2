@@ -5,9 +5,11 @@
  */
 package Programmes;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,6 +26,11 @@ public class ProgrammesDAO {
         em.persist(object);
     }
 
+    //coder
+    public List<Programmes> getAllProgrammes() {
+        Query query = em.createNamedQuery("Programmes.findAll");
+        return query.getResultList();
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

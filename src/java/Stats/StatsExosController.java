@@ -6,6 +6,7 @@
 package Stats;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -14,20 +15,23 @@ import javax.faces.view.ViewScoped;
  *
  * @author Asus
  */
-@Named(value = "statsController")
+@Named(value = "statsExosController")
 @ViewScoped
-public class StatsController implements Serializable{
+public class StatsExosController implements Serializable{
 
     @EJB
     private StatsExosDAO statsExosDAO;
 
     
-    
+    //getter du compte
+    public List<StatsExos> getStatsExos(){
+        return statsExosDAO.getAllStatsExos();
+    }
     
     /**
      * Creates a new instance of StatsController
      */
-    public StatsController() {
+    public StatsExosController() {
     }
     
 }

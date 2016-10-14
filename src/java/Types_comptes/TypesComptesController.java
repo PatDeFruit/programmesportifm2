@@ -6,6 +6,7 @@
 package Types_comptes;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -22,7 +23,10 @@ public class TypesComptesController implements Serializable{
     private TypesComptesDAO typesComptesDAO;
 
     
-    
+    //getter du compte
+    public List<TypesComptes> getTypesComptes(){
+        return typesComptesDAO.getAllTypesComptes();
+    }
     
     /**
      * Creates a new instance of TypesComptesController

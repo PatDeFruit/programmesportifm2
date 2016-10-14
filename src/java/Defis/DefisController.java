@@ -6,6 +6,7 @@
 package Defis;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -21,7 +22,10 @@ public class DefisController implements Serializable{
     @EJB
     private DefisDAO defisDAO;
 
-    
+    //getter du compte
+    public List<Defis> getDefis(){
+        return defisDAO.getAllDefis();
+    }
     
     /**
      * Creates a new instance of DefisController

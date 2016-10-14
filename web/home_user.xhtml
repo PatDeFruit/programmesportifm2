@@ -9,8 +9,59 @@
         <link rel="stylesheet" type="text/css" href="CSS/cssProgrammeSportifUtilisateur.css" />
     </h:head>
     <h:body>
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        <!--Formulaire -->
+        <f:view>
+            <h1> Liste des Fruits </h1>
+            <h:form>
+            <!--tableau -->
+            <p:dataTable id="TableauCompte" value="#{comptesController.comptes}" var="cp" >
+                    <p:column>
+                        <f:facet name='header'>
+                            <h:outputText value="Login" />
+                        </f:facet>
+                        <h:outputText value="#{cp.login}" />
+                    </p:column>
+                    <p:column >
+                        <f:facet name='header'>
+                            <h:outputText value="Nom" />
+                        </f:facet>
+                        <h:outputText value="#{cp.nom}" />
+                    </p:column>
+                    <p:column >
+                        <f:facet name='header'>
+                            <h:outputText value="Prénom" />
+                        </f:facet>
+                        <h:outputText value="#{cp.prenom}" />
+                    </p:column>
+                    <p:column >
+                        <f:facet name='header'>
+                            <h:outputText value="Age" />
+                        </f:facet>
+                        <h:outputText value="#{cp.age}">
+                          <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column >
+                        <f:facet name='header'>
+                            <h:outputText value="Sexe" />
+                        </f:facet>
+                        <h:outputText value="#{cp.sexeAffichage}" />
+                    </p:column>
+                    <p:column >
+                        <f:facet name='header'>
+                            <h:outputText value="Taille" />
+                        </f:facet>
+                        <h:outputText value="#{cp.taille}" />
+                    </p:column>
+                    <p:column >
+                        <f:facet name='header'>
+                            <h:outputText value="Poids" />
+                        </f:facet>
+                        <h:outputText value="#{cp.poids}" />
+                    </p:column> 
+                </p:dataTable>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
 

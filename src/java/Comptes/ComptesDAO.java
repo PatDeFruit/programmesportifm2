@@ -5,9 +5,11 @@
  */
 package Comptes;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,7 +26,11 @@ public class ComptesDAO {
         em.persist(object);
     }
 
-    
+    //coder
+    public List<Comptes> getAllComptes() {
+        Query query = em.createNamedQuery("Comptes.findAll");
+        return query.getResultList();
+    }
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

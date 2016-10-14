@@ -5,9 +5,11 @@
  */
 package Exercices;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,6 +26,11 @@ public class ExercicesDAO {
         em.persist(object);
     }
 
+    //coder
+    public List<Exercices> getAllExercices() {
+        Query query = em.createNamedQuery("Exercices.findAll");
+        return query.getResultList();
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

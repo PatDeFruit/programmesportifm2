@@ -5,8 +5,13 @@
  */
 package Exercices;
 
+import Constitue.EstConstitue;
+import Defis.Defis;
+import Entrainements.Entrainements;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +19,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +40,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Exercices.findByDescription", query = "SELECT e FROM Exercices e WHERE e.description = :description"),
     @NamedQuery(name = "Exercices.findByDifficulte", query = "SELECT e FROM Exercices e WHERE e.difficulte = :difficulte")})
 public class Exercices implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idExercice")
+    private Collection<Entrainements> entrainementsCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idExercice")
+    private Collection<Defis> defisCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idExercice")
+    private Collection<EstConstitue> estConstitueCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -121,6 +137,33 @@ public class Exercices implements Serializable {
     @Override
     public String toString() {
         return "Exercices.Exercices[ idExercice=" + idExercice + " ]";
+    }
+
+    @XmlTransient
+    public Collection<EstConstitue> getEstConstitueCollection() {
+        return estConstitueCollection;
+    }
+
+    public void setEstConstitueCollection(Collection<EstConstitue> estConstitueCollection) {
+        this.estConstitueCollection = estConstitueCollection;
+    }
+
+    @XmlTransient
+    public Collection<Defis> getDefisCollection() {
+        return defisCollection;
+    }
+
+    public void setDefisCollection(Collection<Defis> defisCollection) {
+        this.defisCollection = defisCollection;
+    }
+
+    @XmlTransient
+    public Collection<Entrainements> getEntrainementsCollection() {
+        return entrainementsCollection;
+    }
+
+    public void setEntrainementsCollection(Collection<Entrainements> entrainementsCollection) {
+        this.entrainementsCollection = entrainementsCollection;
     }
     
 }

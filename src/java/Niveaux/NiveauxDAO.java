@@ -5,9 +5,11 @@
  */
 package Niveaux;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,7 +26,11 @@ public class NiveauxDAO {
         em.persist(object);
     }
 
-
+//coder
+    public List<Niveaux> getAllNiveaux() {
+        Query query = em.createNamedQuery("Niveaux.findAll");
+        return query.getResultList();
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

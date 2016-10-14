@@ -5,6 +5,9 @@
  */
 package Entrainements;
 
+import Comptes.Comptes;
+import Exercices.Exercices;
+import Programmes.Programmes;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -13,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -36,6 +41,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Entrainements.findByNbSerieEffect", query = "SELECT e FROM Entrainements e WHERE e.nbSerieEffect = :nbSerieEffect"),
     @NamedQuery(name = "Entrainements.findByTempsEffect", query = "SELECT e FROM Entrainements e WHERE e.tempsEffect = :tempsEffect")})
 public class Entrainements implements Serializable {
+
+    @JoinColumn(name = "idProgramme", referencedColumnName = "idProgramme")
+    @ManyToOne(optional = false)
+    private Programmes idProgramme;
+    @JoinColumn(name = "idExercice", referencedColumnName = "idExercice")
+    @ManyToOne(optional = false)
+    private Exercices idExercice;
+    @JoinColumn(name = "login", referencedColumnName = "login")
+    @ManyToOne(optional = false)
+    private Comptes login;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -139,6 +154,30 @@ public class Entrainements implements Serializable {
     @Override
     public String toString() {
         return "Entrainements.Entrainements[ idEntrainements=" + idEntrainements + " ]";
+    }
+
+    public Programmes getIdProgramme() {
+        return idProgramme;
+    }
+
+    public void setIdProgramme(Programmes idProgramme) {
+        this.idProgramme = idProgramme;
+    }
+
+    public Exercices getIdExercice() {
+        return idExercice;
+    }
+
+    public void setIdExercice(Exercices idExercice) {
+        this.idExercice = idExercice;
+    }
+
+    public Comptes getLogin() {
+        return login;
+    }
+
+    public void setLogin(Comptes login) {
+        this.login = login;
     }
     
 }

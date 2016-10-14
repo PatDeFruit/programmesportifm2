@@ -6,6 +6,7 @@
 package Niveaux;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -22,7 +23,10 @@ public class NiveauxController implements Serializable{
     private NiveauxDAO niveauxDAO;
 
     
-    
+    //getter du compte
+    public List<Niveaux> getNiveaux(){
+        return niveauxDAO.getAllNiveaux();
+    }
     /**
      * Creates a new instance of NiveauxController
      */

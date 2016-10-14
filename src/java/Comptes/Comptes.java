@@ -5,20 +5,31 @@
  */
 package Comptes;
 
+import Amitie.Amitie;
+import Defis.Defis;
+import Entrainements.Entrainements;
+import Niveaux.Niveaux;
+import Types_comptes.TypesComptes;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,6 +52,25 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comptes.findByNbDefis", query = "SELECT c FROM Comptes c WHERE c.nbDefis = :nbDefis"),
     @NamedQuery(name = "Comptes.findByNbDefisEmportes", query = "SELECT c FROM Comptes c WHERE c.nbDefisEmportes = :nbDefisEmportes")})
 public class Comptes implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "login")
+    private Collection<Entrainements> entrainementsCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "login2")
+    private Collection<Defis> defisCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "login1")
+    private Collection<Defis> defisCollection1;
+
+    @JoinColumn(name = "idType", referencedColumnName = "idType")
+    @ManyToOne(optional = false)
+    private TypesComptes idType;
+    @JoinColumn(name = "idNiveau", referencedColumnName = "idNiveau")
+    @ManyToOne(optional = false)
+    private Niveaux idNiveau;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "login2")
+    private Collection<Amitie> amitieCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "login1")
+    private Collection<Amitie> amitieCollection1;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -148,6 +178,18 @@ public class Comptes implements Serializable {
     public boolean getSexe() {
         return sexe;
     }
+    /////////////////////////////////////
+    public String getSexeAffichage() {
+        String sexAffichage;
+        if (sexe == true){
+            sexAffichage = "Femme";
+        } else if (sexe == false) {
+            sexAffichage = "Homme";
+        }else {
+            sexAffichage = "Non renseigné";
+        }
+        return sexAffichage;
+    }
 
     public void setSexe(boolean sexe) {
         this.sexe = sexe;
@@ -216,6 +258,67 @@ public class Comptes implements Serializable {
     @Override
     public String toString() {
         return "Comptes.Comptes[ login=" + login + " ]";
+    }
+
+    public TypesComptes getIdType() {
+        return idType;
+    }
+
+    public void setIdType(TypesComptes idType) {
+        this.idType = idType;
+    }
+
+    public Niveaux getIdNiveau() {
+        return idNiveau;
+    }
+
+    public void setIdNiveau(Niveaux idNiveau) {
+        this.idNiveau = idNiveau;
+    }
+
+    @XmlTransient
+    public Collection<Amitie> getAmitieCollection() {
+        return amitieCollection;
+    }
+
+    public void setAmitieCollection(Collection<Amitie> amitieCollection) {
+        this.amitieCollection = amitieCollection;
+    }
+
+    @XmlTransient
+    public Collection<Amitie> getAmitieCollection1() {
+        return amitieCollection1;
+    }
+
+    public void setAmitieCollection1(Collection<Amitie> amitieCollection1) {
+        this.amitieCollection1 = amitieCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Defis> getDefisCollection() {
+        return defisCollection;
+    }
+
+    public void setDefisCollection(Collection<Defis> defisCollection) {
+        this.defisCollection = defisCollection;
+    }
+
+    @XmlTransient
+    public Collection<Defis> getDefisCollection1() {
+        return defisCollection1;
+    }
+
+    public void setDefisCollection1(Collection<Defis> defisCollection1) {
+        this.defisCollection1 = defisCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Entrainements> getEntrainementsCollection() {
+        return entrainementsCollection;
+    }
+
+    public void setEntrainementsCollection(Collection<Entrainements> entrainementsCollection) {
+        this.entrainementsCollection = entrainementsCollection;
     }
     
 }

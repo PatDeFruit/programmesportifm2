@@ -6,6 +6,7 @@
 package Programmes;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -21,7 +22,10 @@ public class ProgrammesController implements Serializable{
     @EJB
     private ProgrammesDAO programmesDAO;
 
-    
+    //getter du compte
+    public List<Programmes> getProgrammes(){
+        return programmesDAO.getAllProgrammes();
+    }
     
     /**
      * Creates a new instance of ProgrammesController

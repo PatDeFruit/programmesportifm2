@@ -6,6 +6,7 @@
 package Comptes;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -21,7 +22,10 @@ public class ComptesController implements Serializable{
     @EJB
     private ComptesDAO comptesDAO;
 
-    
+    //getter du compte
+    public List<Comptes> getComptes(){
+        return comptesDAO.getAllComptes();
+    }
     
     /**
      * Creates a new instance of ComptesController

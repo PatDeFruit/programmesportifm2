@@ -5,6 +5,8 @@
  */
 package Constitue;
 
+import Exercices.Exercices;
+import Stats.StatsExos;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,6 +32,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EstConstitue.findAll", query = "SELECT e FROM EstConstitue e"),
     @NamedQuery(name = "EstConstitue.findByIdConstitue", query = "SELECT e FROM EstConstitue e WHERE e.idConstitue = :idConstitue")})
 public class EstConstitue implements Serializable {
+
+    @JoinColumn(name = "idStat", referencedColumnName = "idStat")
+    @ManyToOne(optional = false)
+    private StatsExos idStat;
+    @JoinColumn(name = "idExercice", referencedColumnName = "idExercice")
+    @ManyToOne(optional = false)
+    private Exercices idExercice;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -74,6 +85,22 @@ public class EstConstitue implements Serializable {
     @Override
     public String toString() {
         return "Constitue.EstConstitue[ idConstitue=" + idConstitue + " ]";
+    }
+
+    public StatsExos getIdStat() {
+        return idStat;
+    }
+
+    public void setIdStat(StatsExos idStat) {
+        this.idStat = idStat;
+    }
+
+    public Exercices getIdExercice() {
+        return idExercice;
+    }
+
+    public void setIdExercice(Exercices idExercice) {
+        this.idExercice = idExercice;
     }
     
 }

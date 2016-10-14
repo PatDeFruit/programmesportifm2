@@ -6,6 +6,7 @@
 package Entrainements;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -21,7 +22,10 @@ public class EntrainementsController implements Serializable{
     @EJB
     private EntrainementsDAO entrainementsDAO;
 
-    
+    //getter du compte
+    public List<Entrainements> getEntrainements(){
+        return entrainementsDAO.getAllEntrainement();
+    }
     
     /**
      * Creates a new instance of EntrainementsController

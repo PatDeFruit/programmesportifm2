@@ -6,6 +6,7 @@
 package Exercices;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -21,7 +22,10 @@ public class ExercicesController implements Serializable{
     @EJB
     private ExercicesDAO exercicesDAO;
 
-    
+    //getter du compte
+    public List<Exercices> getExercices(){
+        return exercicesDAO.getAllExercices();
+    }
     
     /**
      * Creates a new instance of ExercicesController

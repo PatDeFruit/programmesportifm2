@@ -5,9 +5,11 @@
  */
 package Defis;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,6 +26,11 @@ public class DefisDAO {
         em.persist(object);
     }
 
+    //coder
+    public List<Defis> getAllDefis() {
+        Query query = em.createNamedQuery("Defis.findAll");
+        return query.getResultList();
+    }
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

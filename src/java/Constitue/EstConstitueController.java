@@ -6,6 +6,7 @@
 package Constitue;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -16,17 +17,20 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "constitueController")
 @ViewScoped
-public class ConstitueController implements Serializable{
+public class EstConstitueController implements Serializable{
 
     @EJB
-    private ConstitueDAO constitueDAO;
+    private EstConstitueDAO estConstitueDAO;
 
-    
+    //getter du compte
+    public List<EstConstitue> getEstConstitue(){
+        return estConstitueDAO.getAllConstitue();
+    }
     
     /**
      * Creates a new instance of ConstitueController
      */
-    public ConstitueController() {
+    public EstConstitueController() {
     }
     
 }

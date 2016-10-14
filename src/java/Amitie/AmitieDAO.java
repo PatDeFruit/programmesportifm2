@@ -5,9 +5,11 @@
  */
 package Amitie;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -24,5 +26,11 @@ public class AmitieDAO {
         em.persist(object);
     }
 
+    //coder
+    public List<Amitie> getAllAmitie() {
+        Query query = em.createNamedQuery("Amitie.findAll");
+        return query.getResultList();
+    }
+    
     // ADD code
 }

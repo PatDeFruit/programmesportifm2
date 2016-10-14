@@ -5,8 +5,11 @@
  */
 package Stats;
 
+import Constitue.EstConstitue;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,9 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,6 +37,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "StatsExos.findByNbSeries", query = "SELECT s FROM StatsExos s WHERE s.nbSeries = :nbSeries"),
     @NamedQuery(name = "StatsExos.findByTemps", query = "SELECT s FROM StatsExos s WHERE s.temps = :temps")})
 public class StatsExos implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStat")
+    private Collection<EstConstitue> estConstitueCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -121,6 +129,15 @@ public class StatsExos implements Serializable {
     @Override
     public String toString() {
         return "Stats.StatsExos[ idStat=" + idStat + " ]";
+    }
+
+    @XmlTransient
+    public Collection<EstConstitue> getEstConstitueCollection() {
+        return estConstitueCollection;
+    }
+
+    public void setEstConstitueCollection(Collection<EstConstitue> estConstitueCollection) {
+        this.estConstitueCollection = estConstitueCollection;
     }
     
 }

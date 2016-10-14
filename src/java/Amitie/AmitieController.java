@@ -6,6 +6,7 @@
 package Amitie;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -22,6 +23,11 @@ public class AmitieController implements Serializable{
     @EJB
     private AmitieDAO amitieDAO;
 
+    //getter du compte
+    public List<Amitie> getAmitie(){
+        return amitieDAO.getAllAmitie();
+    }
+    
      
     /**
      * Creates a new instance of AmitieController
