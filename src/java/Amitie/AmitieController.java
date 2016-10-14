@@ -5,6 +5,7 @@
  */
 package Amitie;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -15,7 +16,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "amitieController")
 @ViewScoped
-public class AmitieController {
+public class AmitieController implements Serializable{
 
     //insert code -> call entreprise bean -> AmitieDAO
     @EJB

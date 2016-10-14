@@ -5,6 +5,7 @@
  */
 package Defis;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -15,7 +16,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "defisController")
 @ViewScoped
-public class DefisController {
+public class DefisController implements Serializable{
 
     @EJB
     private DefisDAO defisDAO;

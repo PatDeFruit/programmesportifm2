@@ -5,6 +5,7 @@
  */
 package Comptes;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -15,7 +16,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "comptesController")
 @ViewScoped
-public class ComptesController {
+public class ComptesController implements Serializable{
 
     @EJB
     private ComptesDAO comptesDAO;

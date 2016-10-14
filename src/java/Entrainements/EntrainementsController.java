@@ -5,6 +5,7 @@
  */
 package Entrainements;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -15,7 +16,7 @@ import javax.enterprise.context.Dependent;
  */
 @Named(value = "entrainementsController")
 @Dependent
-public class EntrainementsController {
+public class EntrainementsController implements Serializable{
 
     @EJB
     private EntrainementsDAO entrainementsDAO;

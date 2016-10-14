@@ -5,6 +5,7 @@
  */
 package Exercices;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -15,7 +16,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "exercicesController")
 @ViewScoped
-public class ExercicesController {
+public class ExercicesController implements Serializable{
 
     @EJB
     private ExercicesDAO exercicesDAO;

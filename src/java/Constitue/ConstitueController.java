@@ -5,6 +5,7 @@
  */
 package Constitue;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -15,7 +16,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "constitueController")
 @ViewScoped
-public class ConstitueController {
+public class ConstitueController implements Serializable{
 
     @EJB
     private ConstitueDAO constitueDAO;

@@ -5,6 +5,7 @@
  */
 package Stats;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -15,7 +16,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "statsController")
 @ViewScoped
-public class StatsController {
+public class StatsController implements Serializable{
 
     @EJB
     private StatsExosDAO statsExosDAO;
