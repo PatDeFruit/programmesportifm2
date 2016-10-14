@@ -1,0 +1,134 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14 oct. 2016, 15:24:49
+    Author     : Margaux
+*/
+
+body{
+    background-color: #1B6A8C;
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+/*---- Connection form--*/
+.formContainer{
+	width: 75%;
+                   max-width: 85%;
+	text-align: center;
+	margin : 0 auto;
+}
+
+#formulaireSaisie {
+	padding: 0px 25px 25px;
+    background: #E2B241;
+    
+    box-shadow: 
+        0px 0px 0px 5px #FFF, 
+        0px 4px 30px #FFF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: table;
+    position: static;
+	color: #333333;
+    font-size: 14px;
+    font-weight: 300;
+	text-align : center;
+}
+
+#formulaireSaisie .formHeader {
+    margin-bottom: 20px;
+}
+
+#formulaireSaisie .formHeader h3 {
+    color: #333333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+	text-align : center;
+}
+
+#formulaireSaisie .formHeader p {
+    color: #8f8f8f;
+    font-size: 14px;
+    font-weight: 300;
+	text-align : center;
+}
+
+#formulaireSaisie.sep {
+    height: 1px;
+    background: #e8e8e8;
+    width: 420px;
+    margin: 0px -25px;
+}
+
+#formulaireSaisie .inputs {
+    margin-top: 25px;
+	text-align : center;
+}
+
+#formulaireSaisie .inputs label {
+    color: #8f8f8f;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+    display: block;
+}
+
+#formulaireSaisie .inputs select {
+    color: #8f8f8f;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+    display: block;
+}
+
+#formulaireSaisie .inputs number {
+    color: #8f8f8f;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+    display: block;
+}
+input::-webkit-input-placeholder {
+    color:    #b5b5b5;
+}
+
+input:-moz-placeholder {
+    color:    #b5b5b5;
+}
+
+#formulaireSaisie .inputs input[type=text], input[type=password], input[type=number], textarea, select {
+    background: #f5f5f5;
+    font-size: 0.8rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    padding: 13px 10px;
+    width: 330px;
+    margin-bottom: 20px;
+    box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 );
+    clear: both;
+}
+
+#formulaireSaisie .inputs input[type=color] {
+    background: #f5f5f5;
+    font-size: 0.8rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    padding: 13px 10px;
+    width: 330px;
+	height: 75px;
+    margin-bottom: 20px;
+    box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 );
+    clear: both;
+}
