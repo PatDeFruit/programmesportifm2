@@ -7,61 +7,62 @@
     <h:head>
         <title>Programme Sportif - Accueil</title>
         <link rel="stylesheet" type="text/css" href="CSS/cssProgrammeSportifUtilisateur.css" />
+        <link rel="stylesheet" type="text/css" href="CSS/font-awesome.css" />
     </h:head>
     <h:body>
-        <!--Formulaire -->
-        <f:view>
-            <h1> Liste des Fruits </h1>
-            <h:form>
-            <!--tableau -->
-            <p:dataTable id="TableauCompte" value="#{comptesController.comptes}" var="cp" >
-                    <p:column>
-                        <f:facet name='header'>
-                            <h:outputText value="Login" />
-                        </f:facet>
-                        <h:outputText value="#{cp.login}" />
-                    </p:column>
-                    <p:column >
-                        <f:facet name='header'>
-                            <h:outputText value="Nom" />
-                        </f:facet>
-                        <h:outputText value="#{cp.nom}" />
-                    </p:column>
-                    <p:column >
-                        <f:facet name='header'>
-                            <h:outputText value="Prénom" />
-                        </f:facet>
-                        <h:outputText value="#{cp.prenom}" />
-                    </p:column>
-                    <p:column >
-                        <f:facet name='header'>
-                            <h:outputText value="Age" />
-                        </f:facet>
-                        <h:outputText value="#{cp.age}">
-                          <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </p:column>
-                    <p:column >
-                        <f:facet name='header'>
-                            <h:outputText value="Sexe" />
-                        </f:facet>
-                        <h:outputText value="#{cp.sexeAffichage}" />
-                    </p:column>
-                    <p:column >
-                        <f:facet name='header'>
-                            <h:outputText value="Taille" />
-                        </f:facet>
-                        <h:outputText value="#{cp.taille}" />
-                    </p:column>
-                    <p:column >
-                        <f:facet name='header'>
-                            <h:outputText value="Poids" />
-                        </f:facet>
-                        <h:outputText value="#{cp.poids}" />
-                    </p:column> 
-                </p:dataTable>
-            </h:form>
-        </f:view>
+        <div class="wrapper">
+            <div id="sidebar-wrapper">
+                <div id="sidebar-header">
+                    <div id="logo-wrapper">
+                        <img id="logo" src="rsrc/logo_appli.png" width="76px" height="76px"/>
+                        <br />
+                        <h1>Programme Sportif</h1>
+                    </div>
+                    <div class="sidebar-nav nano has-scrollbar">
+                        <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
+                            <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
+                                <p:menu style="width:250px" styleClass="myMenu">
+                                    <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
+                                </p:menu>
+                                <p:panelMenu style="width:250px">
+                                    <p:separator />
+                                    <p:submenu label="Programmes suivis">
+                                        <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
+                                        <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
+                                        <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>
+                                    </p:submenu>
+                                    <p:separator />
+                                    <p:submenu label="Programmes en attentes" >
+                                        <p:menuitem value="My Programme" styleClass="myMenuItem"/>
+                                    </p:submenu>
+                                </p:panelMenu>
+                                 <p:menu style="width:250px" styleClass="myMenu">
+                                    <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
+                                </p:menu>
+                                <p:panelMenu style="width:250px" >
+                                    <p:separator />
+                                    <p:submenu label="Défis en cours">
+                                        <p:menuitem value="25 burpees" actionListener="home_user" styleClass="myMenuItem"/>
+                                        <p:menuitem value="30 squats" actionListener="home_user" styleClass="myMenuItem"/>
+                                    </p:submenu>
+                                    <p:separator />
+                                    <p:submenu label="Défis gagnés" >
+                                        <p:menuitem value="20 crunchs par Sissi02" actionListener="home_user" styleClass="myMenuItem" />
+                                    </p:submenu>
+                                    <p:separator />
+                                    <p:submenu label="Défis perdus" >
+                                        <p:menuitem value="20 burpees par AllanTheBos" actionListener="home_user" styleClass="myMenuItem"/>
+                                    </p:submenu>
+                                </p:panelMenu>
+                                 <p:menu style="width:250px" styleClass="myMenu">
+                                    <p:menuitem value="Contacter" id="addProg" action="index" styleClass="myMenuItem" />
+                                </p:menu>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>
 

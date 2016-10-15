@@ -15,10 +15,17 @@ body{
 
 /*---- Connection form--*/
 .formContainer{
+                margin: 150px auto;
 	width: 75%;
                    max-width: 85%;
 	text-align: center;
-	margin : 0 auto;
+}
+
+.formContainer2{
+                margin: 150px auto;
+	width: 100%;
+                   max-width: 100%;
+	text-align: center;
 }
 
 #formulaireSaisie {
@@ -131,4 +138,88 @@ input:-moz-placeholder {
     margin-bottom: 20px;
     box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 );
     clear: both;
+}
+
+header/*bandeau haut*/
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width:100%;
+    height: 125px;
+    background-color: #333333;
+}
+
+.titreAppli{
+    min-height: 50px;
+    vertical-align: middle;
+    margin: auto;
+    color : #E2B241;
+    font-size: 50px;
+}
+
+
+.wrapper {
+  width: 100%;
+  min-height: 100%; }
+  .wrapper #sidebar-wrapper {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    margin: 0;
+    top: 0;
+    background: #211d21;
+    z-index: 102;
+    overflow: hidden; }
+  .wrapper #slim-menu-button {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    opacity: .7;
+    -moz-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s; }
+    .wrapper #slim-menu-button:hover {
+      opacity: 1; }
+
+#sidebar-header {
+  height: 100px;
+  background: #f6bb4e;
+  text-align: center;
+  position: relative; }
+  #sidebar-header #logo {
+    margin: 12px 0; }
+  #sidebar-header a i {
+    font-size: 20px;
+    color: #211d21; }
+
+.sidebar-nav {
+  margin-top: 15px; }
+  .sidebar-nav .sidebar-nav-container {
+    padding: 0; }
+  .sidebar-nav .sidebar-scroll-content {
+    display: block;
+    height: 100%;
+    position: relative; }
+    .sidebar-nav .sidebar-scroll-content .sidebar-nav-container {
+      padding-bottom: 145px; }
+    
+    
+    .myMenu{
+        background: none !important;
+        border-color: transparent !important;
+        color : #E2B241 !important;   
+        font-size: 15px !important;
+    }
+    .myMenuItem{
+        color : #E2B241 !important;   
+        font-size: 15px !important;
+    }
+    .myMenuItem:hover{
+        margin: 1px 0;
+    background:  #E2B241 !important;   
+    color: #333333 !important;
+    font-size: 15px !important;
 }
