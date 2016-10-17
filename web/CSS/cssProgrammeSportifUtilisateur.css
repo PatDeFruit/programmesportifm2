@@ -215,20 +215,21 @@ header/*bandeau haut*/
     .sidebar-nav .sidebar-scroll-content .sidebar-nav-container {
       padding-bottom: 145px; }
     
-    
 #top-bar-wrapper {
   position: fixed;
   height: 100px;
   top: 0;
+  left:0;
   margin-left: 250px;
   width: 100%;
-  z-index: 101; 
-background-color: #FFF;}
+  z-index: 101;
+  }
   #top-bar-wrapper #top-bar {
     width: calc(100% - 250px);
     height: 100px;
-    background-color: #FFF;
-    border-bottom: 1px solid #d8d8d8; }
+    background-color: #fff;
+    border-bottom: 1px solid #d8d8d8;
+    }
     #top-bar-wrapper #top-bar .search-bar {
       display: inline-block; }
       #top-bar-wrapper #top-bar .search-bar .search {
@@ -294,7 +295,8 @@ background-color: #FFF;}
       float: right;
       border-left: 1px solid #d8d8d8;
       text-align: right;
-      line-height: 20px; }
+      line-height: 20px;
+      }
       #top-bar-wrapper #top-bar .top-bar-profile .profile-name {
         margin: 30px 10px 0 0;
         color: #9a9a9a;
@@ -364,11 +366,6 @@ background-color: #FFF;}
             color: #ffffff;
             padding: 2px 6px;
             margin-top: 2px; }
-
-#main-wrapper {
-  height: 100%;
-  margin: 100px 0 0 250px;
-  background-color: #f0f0f0; }
     
  
 
@@ -441,4 +438,10 @@ background-color: #FFF;}
 .ui-state-hover a, .ui-state-hover a:hover{
   background:  #E2B241 !important;   
     color: #333333 !important;
+}
+
+.imgButton{
+    width: 50px;
+    height: 50px;
+    background-image: url(rsrc/profil.png);
 }
