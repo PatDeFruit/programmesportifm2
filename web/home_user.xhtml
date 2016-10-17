@@ -1,22 +1,24 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p ="http://primefaces.org/ui" >
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" >
     <h:head>
         <title>Programme Sportif - Accueil</title>
         <link rel="stylesheet" type="text/css" href="CSS/cssProgrammeSportifUtilisateur.css" />
         <link rel="stylesheet" type="text/css" href="CSS/font-awesome.css" />
     </h:head>
     <h:body>
+        <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
         <div class="wrapper">
             <div id="sidebar-wrapper">
                 <div id="sidebar-header">
                     <div id="logo-wrapper">
                         <img id="logo" src="rsrc/logo_appli.png" width="76px" height="76px"/>
                         <br />
-                        <h1>Programme Sportif</h1>
+                        <h1 class="titreAppliUser">Programme Sportif</h1>
                     </div>
                     <div class="sidebar-nav nano has-scrollbar">
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
@@ -24,14 +26,12 @@
                                 <p:menu style="width:250px" styleClass="myMenu">
                                     <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
-                                <p:panelMenu style="width:250px">
-                                    <p:separator />
+                                <p:panelMenu style="width:250px" styleClass="myMenu">
                                     <p:submenu label="Programmes suivis">
                                         <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
                                         <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
                                         <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>
                                     </p:submenu>
-                                    <p:separator />
                                     <p:submenu label="Programmes en attentes" >
                                         <p:menuitem value="My Programme" styleClass="myMenuItem"/>
                                     </p:submenu>
@@ -39,17 +39,14 @@
                                  <p:menu style="width:250px" styleClass="myMenu">
                                     <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
                                 </p:menu>
-                                <p:panelMenu style="width:250px" >
-                                    <p:separator />
+                                <p:panelMenu style="width:250px" styleClass="myMenu">
                                     <p:submenu label="Défis en cours">
                                         <p:menuitem value="25 burpees" actionListener="home_user" styleClass="myMenuItem"/>
                                         <p:menuitem value="30 squats" actionListener="home_user" styleClass="myMenuItem"/>
                                     </p:submenu>
-                                    <p:separator />
                                     <p:submenu label="Défis gagnés" >
                                         <p:menuitem value="20 crunchs par Sissi02" actionListener="home_user" styleClass="myMenuItem" />
                                     </p:submenu>
-                                    <p:separator />
                                     <p:submenu label="Défis perdus" >
                                         <p:menuitem value="20 burpees par AllanTheBos" actionListener="home_user" styleClass="myMenuItem"/>
                                     </p:submenu>
@@ -58,6 +55,17 @@
                                     <p:menuitem value="Contacter" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
                             </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="top-bar-wrapper">
+                <div id="top-bar">
+                    <div class="top-bar-profile">
+                        <div class="profile-name">
+                            <span>Margaux BILLON</span>
+                            <br/>
+                            Admin
                         </div>
                     </div>
                 </div>
