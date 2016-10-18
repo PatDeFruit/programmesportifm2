@@ -23,7 +23,7 @@
                     <div class="sidebar-nav nano has-scrollbar">
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
-                                <p:menu style="width:250px" styleClass="myMenu">
+                                  <p:menu style="width:250px" styleClass="myMenu">
                                     <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
                                 <p:panelMenu style="width:250px" styleClass="myMenu">
@@ -36,10 +36,10 @@
                                         <p:menuitem value="My Programme" styleClass="myMenuItem"/>
                                     </p:submenu>
                                 </p:panelMenu>
-                                 <p:menu style="width:250px" styleClass="myMenu">
+                                <p:menu style="width:250px" styleClass="myMenu">
                                     <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
                                 </p:menu>
-                                <p:panelMenu style="width:250px" styleClass="myMenu">
+                                 <p:panelMenu style="width:250px" styleClass="myMenu">
                                     <p:submenu label="Défis en cours">
                                         <p:menuitem value="25 burpees" actionListener="home_user" styleClass="myMenuItem"/>
                                         <p:menuitem value="30 squats" actionListener="home_user" styleClass="myMenuItem"/>
@@ -51,8 +51,8 @@
                                         <p:menuitem value="20 burpees par AllanTheBos" actionListener="home_user" styleClass="myMenuItem"/>
                                     </p:submenu>
                                 </p:panelMenu>
-                                 <p:menu style="width:250px" styleClass="myMenu">
-                                    <p:menuitem value="Contacter" id="addProg" action="index" styleClass="myMenuItem" />
+                                <p:menu style="width:250px" styleClass="myMenu">
+                                    <p:menuitem value="Contacter" id="contact" action="index" styleClass="myMenuItem" />
                                 </p:menu>
                             </h:form>
                         </div>
@@ -67,6 +67,10 @@
                             <br/>
                             Admin
                         </div>
+                        <h:button id="profile-image" image="rsrc/profil.png" styleClass="imgButton"/>
+                        <p:menu overlay="true" trigger="profile-image"  at="left bottom" styleClass="profilMenu">
+                            <p:menuitem value="Test" outcome="index" />
+                        </p:menu>
                     </div>
                 </div>
             </div>
