@@ -27,7 +27,7 @@
             </table>
         </header>
 
-        <div class="formContainer">
+      <div class="formContainer">
                     <table align="center">
                         <tr>
                         <td>
@@ -35,13 +35,13 @@
                                 <h1><h:outputText value="Bienvenue !"/></h1>
                                 <p:outputLabel value="Login" for="login" />
                                 <br/>
-                                <p:inputText id="login" value="" title="Login" />
+                                <p:inputText id="login" value="#{comptesController.newComptes.login}" title="Login" />
                                 <br/><br/><br/>
                                 <p:outputLabel value="Mot de passe" for="pswd" />
                                 <br/>
-                                <p:inputText id="pswd" value="" title="Mot de passe" />
+                                <p:inputText id="pswd" value="#{comptesController.newComptes.pswd}" title="Mot de passe" />
                                 <br/><br/><br/>
-                                <p:commandButton value="Connexion"/>
+                                <p:commandButton value="Connexion" action="#{comptesController.connect()}" update="formulaireSaisie"/>
                             </h:form>
                         </td>
                     </tr>

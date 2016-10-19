@@ -166,13 +166,16 @@ header/*bandeau haut*/
     font-size: 25px;
 }
 
+.ui-widget-content{
+    border: 0px;
+}
 
 .wrapper {
   width: 100%;
   min-height: 100%; }
   .wrapper #sidebar-wrapper {
     position: fixed;
-    width: 250px;
+    width: 175px;
     height: 100%;
     margin: 0;
     top: 0;
@@ -180,6 +183,17 @@ header/*bandeau haut*/
     background: #211d21;
     z-index: 102;
     overflow: hidden; }
+   .wrapper #sidebar-wrapper2 {
+    position: fixed;
+    width: 240px;
+    height: 100%;
+    margin-top: 100px;
+    top: 0;
+    right:0;
+    background: transparent;
+    z-index: 102;
+   overflow:auto;
+   border-color:transparent}
   .wrapper #slim-menu-button {
     display: block;
     position: absolute;
@@ -205,7 +219,9 @@ header/*bandeau haut*/
     color: #211d21; }
 
 .sidebar-nav {
-  margin-top: 15px; }
+  margin-top: 15px; 
+    text-align: right;
+margin-right: 5px;}
   .sidebar-nav .sidebar-nav-container {
     padding: 0; }
   .sidebar-nav .sidebar-scroll-content {
@@ -220,12 +236,12 @@ header/*bandeau haut*/
   height: 100px;
   top: 0;
   left:0;
-  margin-left: 250px;
+  margin-left: 175px;
   width: 100%;
   z-index: 101;
   }
   #top-bar-wrapper #top-bar {
-    width: calc(100% - 250px);
+    width: calc(100% - 175px);
     height: 100px;
     background-color: #fff;
     border-bottom: 1px solid #d8d8d8;
@@ -366,8 +382,6 @@ header/*bandeau haut*/
             color: #ffffff;
             padding: 2px 6px;
             margin-top: 2px; }
-    
- 
 
     
     .myMenu{
@@ -429,7 +443,6 @@ header/*bandeau haut*/
 }
 
 
-
 .ui-state-default a, .ui-state-default a:link{
     text-shadow: 0 1px 0 #333333;
      color : #E2B241 !important;   
@@ -478,4 +491,26 @@ header/*bandeau haut*/
     width: 50px;
     height: 50px;
     margin-top: 20px;
+}
+
+#main-wrapper{
+    position: relative;
+  margin-top: 110px;
+  margin-left: 180px;
+  width: 85%;
+  overflow: auto;
+}
+
+.ui-tagcloud li a{
+    color: #FFF;
+}
+
+.ui-tagcloud li a:hover{
+    color:#E2B241;
+    background: transparent;
+    -webkit-box-shadow : none;
+}
+
+.tagCloud{
+    background-color: transparent;
 }

@@ -7,6 +7,8 @@ package Comptes;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -45,7 +47,19 @@ public class ComptesDAO {
         } catch (Exception e){
             System.err.println(e.getMessage());
         }
+        
     }
     
+        public Comptes connect(String login,String mdp){
+        Query query = em.createQuery("SELECT c FROM Comptes c WHERE c.login = :login AND c.pswd = :pswd").setParameter("login", login).setParameter("pswd", mdp);
+        try{
+            return (Comptes) query.getSingleResult();
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login/mot de passe invalide",null));
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
     
+       
 }

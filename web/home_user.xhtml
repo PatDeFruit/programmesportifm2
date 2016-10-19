@@ -24,23 +24,23 @@
                     <div class="sidebar-nav nano has-scrollbar">
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
-                                  <p:menu style="width:250px" styleClass="myMenu">
-                                    <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
+                                  <p:menu style="width:175px" styleClass="myMenu">
+                                        <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
-                                <p:panelMenu style="width:250px" styleClass="myMenu">
-                                    <p:submenu label="Programmes suivis">
-                                        <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
-                                        <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
-                                        <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>
-                                    </p:submenu>
-                                    <p:submenu label="Programmes en attentes" >
-                                        <p:menuitem value="My Programme" styleClass="myMenuItem"/>
-                                    </p:submenu>
+                                <p:panelMenu style="width:175px" styleClass="myMenu">
+                                        <p:submenu label="Programmes suivis">
+                                            <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
+                                            <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
+                                            <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>
+                                        </p:submenu>
+                                        <p:submenu label="Programmes en attentes" >
+                                            <p:menuitem value="My Programme" styleClass="myMenuItem"/>
+                                        </p:submenu>
                                 </p:panelMenu>
-                                <p:menu style="width:250px" styleClass="myMenu">
+                                <p:menu style="width:175px" styleClass="myMenu">
                                     <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
                                 </p:menu>
-                                 <p:panelMenu style="width:250px" styleClass="myMenu">
+                                 <p:panelMenu style="width:175px" styleClass="myMenu">
                                     <p:submenu label="Défis en cours">
                                         <p:menuitem value="25 burpees" actionListener="home_user" styleClass="myMenuItem"/>
                                         <p:menuitem value="30 squats" actionListener="home_user" styleClass="myMenuItem"/>
@@ -52,7 +52,7 @@
                                         <p:menuitem value="20 burpees par AllanTheBos" actionListener="home_user" styleClass="myMenuItem"/>
                                     </p:submenu>
                                 </p:panelMenu>
-                                <p:menu style="width:250px" styleClass="myMenu">
+                                <p:menu style="width:175px" styleClass="myMenu">
                                     <p:menuitem value="Contacter" id="contact" action="index" styleClass="myMenuItem" />
                                 </p:menu>
                             </h:form>
@@ -99,6 +99,38 @@
                     </div>
                 </div>
             </div>
+            <div id="sidebar-wrapper2">
+                <p:tagCloud model="#{tagCloudView.model}" style="width:240px;" styleClass="tagCloud"/>
+            </div>
+            <div id="main-wrapper">
+                <h:form style="width: 85%">
+                    <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px;">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                            <h:outputText
+                                value="The story begins as Don Vito Corleone..." />
+                        </h:panelGrid>
+                    </p:panel>
+                    <p:panel id="test" header="Test"  style="margin-bottom:20px;">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                            <h:outputText
+                                value="The story begins as Don Vito Corleone..." />
+                        </h:panelGrid>
+                    </p:panel>
+                     <p:panel id="graphic" header="Graph"  style="margin-bottom:20px;">
+                       <p:chart type="line" model="#{chartView.lineModel1}" />
+                    </p:panel>
+                    <p:panel id="test2" header="Test"  style="margin-bottom:20px;">
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                            <h:outputText
+                                value="The story begins as Don Vito Corleone..." />
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </div>
+            
         </div>
     </h:body>
 </html>

@@ -31,6 +31,8 @@ public class ComptesController implements Serializable{
     private Comptes newComptes;
     private  NiveauxDAO niveauxDAO;
     private Niveaux niveaux;
+     private Comptes result;
+    private Comptes saisie;
     private boolean skip;
 
     //getter du compte
@@ -89,6 +91,23 @@ public class ComptesController implements Serializable{
         }
         else {
             return event.getNewStep();
+        }
+    }
+    
+
+    
+    public String connect(){
+        result = comptesDAO.connect(newComptes.getLogin(),newComptes.getPswd());
+        if(result != null){
+            if(result.getIdType().getIdType()==1){
+                return "home_user";
+            }
+            else{
+                return "home_user";
+            }
+        }
+        else{
+            return "index";
         }
     }
 }
