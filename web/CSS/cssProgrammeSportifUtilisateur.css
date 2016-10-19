@@ -447,17 +447,35 @@ header/*bandeau haut*/
 }
 
 .profilMenu{
-     margin: 1px 0 0 0;
-      padding: 0;
-      position: absolute;
-      display: none;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
-      -webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
-      -moz-box-shadow: 0 1px 2px 4px rgba(0, 0, 0, 0.3);
-      width: 250px;
-      -moz-border-radius: 2px;
-      -webkit-border-radius: 2px;
-      border-radius: 2px;
-      z-index: 102; 
+    margin: 1px 0 0 0;
+     padding: 0;
+     position: absolute;
+     display: none;
+     background-color: #ffffff;
+     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+     -webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 1px 2px 4px rgba(0, 0, 0, 0.3);
+     width: 250px;
+     -moz-border-radius: 2px;
+     -webkit-border-radius: 2px;
+     border-radius: 2px;
+     z-index: 102; 
+}
+
+  .profilMenuItem:hover{
+    background:  #E2B241 ;   
+    color: #333333 ;
+    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 1px 2px 4px rgba(0, 0, 0, 0.3);
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    z-index: 102; 
+}
+
+.iconMenuBar{
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
 }
