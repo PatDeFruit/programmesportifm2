@@ -2,13 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" >
     <h:head>
         <title>Programme Sportif - Accueil</title>
-        <link rel="stylesheet" type="text/css" href="CSS/cssProgrammeSportifUtilisateur.css" />
-        <link rel="stylesheet" type="text/css" href="CSS/font-awesome.css" />
+        <style type="text/css" media="all"> 
+       @import "CSS/cssProgrammeSportifUtilisateur.css"; 
+        </style> 
     </h:head>
     <h:body>
         <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
@@ -67,10 +68,34 @@
                             <br/>
                             Admin
                         </div>
-                        <h:button id="profile-image" image="rsrc/profil.png" styleClass="imgButton"/>
-                        <p:menu overlay="true" trigger="profile-image"  at="left bottom" styleClass="profilMenu">
-                            <p:menuitem value="Test" outcome="index" />
+                        <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
+                        <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >
+                            <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
+                            <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
                         </p:menu>
+                    </div>
+                    <div class="top-menu">
+                        <div class="top-bar-icon">
+                            <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
+                                <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
+                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
+                                </p:menu>
+                        </div>
+                        <div class="top-bar-icon">
+                            <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
+                                <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
+                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
+                                </p:menu>
+                        </div>
+                        <div class="top-bar-icon">
+                            <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
+                                <p:menu overlay="true" trigger="friend_notif" my="left top" at="left bottom" styleClass="profilMenu" >
+                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
+                                </p:menu>
+                        </div>
                     </div>
                 </div>
             </div>
