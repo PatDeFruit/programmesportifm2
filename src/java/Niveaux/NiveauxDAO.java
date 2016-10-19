@@ -31,6 +31,12 @@ public class NiveauxDAO {
         Query query = em.createNamedQuery("Niveaux.findAll");
         return query.getResultList();
     }
+    
+//trouver un niveau via l'Id
+    public Niveaux getFindByOneNiveaux(int id) {
+        Query query = em.createNamedQuery("Niveaux.findByIdNiveau").setParameter("idNiveau", id);
+        return (Niveaux) query.getSingleResult();
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

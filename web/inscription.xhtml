@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p ="http://primefaces.org/ui" >
+    
+    <f:metadata>
+        <f:viewParam name="id" value="#{niveauxController.id}"/>
+    </f:metadata>
+    
+    <h:head>
+        <title>Programme Sportif - Inscription</title>
+      <style type="text/css" media="all"> 
+       @import "CSS/cssProgrammeSportifUtilisateur.css"; 
+        </style> 
+    </h:head>
+    <h:body>
+        <header>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <h:graphicImage value="rsrc/logo_appli.png" width="125px" height="125px"/>
+                    </td>
+                    <td>
+                        <h:outputText value="Programme Sportif Gphy" styleClass="titreAppli" />
+                    </td>
+                    <td align="center">
+                        <h:button id="profile-image" image="rsrc/Home.png" title="Retour vers l'accueil" styleClass="imgButton" outcome="index"/>
+                    </td>
+                </tr>
+            </table>    
+        </header>
+
+        <div class="formContainer">
+            <h:form>
+                <p:growl id="growl" sticky="true" showDetail="true" life="2000"/>
+                                
+                <p:wizard flowListener="#{comptesController.onFlowProcess}">
+                 <!-- login -->
+                    <p:tab id="Compte" title="Création du Compte">
+                         <p:panel header="Création du Compte">
+                             <p:messages />
+                             <h:panelGrid columns="2" columnClasses="label, value">
+                                 <h:outputText value="eMail" />
+                                 <p:inputText value="#{comptesController.newComptes.email}" required="true" label="email"/>
+                                 <h:outputText value="Login" />
+                                    <p:inputText value="#{comptesController.newComptes.login}" required="true" label="login"/>
+                                 <h:outputText value="Mot de passe" />
+                                    <p:inputText value="#{comptesController.newComptes.pswd}" required="true" label="pswd"/>
+
+                                    
+                                
+                             </h:panelGrid>
+                         </p:panel>
+                    </p:tab>
+                    <!-- Info perso -->
+                    <p:tab id="Info" title="Informations personnelles">
+                         <p:panel header="Informations personnelles">
+                             <p:messages />
+                             <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Nom" />
+                                    <p:inputText value="#{comptesController.newComptes.nom}" required="true" label="nom"/>
+                                <h:outputText value="Prénom" />
+                                    <p:inputText value="#{comptesController.newComptes.prenom}" required="true" label="prenom"/>
+                                 <h:outputText value="Date de naissance" />
+                                    <p:calendar id="button" value="#{comptesController.newComptes.age}" showOn="button" />
+                                <h:outputText value="Sexe" />
+                                    <p:inputText value="#{comptesController.newComptes.sexe}" required="true" label="sexe"/>
+                                <h:outputText value="Taille" />
+                                    <p:inputText value="#{comptesController.newComptes.taille}" required="true" label="taille"/>
+                                <h:outputText value="Poids" />
+                                    <p:inputText value="#{comptesController.newComptes.poids}" required="true" label="poids"/>
+                             </h:panelGrid>
+                         </p:panel>
+                     </p:tab> -->
+                    <!-- Confirmation -->
+                    <p:tab id="confirm" title="Confirmation">
+                        <p:panel header="Confirmation">
+                            <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="eMail : " />
+                                    <h:outputText value="#{comptesController.newComptes.email}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Login : " />
+                                    <h:outputText value="#{comptesController.newComptes.login}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Mot de passe : " />
+                                    <h:outputText value="#{comptesController.newComptes.pswd}" styleClass="outputLabel"/>
+                                     
+                                    
+                               </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Nom : " />
+                                    <h:outputText value="#{comptesController.newComptes.nom}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Prénom : " />
+                                    <h:outputText value="#{comptesController.newComptes.prenom}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Age : " />
+                                    <h:outputText value="#{comptesController.newComptes.age}" styleClass="outputLabel"> 
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+
+                                    <h:outputText value="Sexe : " />
+                                    <h:outputText value="#{comptesController.newComptes.sexeAffichage}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Taille : " />
+                                    <h:outputText value="#{comptesController.newComptes.taille}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Poids : " />
+                                    <h:outputText value="#{comptesController.newComptes.poids}" styleClass="outputLabel"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                            
+                            <p:commandButton value="Sauvegarder" action="#{comptesController.saveComptes}" update="growl" process="@this"/>
+                        </p:panel>
+                    </p:tab>
+                    
+                    
+                </p:wizard>
+            </h:form> 
+        </div>
+        
+        
+        
+        <br />
+    </h:body>
+</html>
+

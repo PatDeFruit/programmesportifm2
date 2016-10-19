@@ -8,6 +8,7 @@ package Niveaux;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
@@ -21,16 +22,43 @@ public class NiveauxController implements Serializable{
 
     @EJB
     private NiveauxDAO niveauxDAO;
-
+    private Niveaux newNiveaux;
+    int id;
     
-    //getter du compte
+    
+    //getter
     public List<Niveaux> getNiveaux(){
         return niveauxDAO.getAllNiveaux();
     }
+
+    public Niveaux getNewNiveaux() {
+        return newNiveaux;
+    }
+
+    public void setNewNiveaux(Niveaux newNiveaux) {
+        this.newNiveaux = newNiveaux;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+    
     /**
      * Creates a new instance of NiveauxController
      */
     public NiveauxController() {
+        newNiveaux = new Niveaux();
     }
+    
+    public void getFindByOneNiveaux(ComponentSystemEvent event){
+        newNiveaux = niveauxDAO.getFindByOneNiveaux(id);
+    }
+    
     
 }

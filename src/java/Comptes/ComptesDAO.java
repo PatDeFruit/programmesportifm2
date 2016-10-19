@@ -26,12 +26,26 @@ public class ComptesDAO {
         em.persist(object);
     }
 
-    //coder
+    //Liste des comptes
     public List<Comptes> getAllComptes() {
         Query query = em.createNamedQuery("Comptes.findAll");
         return query.getResultList();
     }
     
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+
+     //save Comptes
+    public void saveComptes(Comptes newComptes){
+        try{
+            if(newComptes.getLogin() != null){
+                em.merge(newComptes);
+            }
+            else {
+                em.persist(newComptes);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    
 }
