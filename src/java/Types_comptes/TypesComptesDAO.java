@@ -32,6 +32,11 @@ public class TypesComptesDAO {
         return query.getResultList();
     }
     
+    //trouver un type via l'Id
+    public TypesComptes getFindByOneTypesComptes(int id) {
+        Query query = em.createNamedQuery("TypesComptes.findByIdType").setParameter("idType", id);
+        return (TypesComptes) query.getSingleResult();
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

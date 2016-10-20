@@ -5,6 +5,7 @@
  */
 package Comptes;
 
+import Types_comptes.TypesComptes;
 import Niveaux.Niveaux;
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.inject.Named;
 import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
 import javax.faces.view.ViewScoped;
+import Types_comptes.TypesComptesDAO;
 
 /**
  *
@@ -28,11 +30,17 @@ public class ComptesController implements Serializable{
 
     @EJB
     private ComptesDAO comptesDAO;
+        
+    @EJB
+    private NiveauxDAO niveauxDAO;
+    
+    @EJB
+    private TypesComptesDAO typeDAO;
+    
     private Comptes newComptes;
-    private  NiveauxDAO niveauxDAO;
     private Niveaux niveaux;
-     private Comptes result;
-    private Comptes saisie;
+    private TypesComptes typeComptes;
+    private Comptes result;
     private boolean skip;
 
     //getter du compte
@@ -62,15 +70,30 @@ public class ComptesController implements Serializable{
      * @return
      */
     public String saveComptes() {
-        FacesMessage msg = new FacesMessage("Successful", "Bienvenu :" + newComptes.getLogin());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        //System.out.println(niveaux.getFindByOneNiveaux(1));
-        niveaux = niveauxDAO.getFindByOneNiveaux(1);
-        newComptes.setIdNiveau(niveaux);
-        //System.out.println("blabla"+ niveaux.getFindByOneNiveaux(1));
-        comptesDAO.saveComptes(newComptes);
-        return "inscription";
+        int resultat = comptesDAO.getCountLogin(newComptes.getLogin());
+        //System.out.println("**************NON ****"+newComptes.getLogin()+"*********************");
+        //System.out.println("**********RES********"+resultat+"*********************");
+        if (resultat == 0){   
+            //ajout du niveau
+                this.niveaux = niveauxDAO.getFindByOneNiveaux(1);
+                newComptes.setIdNiveau(this.niveaux);
+            //ajout du type
+                this.typeComptes = typeDAO.getFindByOneTypesComptes(2);
+                newComptes.setIdType(this.typeComptes);
+            //création du nouveau compte
+                comptesDAO.saveComptes(newComptes);  
+                FacesMessage msg = new FacesMessage("Successful", "Bienvenu :" + newComptes.getLogin());
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                
+                return "index";  
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            return "inscription";  
+        }
+        
     }
+    
     
     /**
     * //skip pour passer les pages pour l'inscription 
@@ -93,9 +116,7 @@ public class ComptesController implements Serializable{
             return event.getNewStep();
         }
     }
-    
-
-    
+        
     public String connect(){
         result = comptesDAO.connect(newComptes.getLogin(),newComptes.getPswd());
         if(result != null){

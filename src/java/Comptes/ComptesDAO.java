@@ -5,6 +5,7 @@
  */
 package Comptes;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
@@ -34,14 +35,23 @@ public class ComptesDAO {
         return query.getResultList();
     }
     
+    //compteur de la présence d'un login dans la BDD
+    //trouver un niveau via l'Id
+    public int getCountLogin(String login) {
+        Query query = em.createQuery("SELECT COUNT(c) FROM Comptes c Where c.login = :login").setParameter("login", login);
+        try{
+            return ((Number) query.getSingleResult()).intValue();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return -1;
+        }
+    }
 
      //save Comptes
     public void saveComptes(Comptes newComptes){
         try{
             if(newComptes.getLogin() != null){
-                em.merge(newComptes);
-            }
-            else {
                 em.persist(newComptes);
             }
         } catch (Exception e){
@@ -49,6 +59,7 @@ public class ComptesDAO {
         }
         
     }
+   
     
         public Comptes connect(String login,String mdp){
         Query query = em.createQuery("SELECT c FROM Comptes c WHERE c.login = :login AND c.pswd = :pswd").setParameter("login", login).setParameter("pswd", mdp);
