@@ -50,7 +50,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Comptes.findByTaille", query = "SELECT c FROM Comptes c WHERE c.taille = :taille"),
     @NamedQuery(name = "Comptes.findByPoids", query = "SELECT c FROM Comptes c WHERE c.poids = :poids"),
     @NamedQuery(name = "Comptes.findByNbDefis", query = "SELECT c FROM Comptes c WHERE c.nbDefis = :nbDefis"),
-    @NamedQuery(name = "Comptes.findByNbDefisEmportes", query = "SELECT c FROM Comptes c WHERE c.nbDefisEmportes = :nbDefisEmportes")})
+    @NamedQuery(name = "Comptes.findByNbDefisEmportes", query = "SELECT c FROM Comptes c WHERE c.nbDefisEmportes = :nbDefisEmportes"),
+    @NamedQuery(name = "Comptes.CountLogin", query = "SELECT COUNT(c) FROM Comptes c WHERE c.login = :login")
+})
+    
+
 public class Comptes implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "login")

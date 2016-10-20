@@ -13,6 +13,7 @@
     </h:head>
     <h:body>
         <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
+            
         <div class="wrapper">
             <div id="sidebar-wrapper">
                 <div id="sidebar-header">
@@ -24,6 +25,7 @@
                     <div class="sidebar-nav nano has-scrollbar">
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
+                                <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
                                   <p:menu style="width:175px" styleClass="myMenu">
                                         <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
@@ -68,8 +70,8 @@
                             <br/>
                             Admin
                         </div>
+                        <h:form style="display :inline">
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
-                        <h:form>
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
                             <p:menuitem value="Profil" styleClass="profilMenuItem" onclick="PF('dlg2').show();"/>
                             <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
@@ -78,8 +80,8 @@
                     </div>
                     <div class="top-menu">
                         <div class="top-bar-icon">
-                            <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
                             <h:form>
+                            <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
@@ -87,8 +89,8 @@
                             </h:form>
                         </div>
                         <div class="top-bar-icon">
-                            <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
                             <h:form>
+                             <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
@@ -96,8 +98,8 @@
                             </h:form>
                         </div>
                         <div class="top-bar-icon">
-                            <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
                             <h:form>
+                            <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="friend_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
