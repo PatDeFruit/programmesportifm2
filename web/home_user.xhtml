@@ -69,67 +69,89 @@
                             Admin
                         </div>
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
-                        <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >
-                            <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
+                        <h:form>
+                        <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
+                            <p:menuitem value="Profil" styleClass="profilMenuItem" onclick="PF('dlg2').show();"/>
                             <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
                         </p:menu>
+                        </h:form>
                     </div>
                     <div class="top-menu">
                         <div class="top-bar-icon">
                             <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
+                            <h:form>
                                 <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
                                 </p:menu>
+                            </h:form>
                         </div>
                         <div class="top-bar-icon">
                             <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
+                            <h:form>
                                 <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
                                 </p:menu>
+                            </h:form>
                         </div>
                         <div class="top-bar-icon">
                             <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
+                            <h:form>
                                 <p:menu overlay="true" trigger="friend_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
                                 </p:menu>
+                            </h:form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="sidebar-wrapper2">
-                <p:tagCloud model="#{tagCloudView.model}" style="width:240px;" styleClass="tagCloud"/>
-            </div>
-            <div id="main-wrapper">
-                <h:form style="width: 85%">
-                    <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px;">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-                            <h:outputText
-                                value="The story begins as Don Vito Corleone..." />
-                        </h:panelGrid>
-                    </p:panel>
-                    <p:panel id="test" header="Test"  style="margin-bottom:20px;">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-                            <h:outputText
-                                value="The story begins as Don Vito Corleone..." />
-                        </h:panelGrid>
-                    </p:panel>
-                     <p:panel id="graphic" header="Graph"  style="margin-bottom:20px;">
-                       <p:chart type="line" model="#{chartView.lineModel1}" />
-                    </p:panel>
-                    <p:panel id="test2" header="Test"  style="margin-bottom:20px;">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-                            <h:outputText
-                                value="The story begins as Don Vito Corleone..." />
-                        </h:panelGrid>
-                    </p:panel>
-                </h:form>
-            </div>
+            <table class="main-wrapper">
+                <tr>
+                    <td>
+                        <div>
+                        <h:form>
+                            <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px;">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                                    <h:outputText
+                                        value="The story begins as Don Vito Corleone..." />
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:panel id="test" header="Test"  style="margin-bottom:20px;">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                                    <h:outputText
+                                        value="The story begins as Don Vito Corleone..." />
+                                </h:panelGrid>
+                            </p:panel>
+                             <p:panel id="graphic" header="Graph"  style="margin-bottom:20px;">
+                               <p:chart type="line" model="#{chartView.lineModel1}" />
+                            </p:panel>
+                            <p:panel id="test2" header="Test"  style="margin-bottom:20px;">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                                    <h:outputText
+                                        value="The story begins as Don Vito Corleone..." />
+                                </h:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                    </td>
+                    <td width="240px">
+                        <div id="sidebar-wrapper2">
+                         <p:tagCloud model="#{tagCloudView.model}" style="width:240px;" styleClass="tagCloud"/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+            <!-- Les fenetres de dialogue -->
+            <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                 <h:outputText value="This is a Modal Dialog." />
+             </p:dialog>   
+            
             
         </div>
     </h:body>

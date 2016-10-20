@@ -32,7 +32,6 @@ public class ComptesController implements Serializable{
     private  NiveauxDAO niveauxDAO;
     private Niveaux niveaux;
      private Comptes result;
-    private Comptes saisie;
     private boolean skip;
 
     //getter du compte
@@ -62,11 +61,11 @@ public class ComptesController implements Serializable{
      * @return
      */
     public String saveComptes() {
-        FacesMessage msg = new FacesMessage("Successful", "Bienvenu :" + newComptes.getLogin());
+        FacesMessage msg = new FacesMessage("Successful", "Bienvenue :" + newComptes.getLogin());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         //System.out.println(niveaux.getFindByOneNiveaux(1));
-        niveaux = niveauxDAO.getFindByOneNiveaux(1);
-        newComptes.setIdNiveau(niveaux);
+        //niveaux = niveauxDAO.getFindByOneNiveaux(1);
+        //newComptes.setIdNiveau(niveaux);
         //System.out.println("blabla"+ niveaux.getFindByOneNiveaux(1));
         comptesDAO.saveComptes(newComptes);
         return "inscription";
@@ -107,6 +106,7 @@ public class ComptesController implements Serializable{
             }
         }
         else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Mot de passe ou Login incorrect!"));
             return "index";
         }
     }

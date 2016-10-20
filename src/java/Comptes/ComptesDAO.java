@@ -42,6 +42,8 @@ public class ComptesDAO {
                 em.merge(newComptes);
             }
             else {
+                newComptes.getIdType().setIdType(2);
+                newComptes.getIdNiveau().setIdNiveau(1);
                 em.persist(newComptes);
             }
         } catch (Exception e){
@@ -55,11 +57,8 @@ public class ComptesDAO {
         try{
             return (Comptes) query.getSingleResult();
         }catch(Exception e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login/mot de passe invalide",null));
             System.err.println(e.getMessage());
             return null;
         }
     }
-    
-       
 }
