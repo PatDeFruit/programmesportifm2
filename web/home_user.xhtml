@@ -66,15 +66,15 @@
                 <div id="top-bar">
                     <div class="top-bar-profile">
                         <div class="profile-name">
-                            <span>Margaux BILLON</span>
+                            <span><h:outputText value="#{comptesController.compteConnecte.login}" /></span>
                             <br/>
-                            Admin
+                                Utilisateur
                         </div>
                         <h:form style="display :inline">
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
                             <p:menuitem value="Profil" styleClass="profilMenuItem" onclick="PF('dlg2').show();"/>
-                            <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
+                            <p:menuitem value="Deconnexion" outcome="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
                         </p:menu>
                         </h:form>
                     </div>
@@ -111,7 +111,7 @@
             </div>
             <table class="main-wrapper">
                 <tr>
-                    <td>
+                    <td style="vertical-align: top">
                         <div>
                         <h:form>
                             <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px;">

@@ -18,13 +18,15 @@ import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
 import javax.faces.view.ViewScoped;
 import Types_comptes.TypesComptesDAO;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Asus
  */
 @Named(value = "comptesController")
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class ComptesController implements Serializable{
 
@@ -38,10 +40,13 @@ public class ComptesController implements Serializable{
     private TypesComptesDAO typeDAO;
     
     private Comptes newComptes;
+    private Comptes compteConnecte;
     private Niveaux niveaux;
     private TypesComptes typeComptes;
     private Comptes result;
     private boolean skip;
+    
+    
 
     //getter du compte
     public List<Comptes> getComptes(){
@@ -56,6 +61,17 @@ public class ComptesController implements Serializable{
     public void setNewComptes(Comptes newComptes) {
         this.newComptes = newComptes;
     }
+
+    public Comptes getCompteConnecte() {
+        return compteConnecte;
+    }
+
+    public void setCompteConnecte(Comptes compteConnecte) {
+        this.compteConnecte = compteConnecte;
+    }
+
+
+    
     
     
     /**
@@ -119,6 +135,7 @@ public class ComptesController implements Serializable{
         
     public String connect(){
         result = comptesDAO.connect(newComptes.getLogin(),newComptes.getPswd());
+        compteConnecte = result;
         if(result != null){
             if(result.getIdType().getIdType()==1){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connexion réussie !", "Vous êtes connecté en tant que modérateur."));
@@ -130,10 +147,18 @@ public class ComptesController implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                 return "home_user";
             }
+           
         }
         else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erreur!", "Mot de passe ou Login incorrect!"));
             return "index";
-        }
+        }        
     }
+    
+     public String disconnect(){
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("comptesController");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Déconnexion !", "Vous êtes déconnecté"));
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        return "index";
+        }        
 }
