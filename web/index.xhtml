@@ -40,7 +40,7 @@
                                 <br/><br/><br/>
                                 <p:outputLabel value="Mot de passe" for="pswd" />
                                 <br/>
-                                <p:inputText id="pswd" value="#{comptesController.newComptes.pswd}" title="Mot de passe" />
+                                <p:password style="width:200px;height:5px" id="pswd" value="#{comptesController.newComptes.pswd}" title="Mot de passe" />
                                 <br/><br/><br/>
                                 <p:commandButton value="Connexion" action="#{comptesController.connect()}" update="formulaireSaisie"/>
                             </h:form>
