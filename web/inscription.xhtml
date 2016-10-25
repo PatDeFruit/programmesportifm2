@@ -47,11 +47,8 @@
                                  <h:outputText value="Login" />
                                     <p:inputText value="#{comptesController.newComptes.login}" required="true" label="login"/>
                                  <h:outputText value="Mot de passe" />
-                                    <p:inputText value="#{comptesController.newComptes.pswd}" required="true" label="pswd"/>
-
-                                    
-                                
-                             </h:panelGrid>
+                                    <p:password value="#{comptesController.newComptes.pswd}" feedback="true" inline="true" required="true" label="pswd" style="width:210px;height:10px"/>
+                            </h:panelGrid>
                          </p:panel>
                     </p:tab>
                     <!-- Info perso -->
