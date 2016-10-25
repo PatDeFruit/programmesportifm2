@@ -33,7 +33,8 @@
         </header>
 
         <div class="formContainer">
-            <h:form id="inscriptionFrom">
+            <center>
+            <h:form id="formulaireSaisie">
                 <p:growl id="growl" sticky="true" showDetail="true" life="2000"/>
                                 
                 <p:wizard flowListener="#{comptesController.onFlowProcess}">
@@ -111,13 +112,14 @@
                                 </h:panelGrid>
                             </h:panelGrid>
                             
-                            <p:commandButton value="Sauvegarder" action="#{comptesController.saveComptes()}" update="inscriptionFrom" process="@this"/>
+                            <p:commandButton value="Sauvegarder" action="#{comptesController.saveComptes()}" update="formulaireSaisie" process="@this" />
                         </p:panel>
                     </p:tab>
                     
                     
                 </p:wizard>
             </h:form> 
+            </center>
         </div>
         
         
