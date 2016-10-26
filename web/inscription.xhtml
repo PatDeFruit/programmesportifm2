@@ -44,11 +44,14 @@
                              <p:messages />
                              <h:panelGrid columns="2" columnClasses="label, value">
                                  <h:outputText value="eMail" />
-                                 <p:inputText value="#{comptesController.newComptes.email}" required="true" label="email"/>
+                                 <p:inputText id="email" style="float:left;" value="#{comptesController.newComptes.email}" required="true" label="email" validatorMessage="#{settingsBean.aFriendEmail} L'email n'est pas valide. Veuillez recommencer !">
+                                 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                 </p:inputText>
+
                                  <h:outputText value="Login" />
-                                    <p:inputText value="#{comptesController.newComptes.login}" required="true" label="login"/>
+                                    <p:inputText style="float:left;" value="#{comptesController.newComptes.login}" required="true" label="login"/>
                                  <h:outputText value="Mot de passe" />
-                                    <p:password value="#{comptesController.newComptes.pswd}" feedback="true" inline="true" required="true" label="pswd" style="width:210px;height:10px"/>
+                                    <p:password value="#{comptesController.newComptes.pswd}" feedback="true" inline="false" required="true" label="pswd" style="width:200px;height:10px;float:left;"/>
                             </h:panelGrid>
                          </p:panel>
                     </p:tab>
@@ -58,39 +61,44 @@
                              <p:messages />
                              <h:panelGrid columns="2" columnClasses="label, value">
                                 <h:outputText value="Nom" />
-                                    <p:inputText value="#{comptesController.newComptes.nom}" required="true" label="nom"/>
+                                    <p:inputText style="float:left;" value="#{comptesController.newComptes.nom}" required="true" label="nom"/>
                                 <h:outputText value="Prénom" />
-                                    <p:inputText value="#{comptesController.newComptes.prenom}" required="true" label="prenom"/>
+                                    <p:inputText style="float:left;" value="#{comptesController.newComptes.prenom}" required="true" label="prenom"/>
                                  <h:outputText value="Date de naissance" />
-                                    <p:calendar id="button" value="#{comptesController.newComptes.age}" showOn="button" />
-                                <h:outputText value="Sexe" />
-                                    <p:inputText value="#{comptesController.newComptes.sexe}" required="true" label="sexe"/>
+                                    <p:calendar style="float:left;" id="button" value="#{comptesController.newComptes.age}" showOn="button" />
+                                
+                     
+                                <h:outputLabel for="console" value="Sexe" />
+                                    <p:selectOneRadio style="float:left;" id="console" value="#{comptesController.newComptes.sexe}" required="true" label="sexe">
+                                        <f:selectItem itemLabel="Femme" itemValue="True" />
+                                        <f:selectItem itemLabel="Homme" itemValue="False" />
+                                    </p:selectOneRadio>   
+                                    
+                                    
+                                    
                                 <h:outputText value="Taille" />
-                                    <p:inputText value="#{comptesController.newComptes.taille}" required="true" label="taille"/>
+                                    <p:inputText style="float:left;" value="#{comptesController.newComptes.taille}" required="true" label="taille"/>
                                 <h:outputText value="Poids" />
-                                    <p:inputText value="#{comptesController.newComptes.poids}" required="true" label="poids"/>
+                                    <p:inputText style="float:left;" value="#{comptesController.newComptes.poids}" required="true" label="poids"/>
                              </h:panelGrid>
                          </p:panel>
                      </p:tab> -->
                     <!-- Confirmation -->
+                    
                     <p:tab id="confirm" title="Confirmation">
                         <p:panel header="Confirmation">
+                            
                             <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
-                                <h:panelGrid columns="2" columnClasses="label, value">
-                                    <h:outputText value="eMail : " />
-                                    <h:outputText value="#{comptesController.newComptes.email}" styleClass="outputLabel"/>
-
-                                    <h:outputText value="Login : " />
-                                    <h:outputText value="#{comptesController.newComptes.login}" styleClass="outputLabel"/>
-
-                                    <h:outputText value="Mot de passe : " />
-                                    <h:outputText value="#{comptesController.newComptes.pswd}" styleClass="outputLabel"/>
-                                     
+                                <h:panelGrid columns="2" columnClasses="label, value" style="width:150px;">
+                                    <h:outputText value="eMail : " style="float:left;" />
+                                    <h:outputText value="#{comptesController.newComptes.email}" styleClass="outputLabel" style="float:left;"/>
                                     
+                                    <h:outputText value="Login : " style="float:left;" />
+                                    <h:outputText value="#{comptesController.newComptes.login}" styleClass="outputLabel" style="float:left;"/>                                  
                                </h:panelGrid>
 
                                 <h:panelGrid columns="2" columnClasses="label, value">
-                                    <h:outputText value="Nom : " />
+                                    <h:outputText value="Nom : "/>
                                     <h:outputText value="#{comptesController.newComptes.nom}" styleClass="outputLabel"/>
 
                                     <h:outputText value="Prénom : " />
@@ -110,12 +118,13 @@
                                     <h:outputText value="Poids : " />
                                     <h:outputText value="#{comptesController.newComptes.poids}" styleClass="outputLabel"/>
                                 </h:panelGrid>
+
                             </h:panelGrid>
                             
                             <p:commandButton value="Sauvegarder" action="#{comptesController.saveComptes()}" update="formulaireSaisie" process="@this" />
                         </p:panel>
                     </p:tab>
-                    
+                   
                     
                 </p:wizard>
             </h:form> 

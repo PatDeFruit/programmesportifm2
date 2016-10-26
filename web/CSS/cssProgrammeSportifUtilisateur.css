@@ -521,7 +521,9 @@ margin-right: 5px;}
 .ui-widget-content {
     border: 1px dotted #1B6A8C;
     background: #E2B241;
-    color: #4f4f4f;
+    color : #4f4f4f;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #c4c4c4;
 }
 
 .ui-widget-header {

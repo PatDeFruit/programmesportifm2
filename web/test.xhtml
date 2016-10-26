@@ -14,24 +14,24 @@
             <h1> Blem dans les valeurs provenant de jointures si pas approfondissement dans les relations (cf. login) </h1>
             <h:form>
             <!--tableau -->
-            <p:dataTable id="TableauCompte" value="#{amitieController.amitie}" var="cp" >
+            <p:dataTable id="TableauCompte" value="#{entrainementsController.entrainements}" var="cp" >
                     <p:column>
                         <f:facet name='header'>
                             <h:outputText value="id" />
                         </f:facet>
-                        <h:outputText value="#{cp.idAmitie}" />
+                        <h:outputText value="#{cp.idEntrainements}" />
                     </p:column>
                     <p:column >
                         <f:facet name='header'>
                             <h:outputText value="Nom1" />
                         </f:facet>
-                        <h:outputText value="#{cp.login1.login}" />
+                        <h:outputText value="#{cp.idExercice.nomExercice}" />
                     </p:column>
                     <p:column >
                         <f:facet name='header'>
                             <h:outputText value="Nom2" />
                         </f:facet>
-                        <h:outputText value="#{cp.login2.login}" />
+                        <h:outputText value="#{cp.idProgramme.nomProgramme}" />
                     </p:column>
                 </p:dataTable>
             </h:form>
