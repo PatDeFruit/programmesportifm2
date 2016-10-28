@@ -6,9 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui" 
         xmlns:jsf="http://java.sun.com/jsp/jstl/core">
-       
 
-    
     <h:head>
         <title>Programme Sportif - Accueil</title>
         <style type="text/css" media="all"> 
@@ -26,45 +24,9 @@
                         <br />
                         <h1 class="titreAppliUser">Programme Sportif</h1>
                     </div>
-                    <div class="sidebar-nav nano has-scrollbar">
-                        <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
-                            
-                            <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
-                                <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
-                                  <p:menu style="width:175px" styleClass="myMenu">
-                                        <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
-                                </p:menu>
-                                <p:panelMenu style="width:175px" styleClass="myMenu">
-                                        <p:submenu label="Programmes suivis">
-                                            <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
-                                            <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
-                                            <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>
-                                        </p:submenu>
-                                        <p:submenu label="Programmes en attentes" >
-                                            <p:menuitem value="My Programme" styleClass="myMenuItem"/>
-                                        </p:submenu>
-                                </p:panelMenu>
-                                <p:menu style="width:175px" styleClass="myMenu">
-                                    <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
-                                </p:menu>
-                                 <p:panelMenu style="width:175px" styleClass="myMenu">
-                                    <p:submenu label="Défis en cours">
-                                        <p:menuitem value="25 burpees" actionListener="home_user" styleClass="myMenuItem"/>
-                                        <p:menuitem value="30 squats" actionListener="home_user" styleClass="myMenuItem"/>
-                                    </p:submenu>
-                                    <p:submenu label="Défis gagnés" >
-                                        <p:menuitem value="20 crunchs par Sissi02" actionListener="home_user" styleClass="myMenuItem" />
-                                    </p:submenu>
-                                    <p:submenu label="Défis perdus" >
-                                        <p:menuitem value="20 burpees par AllanTheBos" actionListener="home_user" styleClass="myMenuItem"/>
-                                    </p:submenu>
-                                </p:panelMenu>
-                                <p:menu style="width:175px" styleClass="myMenu">
-                                    <p:menuitem value="Contacter" id="contact" action="index" styleClass="myMenuItem" />
-                                </p:menu>
-                            </h:form>
-                        </div>
-                    </div>
+                    <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
+                        <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
+                    </h:form>
                 </div>
             </div>
             <div id="top-bar-wrapper">
@@ -79,40 +41,81 @@
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
                             <p:menuitem value="Profil" styleClass="profilMenuItem" outcome="profil?login=#{comptesController.compteConnecte.login}"/>
+                            <p:separator/>
                             <p:menuitem value="Deconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
                         </p:menu>
                         </h:form>
                     </div>
                     <div class="top-menu">
                         <div class="top-bar-icon">
-                            <h:form>
-                            <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
-                                <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
-                                </p:menu>
-                            </h:form>
-                        </div>
-                        <div class="top-bar-icon">
-                            <h:form>
-                             <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
-                                <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
-                                </p:menu>
-                            </h:form>
-                        </div>
-                        <div class="top-bar-icon">
-                            <h:form>
-                            <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
-                                <p:menu overlay="true" trigger="friend_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
-                                </p:menu>
+                            <h:form>                                
+                            <h:commandButton id="view_stat" image="rsrc/stat.png" styleClass="iconMenuBar" />
+                            <p:menu overlay="true" trigger="view_stat" my="left top" at="left bottom" styleClass="profilMenu" >                         
+                                <p:menuitem value="nb : #{comptesController.compteConnecte.login}" styleClass="profilMenuItem"/>
+                                <p:separator/>
+                                <p:menuitem value="nb : #{comptesController.compteConnecte.login}" styleClass="profilMenuItem"/>
+                            </p:menu>
                             </h:form>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="main-wrapper">
+                <p:accordionPanel style="margin: 20px;width: 95%;">
+                    <p:tab title="Godfather Part I">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                            <h:outputText
+                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+                                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                                Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, 
+                                but given to ruthless violence whenever anything stands against the good of the family." />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Godfather Part II">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:graphicImage name="demo/images/godfather/godfather2.jpg" />
+                            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. 
+                                          In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, 
+                                          killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Godfather Part III">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                            <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                                          Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Godfather Part III">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                            <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                                          Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Godfather Part III">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                            <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                                          Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Godfather Part III">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                            <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                                          Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Godfather Part III">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                            <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                                          Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+                        </p:panelGrid>
+                    </p:tab>
+                </p:accordionPanel>     
             </div>
                           
         </div>

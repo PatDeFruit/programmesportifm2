@@ -73,7 +73,7 @@
                         <h:form style="display :inline">
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
-                            <p:menuitem value="Profil" styleClass="profilMenuItem" outcome="testComptes?login=#{comptesController.compteConnecte.login}"/>
+                            <p:menuitem value="Profil" styleClass="profilMenuItem" outcome="profil?login=#{comptesController.compteConnecte.login}"/>
                             <p:menuitem value="Deconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
                         </p:menu>
                         </h:form>
