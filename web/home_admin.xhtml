@@ -1,14 +1,13 @@
-
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p ="http://primefaces.org/ui" 
-      xmlns:jsf="http://java.sun.com/jsp/jstl/core">
-    
-    
-    <f:metadata>
-        <f:viewParam name="login" value="#{comptesController.login}"/>
-    </f:metadata>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui" 
+        xmlns:jsf="http://java.sun.com/jsp/jstl/core">
+       
+
     
     <h:head>
         <title>Programme Sportif - Accueil</title>
@@ -16,19 +15,20 @@
        @import "CSS/cssProgrammeSportifUtilisateur.css"; 
         </style> 
     </h:head>
-    
     <h:body>
-        <div class="wrapper">
+        <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
             
+        <div class="wrapper">
             <div id="sidebar-wrapper">
                 <div id="sidebar-header">
                     <div id="logo-wrapper">
                         <img id="logo" src="rsrc/logo_appli.png" width="76px" height="76px"/>
                         <br />
-                        <h1 class="titreAppliUser">Information du profil</h1>
+                        <h1 class="titreAppliUser">Programme Sportif</h1>
                     </div>
                     <div class="sidebar-nav nano has-scrollbar">
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
+                            
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
                                   <p:menu style="width:175px" styleClass="myMenu">
@@ -78,16 +78,7 @@
                         <h:form style="display :inline">
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
-                            
-                            <jsf:choose>
-                                <jsf:when test="${comptesController.compteConnecte.idNiveau.idNiveau=='1'}">
-                                    <p:menuitem value="Accueil" styleClass="profilMenuItem" outcome="home_user?login"/>
-                                </jsf:when>    
-                                <jsf:otherwise>
-                                    <p:menuitem value="Accueil" styleClass="profilMenuItem" outcome="home_admin?login"/>
-                                </jsf:otherwise>
-                            </jsf:choose>
-                            
+                            <p:menuitem value="Profil" styleClass="profilMenuItem" outcome="testComptes?login=#{comptesController.compteConnecte.login}"/>
                             <p:menuitem value="Deconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
                         </p:menu>
                         </h:form>
@@ -123,83 +114,7 @@
                     </div>
                 </div>
             </div>
-                  
-        <!--Formulaire -->
-            <div class="main-wrapper">
-                <f:view>
-                    <f:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
-                <h:form>
-                <!--tableau -->
-                <h1> Informations sur le compte Utilisateur </h1>
-                <p:dataTable id="TableauCompte" value="#{comptesController.compteConnecte}" var="cp" >
-                        <p:column>
-                            <f:facet name='header'>
-                                <h:outputText value="Login" />
-                            </f:facet>
-                            <h:outputText value="#{cp.login}" />
-                        </p:column>
-                         <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Mot de passe" />
-                            </f:facet>
-                            <p:password value="#{cp.pswd}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Nom" />
-                            </f:facet>
-                            <h:inputText value="#{cp.nom}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Prénom" />
-                            </f:facet>
-                            <h:inputText value="#{cp.prenom}" />
-                        </p:column>
-                    </p:dataTable>
-                <p:commandButton value="Sauvegarder" action="#{comptesController.updateComptes()}" />
-                </h:form>
-                </f:view>
-                 <f:view>
-                <f:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
-                <h:form>
-                <!--tableau -->
-                <h1> Informations personnelles </h1>
-                <p:dataTable id="TableauCompte" value="#{comptesController.compteConnecte}" var="cp" >
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Age" />
-                            </f:facet>
-                            <h:outputText value="#{cp.age}">
-                              <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Sexe" />
-                            </f:facet>
-                            <h:outputText value="#{cp.sexe}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Taille" />
-                            </f:facet>
-                            <h:inputText value="#{cp.taille}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Poids" />
-                            </f:facet>
-                            <h:inputText value="#{cp.poids}" />
-                        </p:column> 
-                    
-                    </p:dataTable>
-                <p:commandButton value="Sauvegarder" action="#{comptesController.updateComptes}" />
-                </h:form>
-                
-                </f:view>
-            </div>
-        
+                          
         </div>
     </h:body>
 </html>

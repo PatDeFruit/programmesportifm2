@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -56,8 +57,22 @@ public class ComptesDAO {
             }
         } catch (Exception e){
             System.err.println(e.getMessage());
-        }
-        
+        }    
+    }
+    
+    //Update
+    //save Comptes
+    public void updateComptes(Comptes newComptes){
+        try{
+            if(newComptes.getLogin()!= null){
+                em.merge(newComptes);
+            }
+            else {
+                em.persist(newComptes);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
     }
    
     
@@ -71,4 +86,13 @@ public class ComptesDAO {
         }
     }
         
+    public Comptes getOneComptes(String login){
+        Query query = em.createNamedQuery("Comptes.findByLogin").setParameter("login", login);
+        try{
+            return (Comptes) query.getSingleResult();
+        }catch (NoResultException e){
+            System.err.println("pas de Compte avec ce login");
+            return null;
+        }
+    }
 }

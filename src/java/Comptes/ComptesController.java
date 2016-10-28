@@ -16,10 +16,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
-import javax.faces.view.ViewScoped;
 import Types_comptes.TypesComptesDAO;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ComponentSystemEvent;
 
 /**
  *
@@ -46,6 +46,8 @@ public class ComptesController implements Serializable{
     private Comptes result;
     private boolean skip;
     
+    String login;
+    
     
 
     //getter du compte
@@ -70,7 +72,15 @@ public class ComptesController implements Serializable{
         this.compteConnecte = compteConnecte;
     }
 
+    //getter et setter login
+    public String getLogin() {
+        return login;
+    }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
     
     
     
@@ -87,8 +97,6 @@ public class ComptesController implements Serializable{
      */
     public String saveComptes() {
         int resultat = comptesDAO.getCountLogin(newComptes.getLogin());
-        //System.out.println("**************NON ****"+newComptes.getLogin()+"*********************");
-        //System.out.println("**********RES********"+resultat+"*********************");
         if (resultat == 0){   
             //ajout du niveau
                 this.niveaux = niveauxDAO.getFindByOneNiveaux(1);
@@ -108,6 +116,25 @@ public class ComptesController implements Serializable{
             return "inscription";  
         }
         
+    }
+    
+    /**
+     * Update information du compte
+     * @return string (nom de la page)
+     */
+    public String updateComptes() { 
+            //modif du niveau
+                //this.niveaux = niveauxDAO.getFindByOneNiveaux(1);
+                //compteConnecte.setIdNiveau(this.niveaux);
+            //modif du type
+                //this.typeComptes = typeDAO.getFindByOneTypesComptes(2);
+                //compteConnecte.setIdType(this.typeComptes);
+            //update du compte
+                comptesDAO.updateComptes(compteConnecte);  
+                //FacesMessage msg = new FacesMessage("Successful", "Modification prise en compte" + compteConnecte.getLogin());
+                //FacesContext.getCurrentInstance().addMessage(null, msg);
+                //FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                return "testComptes?login=#{comptesController.compteConnecte.login}";       
     }
     
     
@@ -133,6 +160,10 @@ public class ComptesController implements Serializable{
         }
     }
         
+    /**
+     * Fonction de connexion
+     * @return string
+     */
     public String connect(){
         result = comptesDAO.connect(newComptes.getLogin(),newComptes.getPswd());
         compteConnecte = result;
@@ -140,7 +171,7 @@ public class ComptesController implements Serializable{
             if(result.getIdType().getIdType()==1){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connexion réussie !", "Vous êtes connecté en tant que modérateur."));
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-                return "home_user";
+                return "home_admin";
             }
             else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connexion réussie !", "Vous êtes connecté"));
@@ -160,5 +191,10 @@ public class ComptesController implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Déconnexion !", "Vous êtes déconnecté"));
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         return "index";
-        }        
+        }  
+     
+     //récupére les info d'un compte via le login
+     public void lireCompte(ComponentSystemEvent event){
+        compteConnecte = comptesDAO.getOneComptes(login);
+    }
 }

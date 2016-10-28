@@ -68,13 +68,13 @@
                         <div class="profile-name">
                             <span><h:outputText value="#{comptesController.compteConnecte.login}" /></span>
                             <br/>
-                                Utilisateur
+                                <span><h:outputText value="#{comptesController.compteConnecte.idType.nomType}" /></span>
                         </div>
                         <h:form style="display :inline">
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
-                            <p:menuitem value="Profil" styleClass="profilMenuItem" onclick="PF('dlg2').show();"/>
-                            <p:menuitem value="Deconnexion" outcome="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
+                            <p:menuitem value="Profil" styleClass="profilMenuItem" outcome="testComptes?login=#{comptesController.compteConnecte.login}"/>
+                            <p:menuitem value="Deconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
                         </p:menu>
                         </h:form>
                     </div>
@@ -149,10 +149,12 @@
                 </tr>
             </table>
             
-            <!-- Les fenetres de dialogue -->
-            <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                 <h:outputText value="This is a Modal Dialog." />
-             </p:dialog>   
+            <h:form>
+                <!-- Les fenetres de dialogue -->
+                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                     <h:outputText value="This is a Modal Dialog." />
+                 </p:dialog>   
+            </h:form>
             
             
         </div>
