@@ -36,7 +36,7 @@ public class ComptesDAO {
         return query.getResultList();
     }
     
-    //compteur de la présence d'un login dans la BDD
+        //compteur de la présence d'un login dans la BDD
     //trouver un niveau via l'Id
     public int getCountLogin(String login) {
         Query query = em.createQuery("SELECT COUNT(c) FROM Comptes c Where c.login = :login").setParameter("login", login);
@@ -48,8 +48,20 @@ public class ComptesDAO {
             return -1;
         }
     }
-
-     //save Comptes
+    
+    //compteur du nombre de compte
+    public int getCountComptes() {
+        Query query = em.createQuery("SELECT COUNT(c) FROM Comptes c ");
+        try{
+            return ((Number) query.getSingleResult()).intValue();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return -1;
+        }
+    }
+        
+         //save Comptes
     public void saveComptes(Comptes newComptes){
         try{
             if(newComptes.getLogin() != null){

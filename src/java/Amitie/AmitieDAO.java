@@ -32,5 +32,15 @@ public class AmitieDAO {
         return query.getResultList();
     }
     
-    // ADD code
+    //compteur du nombre d'amities
+    public int getCountAmities() {
+        Query query = em.createQuery("SELECT COUNT(a) FROM Amitie a ");
+        try{
+            return ((Number) query.getSingleResult()).intValue();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return -1;
+        }
+    }
 }

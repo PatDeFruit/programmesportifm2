@@ -32,6 +32,15 @@ public class DefisDAO {
         return query.getResultList();
     }
     
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    //compteur du nombre de compte
+    public int getCountDefis() {
+        Query query = em.createQuery("SELECT COUNT(d) FROM Defis d");
+        try{
+            return ((Number) query.getSingleResult()).intValue();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return -1;
+        }
+    }
 }

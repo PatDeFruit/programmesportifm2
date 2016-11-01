@@ -32,6 +32,15 @@ public class ProgrammesDAO {
         return query.getResultList();
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    //compteur du nombre de compte
+    public int getCountProgrammes() {
+        Query query = em.createQuery("SELECT COUNT(p) FROM Programmes p");
+        try{
+            return ((Number) query.getSingleResult()).intValue();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return -1;
+        }
+    }
 }

@@ -137,6 +137,16 @@ public class ComptesController implements Serializable{
                 return "testComptes?login=#{comptesController.compteConnecte.login}";       
     }
     
+    /**
+     * get le nombre de compte existant
+     * @return integer
+     */
+    //getter du compte
+    public int getCountComptes(){
+        return comptesDAO.getCountComptes();
+    }
+    
+    
     
     /**
     * //skip pour passer les pages pour l'inscription 
