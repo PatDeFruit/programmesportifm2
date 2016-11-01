@@ -67,29 +67,29 @@
             <div class="main-wrapper">
                 <p:accordionPanel style="margin: 20px;width: 95%;">
                     <p:tab title="Gestion des utilisateurs">
-                        <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-8,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
                             <img src="rsrc/gestion_user.png" alt="Gestion des utilisateurs" width="200px" height="200px"/>
-                            <h:outputText
-                                value="Suppression // Mdp perdu" />
+                            <p:button value="Editer" icon="ui-icon-pencil" outcome="edit_compte?login=#{comptesController.compteConnecte.login}"/> 
+                            <p:button value="Gestion des mots de passes" icon="ui-icon-pencil" outcome="mdp_perdu?login=#{comptesController.compteConnecte.login}"/> 
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des Programmes">
-                        <p:panelGrid columns="3" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank">
                             <img src="rsrc/document.png" alt="Gestion des programmes" width="200px" height="200px"/>
-                            <h:outputText value="Suppression // Modification" />
+                            <p:button value="Editer" icon="ui-icon-pencil" outcome="edit_programme?login=#{comptesController.compteConnecte.login}"/> 
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des Entrainements">
-                        <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank">
                             <img src="rsrc/dashboard-icon-32.png" alt="Gestion des entrainements" width="200px" height="200px"/>
-                            <h:commandButton value="Suppression" />
+                            <p:button value="Editer" icon="ui-icon-pencil" outcome="edit_entrainement?login=#{comptesController.compteConnecte.login}"/> 
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des Défis">
-                        <p:panelGrid columns="3" columnClasses="ui-grid-col-9,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-8,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
                             <img src="rsrc/defi.png" alt="Gestion des défis" width="200px" height="200px"/>
-                            <h:commandButton value="Visualisation des défis en cours"/> 
-                            <h:commandButton value="Validation des défis"/>
+                            <p:button value="Visualisation des défis en cours" outcome="defi_en_cours?login=#{comptesController.compteConnecte.login}"/> 
+                            <p:button value="Validation des défis" outcome="validation_defi?login=#{comptesController.compteConnecte.login}"/>
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des données de références">
@@ -98,10 +98,9 @@
                                     <img src="rsrc/exercices.png" alt="Gestion des exercices" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" />
-                                            <p:menuitem value="Supression" ajax="false" icon="ui-icon-closethick" />
+                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" outcome="ajout_exercice?login=#{comptesController.compteConnecte.login}"/>
                                             <p:separator />
-                                            <p:menuitem value="modification" icon="ui-icon-pencil" />
+                                            <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_exercice?login=#{comptesController.compteConnecte.login}" />
                                         </p:splitButton>
                                     </h:form>
                                 </p:panelGrid>
@@ -109,10 +108,9 @@
                                     <img src="rsrc/niveau.png" alt="Gestion des niveaux" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" />
-                                            <p:menuitem value="Supression" ajax="false" icon="ui-icon-closethick" />
+                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" outcome="ajout_niveau?login=#{comptesController.compteConnecte.login}"/>
                                             <p:separator />
-                                            <p:menuitem value="modification" icon="ui-icon-pencil" />
+                                            <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_niveau?login=#{comptesController.compteConnecte.login}" />
                                         </p:splitButton>
                                     </h:form>
                                 </p:panelGrid>
@@ -120,10 +118,9 @@
                                     <img src="rsrc/type_de_compte.png" alt="Gestion des types de compte" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" />
-                                            <p:menuitem value="Supression" ajax="false" icon="ui-icon-closethick" />
+                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" outcome="ajout_type_compte?login=#{comptesController.compteConnecte.login}"/>
                                             <p:separator />
-                                            <p:menuitem value="modification" icon="ui-icon-pencil" />
+                                            <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_type_compte?login=#{comptesController.compteConnecte.login}" />
                                         </p:splitButton>
                                     </h:form>
                                 </p:panelGrid>
