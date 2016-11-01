@@ -31,7 +31,10 @@
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
-                                  <p:menu style="width:175px" styleClass="myMenu">
+                                
+                                <jsf:choose>
+                                <jsf:when test="${comptesController.compteConnecte.idNiveau.idNiveau=='1'}">
+                                <p:menu style="width:175px" styleClass="myMenu">
                                         <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
                                 <p:panelMenu style="width:175px" styleClass="myMenu">
@@ -62,6 +65,8 @@
                                 <p:menu style="width:175px" styleClass="myMenu">
                                     <p:menuitem value="Contacter" id="contact" action="index" styleClass="myMenuItem" />
                                 </p:menu>
+                            </jsf:when>    
+                            </jsf:choose>
                             </h:form>
                         </div>
                     </div>
@@ -92,6 +97,9 @@
                         </p:menu>
                         </h:form>
                     </div>
+                   
+                    <jsf:choose>
+                        <jsf:when test="${comptesController.compteConnecte.idNiveau.idNiveau=='1'}">              
                     <div class="top-menu">
                         <div class="top-bar-icon">
                             <h:form>
@@ -121,6 +129,26 @@
                             </h:form>
                         </div>
                     </div>
+                   </jsf:when>    
+                   <jsf:otherwise>
+                                        <div class="top-menu">
+                        <div class="top-bar-icon">
+                            <h:form>                                
+                            <h:commandButton id="view_stat" image="rsrc/stat.png" styleClass="iconMenuBar" />
+                            <p:menu overlay="true" trigger="view_stat" my="left top" at="left bottom" styleClass="profilMenu" >                         
+                                <p:menuitem value="Nombre d'amitiés : #{amitieController.countAmities}" styleClass="profilMenuItem"/>
+                                <p:separator/>
+                                <p:menuitem value="Nombre d'utilisateurs : #{comptesController.countComptes}" styleClass="profilMenuItem"/>
+                                <p:separator/>
+                                <p:menuitem value="Nombre de défis : #{defisController.countDefis}" styleClass="profilMenuItem"/>
+                                <p:separator/>
+                                <p:menuitem value="Nombre de programmes : #{programmesController.countProgrammes}" styleClass="profilMenuItem"/>
+                            </p:menu>
+                            </h:form>
+                        </div>
+                    </div>
+                    </jsf:otherwise>
+                    </jsf:choose>
                 </div>
             </div>
                   
