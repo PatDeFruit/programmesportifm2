@@ -46,7 +46,7 @@ public class ProgrammesDAO {
     }
     
     public List<Programmes> getMyProgrammes(String login){
-        Query query = em.createNativeQuery("SELECT p FROM Programmes p INNER JOIN Entrainements e USING(idProgramme) INNER JOIN Comptes c USING(login) WHERE login =:login").setParameter("login", login);
+        Query query = em.createNativeQuery("SELECT p FROM Programmes p INNER JOIN Entrainements e USING(idProgramme) INNER JOIN Comptes c USING(login) WHERE c.login = :login").setParameter("login", login);
         try{
             return query.getResultList();
         } catch(Exception e){
