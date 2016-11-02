@@ -46,7 +46,7 @@ public class ProgrammesDAO {
     }
     
     public List<Programmes> getMyProgrammes(String login){
-        Query query = em.createQuery("SELECT p FROM Programmes p, Entrainements e, Comptes c where c.login = :login").setParameter("login", login);
+        Query query = em.createQuery("SELECT DISTINCT p.nomProgramme FROM Programmes p, Entrainements e, Comptes c where c.login = :login").setParameter("login", login);
         try{
             return query.getResultList();
         } catch(Exception e){

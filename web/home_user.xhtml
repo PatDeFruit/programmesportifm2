@@ -32,7 +32,7 @@
                                 <p:panel id="basic" header="Programmes suivis" style="width: 175px;" styleClass="myMenu">
                                     <p:dataTable value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
                                         <p:column>
-                                            <h:outputText value="#{item.nomProgramme}"/>
+                                            <h:outputText value="#{item}"/>
                                         </p:column>
                                     </p:dataTable>
                                 </p:panel>
