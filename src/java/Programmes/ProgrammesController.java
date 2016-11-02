@@ -5,7 +5,7 @@
  */
 package Programmes;
 
-import Comptes.Comptes;
+import Comptes.ComptesDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -24,6 +24,9 @@ public class ProgrammesController implements Serializable{
 
     @EJB
     private ProgrammesDAO programmesDAO;
+    
+    @EJB
+    private ComptesDAO compteDAO;
     
     private Programmes newProgramme;
 
