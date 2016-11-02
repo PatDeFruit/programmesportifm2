@@ -5,6 +5,8 @@
  */
 package Entrainements;
 
+import Comptes.Comptes;
+import Programmes.Programmes;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -21,6 +23,10 @@ public class EntrainementsController implements Serializable{
 
     @EJB
     private EntrainementsDAO entrainementsDAO;
+    
+    private Entrainements result;
+    private Programmes resultProgramme;
+    
 
     //getter du compte
     public List<Entrainements> getEntrainements(){
@@ -32,5 +38,5 @@ public class EntrainementsController implements Serializable{
      */
     public EntrainementsController() {
     }
-    
+
 }

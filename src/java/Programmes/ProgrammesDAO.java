@@ -5,6 +5,7 @@
  */
 package Programmes;
 
+import Comptes.Comptes;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -41,6 +42,16 @@ public class ProgrammesDAO {
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
             System.err.println(e.getMessage());
             return -1;
+        }
+    }
+    
+    public List<Programmes> getMyProgrammes(String login){
+        Query query = em.createNativeQuery("SELECT p FROM Programmes p INNER JOIN Entrainements e USING(idProgramme) INNER JOIN Comptes c USING(login) WHERE login =:login").setParameter("login", login);
+        try{
+            return query.getResultList();
+        } catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
         }
     }
 }

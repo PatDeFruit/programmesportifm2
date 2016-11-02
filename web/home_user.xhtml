@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsf/core"
 	xmlns:f="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" >
+        xmlns:p="http://primefaces.org/ui" >
     <h:head>
         <title>Programme Sportif - Accueil</title>
         <style type="text/css" media="all"> 
@@ -29,8 +29,17 @@
                                   <p:menu style="width:175px" styleClass="myMenu">
                                         <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
+                                <p:panel id="basic" header="Programmes suivis" style="width: 175px;" styleClass="myMenu">
+                                    <p:dataTable value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
+                                        <p:column>
+                                            <h:outputText value="#{item.nomProgramme}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panel>
+                                
                                 <p:panelMenu style="width:175px" styleClass="myMenu">
                                         <p:submenu label="Programmes suivis">
+                                            
                                             <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
                                             <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
                                             <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>

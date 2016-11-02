@@ -5,6 +5,7 @@
  */
 package Programmes;
 
+import Comptes.Comptes;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -56,6 +57,10 @@ public class ProgrammesController implements Serializable{
     //getter du compte
     public int getCountProgrammes(){
         return programmesDAO.getCountProgrammes();
+    }
+    
+    public List<Programmes> getMyProgrammes(String login){
+        return programmesDAO.getMyProgrammes(login);
     }
     
 }

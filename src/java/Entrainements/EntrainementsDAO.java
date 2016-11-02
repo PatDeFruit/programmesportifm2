@@ -5,6 +5,8 @@
  */
 package Entrainements;
 
+import Comptes.Comptes;
+import Programmes.Programmes;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,6 +33,10 @@ public class EntrainementsDAO {
         Query query = em.createNamedQuery("Entrainements.findAll");
         return query.getResultList();
     }
+    
+    
+   
+
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
