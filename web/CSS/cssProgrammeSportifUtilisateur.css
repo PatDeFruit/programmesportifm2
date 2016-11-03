@@ -171,6 +171,7 @@ header/*bandeau haut*/
     border: 0px;
 }
 
+
 .wrapper {
   width: 100%;
   min-height: 100%; }
@@ -519,7 +520,6 @@ margin-right: 5px;}
 /*---- inscription form--*/
 /*----------------------------------------------------------------------*/
 .ui-widget-content {
-    border: 1px dotted #1B6A8C;
     background: #E2B241;
     color : #4f4f4f;
     font-weight: bold;
