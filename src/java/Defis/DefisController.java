@@ -5,6 +5,8 @@
  */
 package Defis;
 
+import Exercices.Exercices;
+import Exercices.ExercicesDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -58,5 +60,9 @@ public class DefisController implements Serializable{
     public int getCountDefis(){
         return defisDAO.getCountDefis();
     }
+    
+         public List<Exercices> getMyDefis(String login){
+         return defisDAO.getMyDefis(login);
+     }
     
 }

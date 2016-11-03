@@ -5,6 +5,8 @@
  */
 package Defis;
 
+import Exercices.Exercices;
+import Programmes.Programmes;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,4 +45,15 @@ public class DefisDAO {
             return -1;
         }
     }
+    
+
+     public List<Exercices> getMyDefis(String login){
+            Query query = em.createQuery("SELECT e FROM Defis d, Exercices e, Comptes c WHERE c.login = :login AND d.effectue='0' AND e.idExercice = d.idExercice").setParameter("login", login);
+            try{
+                return query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
+        }
 }

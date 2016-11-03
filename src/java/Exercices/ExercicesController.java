@@ -33,4 +33,6 @@ public class ExercicesController implements Serializable{
     public ExercicesController() {
     }
     
+
+    
 }

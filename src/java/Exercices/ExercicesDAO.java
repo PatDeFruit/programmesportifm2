@@ -5,6 +5,7 @@
  */
 package Exercices;
 
+import Defis.Defis;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,6 +32,7 @@ public class ExercicesDAO {
         Query query = em.createNamedQuery("Exercices.findAll");
         return query.getResultList();
     }
+    
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
