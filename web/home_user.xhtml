@@ -24,45 +24,28 @@
                     </div>
                     <div class="sidebar-nav nano has-scrollbar">
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
-                            <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
+                            <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container has-scrollbar">
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
                                   <p:menu style="width:175px" styleClass="myMenu">
                                         <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
                                 </p:menu>
-                                <p:panel id="basic" header="Programmes suivis" style="width: 175px;" styleClass="myMenu">
-                                    <p:dataTable value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
-                                        <p:column>
-                                            <h:outputText value="#{item}"/>
-                                        </p:column>
-                                    </p:dataTable>
-                                </p:panel>
-                                
-                                <p:panelMenu style="width:175px" styleClass="myMenu">
-                                        <p:submenu label="Programmes suivis">
-                                            
-                                            <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
-                                            <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
-                                            <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>
-                                        </p:submenu>
-                                        <p:submenu label="Programmes en attentes" >
-                                            <p:menuitem value="My Programme" styleClass="myMenuItem"/>
-                                        </p:submenu>
-                                </p:panelMenu>
+                                <p:accordionPanel id="prog" style="width: 175px;">
+                                    <p:tab title="Programmes suivis">
+                                        <p:dataList value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
+                                            <p:link value="#{item}"/>
+                                        </p:dataList>
+                                    </p:tab>
+                                </p:accordionPanel>
                                 <p:menu style="width:175px" styleClass="myMenu">
                                     <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
                                 </p:menu>
-                                 <p:panelMenu style="width:175px" styleClass="myMenu">
-                                    <p:submenu label="Défis en cours">
-                                        <p:menuitem value="25 burpees" actionListener="home_user" styleClass="myMenuItem"/>
-                                        <p:menuitem value="30 squats" actionListener="home_user" styleClass="myMenuItem"/>
-                                    </p:submenu>
-                                    <p:submenu label="Défis gagnés" >
-                                        <p:menuitem value="20 crunchs par Sissi02" actionListener="home_user" styleClass="myMenuItem" />
-                                    </p:submenu>
-                                    <p:submenu label="Défis perdus" >
-                                        <p:menuitem value="20 burpees par AllanTheBos" actionListener="home_user" styleClass="myMenuItem"/>
-                                    </p:submenu>
-                                </p:panelMenu>
+                                <p:accordionPanel id="defis" style="width: 175px;">
+                                    <p:tab title="Défis en cours">
+                                        <p:dataList value="#{defisController.getMyDefis(comptesController.compteConnecte.login)}" var="itemDefis">
+                                            <p:link value="#{itemDefis}"/>
+                                    </p:dataList>
+                                    </p:tab>
+                                </p:accordionPanel>
                                 <p:menu style="width:175px" styleClass="myMenu">
                                     <p:menuitem value="Contacter" id="contact" action="index" styleClass="myMenuItem" />
                                 </p:menu>
