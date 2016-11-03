@@ -5,6 +5,7 @@
  */
 package Exercices;
 
+import Defis.Defis;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,6 +33,7 @@ public class ExercicesDAO {
         return query.getResultList();
     }
     
+
     //coder
     public List<Exercices> getNomExercices() {
         Query query = em.createQuery("SELECT e.nomExercice FROM Exercices e");
@@ -52,4 +54,5 @@ public class ExercicesDAO {
             System.err.println(e.getMessage());
         }   
     }
+
 }
