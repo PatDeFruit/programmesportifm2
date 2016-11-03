@@ -31,6 +31,25 @@ public class ExercicesDAO {
         Query query = em.createNamedQuery("Exercices.findAll");
         return query.getResultList();
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
+    //coder
+    public List<Exercices> getNomExercices() {
+        Query query = em.createQuery("SELECT e.nomExercice FROM Exercices e");
+        return query.getResultList();
+    }
+    
+    //coder
+    public List<Exercices> getDifficulteExercice() {
+        Query query = em.createQuery("SELECT e.difficulte FROM Exercices e");
+        return query.getResultList();
+    }
+    
+    //Update
+    public void updateExercice(Exercices newExercices){
+        try{
+            em.merge(newExercices);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
+    }
 }
