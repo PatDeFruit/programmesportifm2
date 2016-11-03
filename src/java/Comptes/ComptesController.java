@@ -134,7 +134,7 @@ public class ComptesController implements Serializable{
                 //FacesMessage msg = new FacesMessage("Successful", "Modification prise en compte" + compteConnecte.getLogin());
                 //FacesContext.getCurrentInstance().addMessage(null, msg);
                 //FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-                return "testComptes?login=#{comptesController.compteConnecte.login}";       
+                return "profil?login=#{comptesController.compteConnecte.login}";       
     }
     
     /**

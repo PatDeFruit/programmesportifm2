@@ -71,6 +71,48 @@
             <div class="main-wrapper">
                 <c:view>
                     <c:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
+                    
+                    <h:form>
+                        <p:dataTable id="data_table" var="exo" value="#{exercicesController.exercices}" widgetVar="exoTable"
+                                     emptyMessage="Aucune donnée trouvée" filteredValue="#{exercicesController.filtreExo}"
+                                     editable="true"
+                                     > 
+                                 
+                            <c:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Recherche : " />
+                                    <p:inputText id="globalFilter" onkeyup="PF('exoTable').filter()" style="width:150px" placeholder="..."/>
+                                </p:outputPanel>
+                            </c:facet>
+                            
+                            
+                            
+                            <p:column headerText="Id Exercice" footerText="" sortBy="#{exo.idExercice}" filterBy="#{exo.idExercice}">
+                                <h:outputText value="#{exo.idExercice}" />
+                            </p:column>
+                            
+                            <p:column headerText="Nom exercice" footerText="" sortBy="#{exo.nomExercice}" filterBy="#{exo.nomExercice}">
+                                <p:cellEditor>
+                                    <c:facet name="output"><h:outputText value="#{exo.nomExercice}" /></c:facet>
+                                    <c:facet name="input"><p:inputText id="modelInput" value="#{exo.nomExercice}" style="width:100%"/></c:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Description" footerText="" sortBy="#{exo.description}" filterBy="#{exo.description}">
+                                <h:outputText value="#{exo.description}" />
+                            </p:column>
+
+                            <p:column headerText="Difficulté" footerText="" sortBy="#{exo.difficulte}" filterBy="#{exo.difficulte}">
+                                <h:outputText value="#{exo.difficulte}" />
+                            </p:column>
+                            
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable>
+                                               
+                    </h:form>
+                    
                 </c:view>
             </div>
                           
