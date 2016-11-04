@@ -74,18 +74,19 @@
                     
                     <h:form>
                         <p:dataTable id="data_table" var="exo" value="#{exercicesController.exercices}" widgetVar="exoTable"
-                                     emptyMessage="Aucune donnée trouvée" filteredValue="#{exercicesController.filtreExo}"
+                                     emptyMessage="Aucune donnée trouvée" paginator="true" rows="5"
                                      editable="true"
                                      > 
                                  
+                            <p:ajax event="rowEdit" listener="#{exercicesController.onRowEdit}" update="menuform"/>
+                            <p:ajax event="rowEditCancel" listener="#{exercicesController.onRowCancel}" update="menuform"/>
+                            
                             <c:facet name="header">
                                 <p:outputPanel>
                                     <h:outputText value="Recherche : " />
                                     <p:inputText id="globalFilter" onkeyup="PF('exoTable').filter()" style="width:150px" placeholder="..."/>
                                 </p:outputPanel>
                             </c:facet>
-                            
-                            
                             
                             <p:column headerText="Id Exercice" footerText="" sortBy="#{exo.idExercice}" filterBy="#{exo.idExercice}">
                                 <h:outputText value="#{exo.idExercice}" />
@@ -94,20 +95,32 @@
                             <p:column headerText="Nom exercice" footerText="" sortBy="#{exo.nomExercice}" filterBy="#{exo.nomExercice}">
                                 <p:cellEditor>
                                     <c:facet name="output"><h:outputText value="#{exo.nomExercice}" /></c:facet>
-                                    <c:facet name="input"><p:inputText id="modelInput" value="#{exo.nomExercice}" style="width:100%"/></c:facet>
+                                    <c:facet name="input"><p:inputText id="nomExercice" value="#{exo.nomExercice}" style="width:100%"/></c:facet>
                                 </p:cellEditor>
                             </p:column>
 
                             <p:column headerText="Description" footerText="" sortBy="#{exo.description}" filterBy="#{exo.description}">
-                                <h:outputText value="#{exo.description}" />
+                                <p:cellEditor>
+                                    <c:facet name="output"><h:outputText value="#{exo.description}" /></c:facet>
+                                    <c:facet name="input"><p:inputText id="description" value="#{exo.description}" style="width:100%"/></c:facet>
+                                </p:cellEditor>
                             </p:column>
 
                             <p:column headerText="Difficulté" footerText="" sortBy="#{exo.difficulte}" filterBy="#{exo.difficulte}">
-                                <h:outputText value="#{exo.difficulte}" />
+                                <p:cellEditor>
+                                    <c:facet name="output"><h:outputText value="#{exo.difficulte}" /></c:facet>
+                                    <c:facet name="input"><p:inputText id="difficulte" value="#{exo.difficulte}" style="width:100%"/></c:facet>
+                                </p:cellEditor>
                             </p:column>
                             
                             <p:column style="width:32px">
                                 <p:rowEditor />
+                            </p:column>
+                            
+                            <p:column style="width:35px">
+                                 <p:commandButton id="supp" icon="ui-icon-trash" style="color:red"
+                                                  update="data_table,menuform" actionListener="#{exercicesController.suppExo(exo)}">
+                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
                                                

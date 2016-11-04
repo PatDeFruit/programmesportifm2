@@ -98,7 +98,7 @@
                                     <img src="rsrc/exercices.png" alt="Gestion des exercices" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" outcome="ajout_exercice?login=#{comptesController.compteConnecte.login}"/>
+                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" onclick="PF('dlg1').show();"/>
                                             <p:separator />
                                             <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_exercice?login=#{comptesController.compteConnecte.login}" />
                                         </p:splitButton>
@@ -108,7 +108,7 @@
                                     <img src="rsrc/niveau.png" alt="Gestion des niveaux" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" outcome="ajout_niveau?login=#{comptesController.compteConnecte.login}"/>
+                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" onclick="PF('dlg2').show();"/>
                                             <p:separator />
                                             <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_niveau?login=#{comptesController.compteConnecte.login}" />
                                         </p:splitButton>
@@ -118,7 +118,7 @@
                                     <img src="rsrc/type_de_compte.png" alt="Gestion des types de compte" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" outcome="ajout_type_compte?login=#{comptesController.compteConnecte.login}"/>
+                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" onclick="PF('dlg3').show();"/>
                                             <p:separator />
                                             <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_type_compte?login=#{comptesController.compteConnecte.login}" />
                                         </p:splitButton>
@@ -128,7 +128,19 @@
                     </p:tab>
                 </p:accordionPanel>     
             </div>
-                          
+                 
+            <p:dialog header="Cadastro" widgetVar="dlg1" resizable="false" modal="true" width="700" height="500">
+                <f:include src="ajout_exercice.xhtml" />
+            </p:dialog>
+            
+            <p:dialog header="Cadastro" widgetVar="dlg2" resizable="false" modal="true" width="700" height="500">
+                <f:include src="ajout_niveau.xhtml" />
+            </p:dialog>
+            
+            <p:dialog header="Cadastro" widgetVar="dlg3" resizable="false" modal="true" width="700" height="500">
+                <f:include src="ajout_type_compte.xhtml" />
+            </p:dialog>
+            
         </div>
     </h:body>
 </html>

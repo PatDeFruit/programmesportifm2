@@ -28,46 +28,9 @@
                         <br />
                         <h1 class="titreAppliUser">Ajouter un niveau</h1>
                     </div>
-                    <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
-                        <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
-                    </h:form>
                 </div>
             </div>
-            <div id="top-bar-wrapper">
-                <div id="top-bar">
-                    <div class="top-bar-profile">
-                        <div class="profile-name">
-                            <span><h:outputText value="#{comptesController.compteConnecte.login}" /></span>
-                            <br/>
-                            <span><h:outputText value="#{comptesController.compteConnecte.idType.nomType}" /></span>
-                        </div>
-                        <h:form style="display :inline">
-                        <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
-                        <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
-                            <p:menuitem value="Accueil" styleClass="profilMenuItem" outcome="home_admin?login"/>
-                            <p:separator/>
-                            <p:menuitem value="Deconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
-                        </p:menu>
-                        </h:form>
-                    </div>
-                    <div class="top-menu">
-                        <div class="top-bar-icon">
-                            <h:form>                                
-                            <h:commandButton id="view_stat" image="rsrc/stat.png" styleClass="iconMenuBar" />
-                            <p:menu overlay="true" trigger="view_stat" my="left top" at="left bottom" styleClass="profilMenu" >                         
-                                <p:menuitem value="Nombre d'amitiés : #{amitieController.countAmities}" styleClass="profilMenuItem"/>
-                                <p:separator/>
-                                <p:menuitem value="Nombre d'utilisateurs : #{comptesController.countComptes}" styleClass="profilMenuItem"/>
-                                <p:separator/>
-                                <p:menuitem value="Nombre de défis : #{defisController.countDefis}" styleClass="profilMenuItem"/>
-                                <p:separator/>
-                                <p:menuitem value="Nombre de programmes : #{programmesController.countProgrammes}" styleClass="profilMenuItem"/>
-                            </p:menu>
-                            </h:form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div class="main-wrapper">
                 <c:view>
                     <c:event type="preRenderView" listener="#{comptesController.lireCompte}"/>

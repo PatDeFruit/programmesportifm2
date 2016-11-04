@@ -54,5 +54,13 @@ public class ExercicesDAO {
             System.err.println(e.getMessage());
         }   
     }
+    
+    public void suppExo(Exercices newExercices){
+        try{
+            em.remove(em.merge(newExercices));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
 
 }

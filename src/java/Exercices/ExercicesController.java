@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -31,33 +32,28 @@ public class ExercicesController implements Serializable{
     @EJB
     private ExercicesDAO exercicesDAO;
     
-    private List<Exercices> filtreExo;
+    private List<Exercices> listeExo;
     
     private Exercices saisie;
     
 
-    //getter du compte
+    //getter du compte   
+    public ExercicesController(){
+        super();
+    }
+    
+    @PostConstruct
+    public void postConstruct(){
+         listeExo = (List<Exercices>) exercicesDAO.getAllExercices();
+    }
+    
     public List<Exercices> getExercices(){
-        return exercicesDAO.getAllExercices();
+        return listeExo;
     }
-    
-    public List<Exercices> getFiltreNomExercices(){
-        return exercicesDAO.getNomExercices();
-    }
-    
-    public List<Exercices> getFiltreDifficulteExercices(){
-        return exercicesDAO.getDifficulteExercice();
-    }
+
+
  
     // getter et setter   
-
-    public List<Exercices> getFiltreExo() {
-        return filtreExo;
-    }
-
-    public void setFiltreExo(List<Exercices> filtreExo) {
-        this.filtreExo = filtreExo;
-    }
 
     public Exercices getSaisie() {
         return saisie;
@@ -70,13 +66,14 @@ public class ExercicesController implements Serializable{
     
     
     /**
-     * Creates a new instance of ExercicesController
-     */
-    public ExercicesController() {
-    }
-    
+     * modification des exercice via le Edit
+     * @param event
+     */   
     public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Exo Edited", ((Exercices) event.getObject()).getNomExercice());
+        Exercices ex = (Exercices) event.getObject();
+                System.out.println("************"+ ex.getNomExercice()  +"************");
+        exercicesDAO.updateExercice(ex);
+        FacesMessage msg = new FacesMessage("Modification : ", ((Exercices) event.getObject()).getNomExercice());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
      
@@ -84,17 +81,11 @@ public class ExercicesController implements Serializable{
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((Exercices) event.getObject()).getNomExercice());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-     
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-           // exercicesDAO.updateExercice(saisie);
-            
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+    public void suppExo(Exercices exo){ 
+        this.exercicesDAO.suppExo(exo);
+        listeExo.remove(exo);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Exercice supprimé"));
         }
-    }
-    
 }
