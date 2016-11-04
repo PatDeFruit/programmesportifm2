@@ -63,7 +63,15 @@ public class ExercicesController implements Serializable{
         this.saisie = saisie;
     }
     
-    
+    /**
+     *Ajout d'un nouvel exercice 
+     */
+    public void saveExercice() {
+        exercicesDAO.saveExercice(saisie);
+        FacesMessage msg = new FacesMessage("Successful", "Ajout de : " + saisie.getNomExercice() +" réalisé");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    }
     
     /**
      * modification des exercice via le Edit
@@ -81,7 +89,11 @@ public class ExercicesController implements Serializable{
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((Exercices) event.getObject()).getNomExercice());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-        
+            
+    /**
+     * suppression des exercices
+     * @param exo 
+     */
     public void suppExo(Exercices exo){ 
         this.exercicesDAO.suppExo(exo);
         listeExo.remove(exo);

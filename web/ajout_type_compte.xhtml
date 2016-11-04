@@ -7,37 +7,21 @@
         xmlns:p="http://primefaces.org/ui" 
         xmlns:jsf="http://java.sun.com/jsp/jstl/core">
 
-    <c:metadata>
-        <c:viewParam name="login" value="#{comptesController.login}"/>
-    </c:metadata>
-    
-    <h:head>
-        <title>Programme Sportif - Accueil</title>
-        <style type="text/css" media="all"> 
-       @import "CSS/cssProgrammeSportifUtilisateur.css"; 
-        </style> 
-    </h:head>
     <h:body>
         <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
             
-        <div class="wrapper">
-            <div id="sidebar-wrapper">
-                <div id="sidebar-header">
-                    <div id="logo-wrapper">
-                        <img id="logo" src="rsrc/logo_appli.png" width="76px" height="76px"/>
-                        <br />
-                        <h1 class="titreAppliUser">Ajouter un type de compte utilisateur</h1>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="main-wrapper">
-                <c:view>
-                    <c:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
-                </c:view>
-            </div>
-                          
-        </div>
+         <c:view>
+            <h:form>
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="id du type de compte utilisateur : " for="idType" />
+                    <h:inputText id="idType" value="#{typesComptesController.saisie.idType}" title="idType" required="true" requiredMessage="L'id du type de compte est obligatoire."/>
+                    <h:outputLabel value="Nom du type de compte : " for="nomType" />
+                    <h:inputText id="nomType" value="#{typesComptesController.saisie.nomType}" title="nomType" required="true" requiredMessage="Le nom du type de compte est obligatoire."/>
+                </p:panelGrid>
+                <h:commandButton value="Sauvegarder" action="#"/>
+            </h:form>
+        </c:view>
+                                      
     </h:body>
 </html>
 
