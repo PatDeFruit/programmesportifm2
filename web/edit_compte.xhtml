@@ -52,7 +52,7 @@
                     </div>
                     <div class="top-menu">
                         <div class="top-bar-icon">
-                            <h:form>                                
+                            <h:form id="statForm">                                
                             <h:commandButton id="view_stat" image="rsrc/stat.png" styleClass="iconMenuBar" />
                             <p:menu overlay="true" trigger="view_stat" my="left top" at="left bottom" styleClass="profilMenu" >                         
                                 <p:menuitem value="Nombre d'amitiés : #{amitieController.countAmities}" styleClass="profilMenuItem"/>
@@ -71,6 +71,74 @@
             <div class="main-wrapper">
                 <c:view>
                     <c:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
+                    <h:form>
+                        <p:dataTable id="data_table" var="var" value="#{comptesController.comptes}" widgetVar="varTable"
+                                     emptyMessage="Aucune donnée trouvée" paginator="true" rows="20"
+                                     editable="true"
+                                     > 
+                                 
+                            <p:ajax event="rowEdit" listener="#{comptesController.onRowEdit}" update="menuform"/>
+                            <p:ajax event="rowEditCancel" listener="#{comptesController.onRowCancel}" update="menuform"/>
+                            
+                            <c:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Recherche : " />
+                                    <p:inputText id="globalFilter" onkeyup="PF('varTable').filter()" style="width:150px" placeholder="..."/>
+                                        <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
+                                        <p:columnToggler datasource="data_table" trigger="toggler" />         
+                                </p:outputPanel>                      
+                            </c:facet>
+                            
+                            <p:column headerText="Type de compte" footerText="" sortBy="#{var.idType.nomType}" filterBy="#{var.idType.nomType}">
+                                <h:outputText value="#{var.idType.nomType}" />
+                            </p:column>
+                            
+                            <p:column headerText="Login" footerText="" sortBy="#{var.login}" filterBy="#{var.login}">
+                                <h:outputText value="#{var.login}" />
+                            </p:column>
+                            
+                            <p:column headerText="eMail" footerText="" sortBy="#{var.email}" filterBy="#{var.email}" visible="false">
+                                <h:outputText value="#{var.email}" />
+                            </p:column>
+                            
+                            <p:column headerText="Date de naissance" footerText="" sortBy="#{var.age}" filterBy="#{var.age}" visible="false">
+                                <h:outputText value="#{var.age}">
+                                    <c:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Taille" footerText="" sortBy="#{var.taille}" filterBy="#{var.taille}" visible="false">
+                                <h:outputText value="#{var.taille}" />
+                            </p:column>
+                            
+                            <p:column headerText="Poids" footerText="" sortBy="#{var.poids}" filterBy="#{var.poids}" visible="false">
+                                <h:outputText value="#{var.poids}" />
+                            </p:column>
+                            
+                            <p:column headerText="Sexe" footerText="" sortBy="#{var.sexeAffichage}" filterBy="#{var.sexeAffichage}">
+                                <h:outputText value="#{var.sexeAffichage}" />
+                            </p:column>
+                            
+                            <p:column headerText="Niveau" footerText="" sortBy="#{var.idNiveau.nomNiveau}" filterBy="#{var.idNiveau.nomNiveau}">
+                                <h:outputText value="#{var.idNiveau.nomNiveau}" />
+                            </p:column>
+                            
+                            <p:column headerText="Nombre de défis réalisés" footerText="" sortBy="#{var.nbDefis}" filterBy="#{var.nbDefis}" visible="false">
+                                <h:outputText value="#{var.nbDefis}" />
+                            </p:column>
+                            
+                            <p:column headerText="Nombre de défis emportés" footerText="" sortBy="#{var.nbDefisEmportes}" filterBy="#{var.nbDefisEmportes}" visible="false">
+                                <h:outputText value="#{var.nbDefisEmportes}" />
+                            </p:column>
+                            
+                            <p:column style="width:35px">
+                                 <p:commandButton id="supp" icon="ui-icon-trash" style="color:red"
+                                                  update="data_table,menuform,statForm" actionListener="#{comptesController.suppCompte(var)}">
+                                 </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                                               
+                    </h:form>
                 </c:view>
             </div>
                           

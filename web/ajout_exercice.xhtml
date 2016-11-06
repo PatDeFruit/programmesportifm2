@@ -13,10 +13,8 @@
          <c:view>
             <h:form>
                 <p:panelGrid columns="2">
-                    <h:outputLabel value="id l'exercice : " for="idExercice" />
-                    <h:inputText id="idExercice" value="#{exercicesController.saisie.idExercice}" title="idExercice" required="true" requiredMessage="L'id de l'exercice est obligatoire."/>
                     <h:outputLabel value="Nom de l'exercice : " for="nomExercice" />
-                    <h:inputText id="nomExercice" value="#{exercicesController.saisie.nomExercice}" title="nomExercice" required="true" requiredMessage="Le nom de l'exercice est obligatoire."/>
+                        <h:inputText id="nomExercice" value="#{exercicesController.saisie.nomExercice}" title="nomExercice" required="true" requiredMessage="Le nom de l'exercice est obligatoire."/>
                     <h:outputLabel value="Description : " for="description" />
                         <h:inputText id="description" value="#{exercicesController.saisie.description}" title="description" required="true" requiredMessage="La description de l'exercice est obligatoire."/>
                     <h:outputLabel value="Difficulte : " for="difficulte" />

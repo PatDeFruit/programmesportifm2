@@ -71,10 +71,36 @@
             <div class="main-wrapper">
                 <c:view>
                     <c:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
+                    <h:form>
+                        <p:dataTable id="data_table" var="var" value="#{defisController.allDefisEnCours}" widgetVar="varTable"
+                                     emptyMessage="Aucune donnée trouvée" paginator="true" rows="20"
+                                     > 
+                       
+                            <c:facet name="header">
+                                <p:outputPanel>
+                                    <h:outputText value="Recherche : " />
+                                    <p:inputText id="globalFilter" onkeyup="PF('varTable').filter()" style="width:150px" placeholder="..."/>      
+                                </p:outputPanel>                      
+                            </c:facet>
+                            
+                            <p:column headerText="Nom de l'exercice" footerText="" sortBy="#{var.idExercice.nomExercice}" filterBy="#{var.idExercice.nomExercice}">
+                                <h:outputText value="#{var.idExercice.nomExercice}" />
+                            </p:column>
+                            
+                            <p:column headerText="Emetteur" footerText="" sortBy="#{var.login1.login}" filterBy="#{var.login1.login}">
+                                <h:outputText value="#{var.login1.login}" />
+                            </p:column>
+                            
+                            <p:column headerText="Receveur" footerText="" sortBy="#{var.login2.login}" filterBy="#{var.login2.login}">
+                                <h:outputText value="#{var.login2.login}"/>
+                            </p:column>
+
+                        </p:dataTable>
+                                               
+                    </h:form>
                 </c:view>
             </div>
                           
         </div>
     </h:body>
 </html>
-

@@ -17,9 +17,11 @@ import javax.inject.Named;
 import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
 import Types_comptes.TypesComptesDAO;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -45,14 +47,25 @@ public class ComptesController implements Serializable{
     private TypesComptes typeComptes;
     private Comptes result;
     private boolean skip;
+    private List<Comptes> listeCompte;
     
     String login;
     
+    /**
+     *  //constructeur
+     */
+    public ComptesController() {
+        newComptes = new Comptes();
+    }
     
+    @PostConstruct
+    public void postConstruct(){
+         listeCompte = (List<Comptes>) comptesDAO.getAllComptes();
+    }
 
     //getter du compte
     public List<Comptes> getComptes(){
-        return comptesDAO.getAllComptes();
+        return listeCompte;
     }
     
     // getter et setter du newComptes
@@ -80,17 +93,7 @@ public class ComptesController implements Serializable{
     public void setLogin(String login) {
         this.login = login;
     }
-    
-    
-    
-    
-    /**
-     *  //constructeur
-     */
-    public ComptesController() {
-        newComptes = new Comptes();
-    }
-    
+       
     /**
      * //save 
      * @return
@@ -135,6 +138,23 @@ public class ComptesController implements Serializable{
                 //FacesContext.getCurrentInstance().addMessage(null, msg);
                 //FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
                 return "profil?login=#{comptesController.compteConnecte.login}";       
+    }
+    
+    /**
+     * modification des exercice via le Edit
+     * @param event
+     */   
+    public void onRowEdit(RowEditEvent event) {
+        Comptes compte = (Comptes) event.getObject();
+                System.out.println("************"+ compte.getLogin()  +"************");
+        comptesDAO.updateComptes(compte);
+        FacesMessage msg = new FacesMessage("Modification : ", ((Comptes) event.getObject()).getLogin());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Comptes) event.getObject()).getLogin());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     /**
@@ -207,4 +227,15 @@ public class ComptesController implements Serializable{
      public void lireCompte(ComponentSystemEvent event){
         compteConnecte = comptesDAO.getOneComptes(login);
     }
+     
+     /**
+     * suppression des exercices
+     * @param exo 
+     */
+    public void suppCompte(Comptes compte){ 
+        this.comptesDAO.suppCompte(compte);
+        listeCompte.remove(compte);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Compte supprimé"));
+        }
 }

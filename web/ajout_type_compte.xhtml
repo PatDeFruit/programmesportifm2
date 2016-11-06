@@ -13,12 +13,10 @@
          <c:view>
             <h:form>
                 <p:panelGrid columns="2">
-                    <h:outputLabel value="id du type de compte utilisateur : " for="idType" />
-                    <h:inputText id="idType" value="#{typesComptesController.saisie.idType}" title="idType" required="true" requiredMessage="L'id du type de compte est obligatoire."/>
                     <h:outputLabel value="Nom du type de compte : " for="nomType" />
-                    <h:inputText id="nomType" value="#{typesComptesController.saisie.nomType}" title="nomType" required="true" requiredMessage="Le nom du type de compte est obligatoire."/>
+                        <h:inputText id="nomType" value="#{typesComptesController.saisie.nomType}" title="nomType" required="true" requiredMessage="Le nom du type de compte est obligatoire."/>
                 </p:panelGrid>
-                <h:commandButton value="Sauvegarder" action="#"/>
+                <h:commandButton value="Sauvegarder" action="#{typesComptesController.saveTypesComptes()}"/>
             </h:form>
         </c:view>
                                       

@@ -37,9 +37,9 @@ public class ExercicesController implements Serializable{
     private Exercices saisie;
     
 
-    //getter du compte   
+    //constructeur du compte   
     public ExercicesController(){
-        super();
+        saisie = new Exercices();
     }
     
     @PostConstruct
@@ -47,12 +47,11 @@ public class ExercicesController implements Serializable{
          listeExo = (List<Exercices>) exercicesDAO.getAllExercices();
     }
     
+    //getter liste
     public List<Exercices> getExercices(){
         return listeExo;
     }
 
-
- 
     // getter et setter   
 
     public Exercices getSaisie() {

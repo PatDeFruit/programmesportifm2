@@ -37,6 +37,36 @@ public class TypesComptesDAO {
         Query query = em.createNamedQuery("TypesComptes.findByIdType").setParameter("idType", id);
         return (TypesComptes) query.getSingleResult();
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
+    //Ajout
+    public void saveTypesComptes(TypesComptes newTypesComptes){
+        try{
+            if(newTypesComptes.getIdType()!= null){
+                em.merge(newTypesComptes);
+            }
+            else {
+                em.persist(newTypesComptes);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    //Update
+    public void updateTypeCompte(TypesComptes newType){
+        try{
+            em.merge(newType);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
+    }
+    
+    //suppression
+    public void suppTypesComptes(TypesComptes newType){
+        try{
+            em.remove(em.merge(newType));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
 }

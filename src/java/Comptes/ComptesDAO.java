@@ -107,4 +107,14 @@ public class ComptesDAO {
             return null;
         }
     }
+    
+    //suppression
+    public void suppCompte(Comptes newComptes){
+        try{
+            em.remove(em.merge(newComptes));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
 }

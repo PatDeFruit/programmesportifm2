@@ -13,12 +13,10 @@
          <c:view>
             <h:form>
                 <p:panelGrid columns="2">
-                    <h:outputLabel value="id du niveau : " for="idNiveau" />
-                    <h:inputText id="idExercice" value="#{niveauxController.newNiveaux.idNiveau}" title="idNiveau" required="true" requiredMessage="L'id du Niveau est obligatoire."/>
                     <h:outputLabel value="Nom du niveau : " for="nomNiveau" />
-                    <h:inputText id="nomNiveau" value="#{niveauxController.newNiveaux.nomNiveau}" title="nomNiveau" required="true" requiredMessage="Le nom du niveau est obligatoire."/>
+                        <h:inputText id="nomNiveau" value="#{niveauxController.newNiveaux.nomNiveau}" title="nomNiveau" required="true" requiredMessage="Le nom du niveau est obligatoire."/>
                 </p:panelGrid>
-                <h:commandButton value="Sauvegarder" action="#"/>
+                <h:commandButton value="Sauvegarder" action="#{niveauxController.saveNiveau()}"/>
             </h:form>
         </c:view>
                                       

@@ -46,6 +46,18 @@ public class DefisDAO {
         }
     }
     
+    //
+    public List<Defis> getAllDefisEnCours() {
+        Query query = em.createQuery("SELECT d FROM Defis d Where d.effectue='0'");
+        try{
+            return query.getResultList();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+    
 
      public List<Exercices> getMyDefis(String login){
             Query query = em.createQuery("SELECT e FROM Exercices e left join e.defisCollection d left join d.login1 c WHERE c.login = :login AND d.effectue='0'").setParameter("login", login);
