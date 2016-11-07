@@ -43,11 +43,25 @@
                                 <p:password style="width:200px;height:5px" id="pswd" value="#{comptesController.newComptes.pswd}" title="Mot de passe" />
                                 <br/><br/><br/>
                                 <p:commandButton value="Connexion" action="#{comptesController.connect()}" update="formulaireSaisie"/>
+                                <br/><br/><br/>
+                                <p:commandButton value="Mot de passe perdu" onclick="PF('mdp_perdu').show();" />
                             </h:form>
                         </td>
                     </tr>
                     </table>
             
+                <p:dialog header="Mot de passe perdu" widgetVar="mdp_perdu" resizable="false" modal="true" width="70%" height="70%">
+                    <f:view>
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <h:outputLabel value="Adresse mail : "  />
+                                
+                            </p:panelGrid>
+                            <p:commandButton value="Mot de passe perdu" action="#{comptesController.notifcompte('juju', false)}" update="formulaireSaisie"/>
+                        </h:form>
+                    </f:view>
+                </p:dialog>
+          
         </div>
         <br />
 

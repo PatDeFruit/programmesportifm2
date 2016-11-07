@@ -17,6 +17,9 @@ import javax.inject.Named;
 import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
 import Types_comptes.TypesComptesDAO;
+import com.sun.xml.bind.util.ListImpl;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.SessionScoped;
@@ -48,6 +51,9 @@ public class ComptesController implements Serializable{
     private Comptes result;
     private boolean skip;
     private List<Comptes> listeCompte;
+    private int cptMdp;
+    
+    private List<Comptes> listeCompteMDP;
     
     String login;
     
@@ -56,14 +62,21 @@ public class ComptesController implements Serializable{
      */
     public ComptesController() {
         newComptes = new Comptes();
+        
     }
     
     @PostConstruct
     public void postConstruct(){
          listeCompte = (List<Comptes>) comptesDAO.getAllComptes();
+         listeCompteMDP = new ArrayList<Comptes>();
+        cptMdp = 0;
     }
 
     //getter du compte
+    public List<Comptes> getListeCompteMDP() {
+        return listeCompteMDP;
+    }
+    
     public List<Comptes> getComptes(){
         return listeCompte;
     }
@@ -93,6 +106,18 @@ public class ComptesController implements Serializable{
     public void setLogin(String login) {
         this.login = login;
     }
+
+    public int getCptMdp() {
+        return cptMdp;
+    }
+
+    public void setCptMdp(int cptMdp) {
+        this.cptMdp = cptMdp;
+    }
+
+
+    
+    
        
     /**
      * //save 
@@ -228,14 +253,47 @@ public class ComptesController implements Serializable{
         compteConnecte = comptesDAO.getOneComptes(login);
     }
      
+    public Comptes getOneEmailComptes(String email){
+        return comptesDAO.getOneEmailComptes(email);
+    }
+     
      /**
      * suppression des exercices
-     * @param exo 
+     * @param compte 
      */
     public void suppCompte(Comptes compte){ 
         this.comptesDAO.suppCompte(compte);
         listeCompte.remove(compte);
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Compte supprimé"));
+        }
+    
+    /**
+     * notification modif compte
+     * @param emailCompte
+     * @param validate
+     * @return int
+     */
+    public List<Comptes> notifcompte(String emailCompte, boolean validate){ 
+        //this.comptesDAO.suppCompte(compte);
+        //listeCompte.remove(compte);
+        System.out.println("*****************************" + emailCompte +"*****************************" );
+                  Comptes c = this.getOneEmailComptes(emailCompte);
+        System.out.println("*****************************" + c.getLogin() +"*****************************" );
+          
+        if (validate == false){
+         cptMdp++;   
+         System.out.println("*****************************" + c.getLogin() +"*****************************" );
+         listeCompteMDP.add(c);
+        }
+        else{
+          cptMdp--;
+        }
+        
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " info : ", "cptMdp : "+ cptMdp));
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        
+        return listeCompteMDP;
         }
 }
