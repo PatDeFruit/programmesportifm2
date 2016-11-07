@@ -5,6 +5,7 @@
  */
 package Amitie;
 
+import Comptes.Comptes;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -61,6 +62,14 @@ public class AmitieController implements Serializable{
     //getter du compte
     public int getCountAmities(){
         return amitieDAO.getCountAmities();
+    }
+    
+    public List<Comptes> getMyFriendsWithLogin1(String login){
+        return amitieDAO.getMyFriendsWithLogin1(login);
+    }
+    
+    public List<Comptes> getMyFriendsWithLogin2(String login){
+        return amitieDAO.getMyFriendsWithLogin2(login);
     }
     
 }

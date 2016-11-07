@@ -48,7 +48,7 @@ public class DefisDAO {
     
 
      public List<Exercices> getMyDefis(String login){
-            Query query = em.createQuery("SELECT e FROM Exercices e left join e.defisCollection d left join d.login1 c WHERE c.login = :login AND d.effectue='0'").setParameter("login", login);
+            Query query = em.createQuery("SELECT e FROM Exercices e left join e.defisCollection d left join d.login1 c left join d.login2 c2 WHERE c.login = :login OR c2.login = :login AND d.effectue='0'").setParameter("login", login);
             try{
                 return query.getResultList();
             } catch(Exception e){

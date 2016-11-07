@@ -61,8 +61,8 @@ public class DefisController implements Serializable{
         return defisDAO.getCountDefis();
     }
     
-         public List<Exercices> getMyDefis(String login){
-         return defisDAO.getMyDefis(login);
+    public List<Exercices> getMyDefis(String login){
+        return defisDAO.getMyDefis(login);
      }
     
 }
