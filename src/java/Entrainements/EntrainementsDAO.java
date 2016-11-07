@@ -34,10 +34,36 @@ public class EntrainementsDAO {
         return query.getResultList();
     }
     
+  
+    //Ajout
+    public void saveEntrainement(Entrainements newEntrainement){
+        try{
+            if(newEntrainement.getIdEntrainements()!= null){
+                em.merge(newEntrainement);
+            }
+            else {
+                em.persist(newEntrainement);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
     
-   
-
+    //Update
+    public void updateEntrainement(Entrainements newEntrainement){
+        try{
+            em.merge(newEntrainement);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
+    }
     
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    //suppression
+    public void suppEntrainement(Entrainements newEntrainement){
+        try{
+            em.remove(em.merge(newEntrainement));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
 }

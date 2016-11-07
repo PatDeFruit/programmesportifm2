@@ -54,4 +54,36 @@ public class ProgrammesDAO {
             return null;
         }
     }
+    
+        //Ajout
+    public void saveProgramme (Programmes newProg){
+        try{
+            if(newProg.getIdProgramme()!= null){
+                em.merge(newProg);
+            }
+            else {
+                em.persist(newProg);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    //Update
+    public void updateProgrammes(Programmes newProg){
+        try{
+            em.merge(newProg);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
+    }
+    
+    //suppression
+    public void suppProgramme(Programmes newProg){
+        try{
+            em.remove(em.merge(newProg));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
 }

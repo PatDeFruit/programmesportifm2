@@ -67,29 +67,43 @@
             <div class="main-wrapper">
                 <p:accordionPanel style="margin: 20px;width: 95%;">
                     <p:tab title="Gestion des utilisateurs">
-                        <p:panelGrid columns="3" columnClasses="ui-grid-col-8,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-                            <img src="rsrc/gestion_user.png" alt="Gestion des utilisateurs" width="200px" height="200px"/>
-                            <p:button value="Editer" icon="ui-icon-pencil" outcome="edit_compte?login=#{comptesController.compteConnecte.login}"/> 
-                            <p:button value="Gestion des mots de passes" icon="ui-icon-pencil" outcome="mdp_perdu?login=#{comptesController.compteConnecte.login}"/> 
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-10,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <img src="rsrc/gestion_user.png" alt="Gestion des utilisateurs" width="50px" height="50px"/>
+                            <h:form>
+                                <p:splitButton value="Options">
+                                    <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_compte?login=#{comptesController.compteConnecte.login}"/>
+                                    <p:separator />
+                                    <p:menuitem value="Mots de passe perdus" icon="ui-icon-pencil" onclick="PF('mdp').show();"/>
+                                </p:splitButton>
+                            </h:form>
+                            <img src="rsrc/gestion_user.png" alt="Gestion des utilisateurs" width="50px" height="50px"/>
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des Programmes">
-                        <p:panelGrid columns="3" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank">
-                            <img src="rsrc/document.png" alt="Gestion des programmes" width="200px" height="200px"/>
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-10,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <img src="rsrc/document.png" alt="Gestion des programmes" width="50px" height="50px"/>
                             <p:button value="Editer" icon="ui-icon-pencil" outcome="edit_programme?login=#{comptesController.compteConnecte.login}"/> 
+                            <img src="rsrc/document.png" alt="Gestion des programmes" width="50px" height="50px"/>
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des Entrainements">
-                        <p:panelGrid columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid" styleClass="ui-panelgrid-blank">
-                            <img src="rsrc/dashboard-icon-32.png" alt="Gestion des entrainements" width="200px" height="200px"/>
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-10,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <img src="rsrc/dashboard-icon-32.png" alt="Gestion des entrainements" width="50px" height="50px"/>
                             <p:button value="Editer" icon="ui-icon-pencil" outcome="edit_entrainement?login=#{comptesController.compteConnecte.login}"/> 
+                            <img src="rsrc/dashboard-icon-32.png" alt="Gestion des entrainements" width="50px" height="50px"/>
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des Défis">
-                        <p:panelGrid columns="3" columnClasses="ui-grid-col-8,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-                            <img src="rsrc/defi.png" alt="Gestion des défis" width="200px" height="200px"/>
-                            <p:button value="Visualisation des défis en cours" outcome="defi_en_cours?login=#{comptesController.compteConnecte.login}"/> 
-                            <p:button value="Validation des défis" outcome="validation_defi?login=#{comptesController.compteConnecte.login}"/>
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-10,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                            <img src="rsrc/defi.png" alt="Gestion des défis" width="50px" height="50px"/>
+                            <h:form>
+                                <p:splitButton value="Options">
+                                    <p:menuitem value="Défis en cours" icon="ui-icon-plusthick" outcome="defi_en_cours?login=#{comptesController.compteConnecte.login}"/>
+                                    <p:separator />
+                                    <p:menuitem value="Validation des défis" icon="ui-icon-pencil" onclick="PF('val').show();"/>
+                                </p:splitButton>
+                            </h:form>
+                            <img src="rsrc/defi.png" alt="Gestion des défis" width="50px" height="50px"/>
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Gestion des données de références">
@@ -110,7 +124,7 @@
                                         <p:splitButton value="Options">
                                             <p:menuitem value="Ajout" icon="ui-icon-plusthick" onclick="PF('dlg2').show();"/>
                                             <p:separator />
-                                            <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_niveau?login=#{comptesController.compteConnecte.login}" />
+                                            <p:menuitem value="Editer" icon="ui-icon-pencil" onclick="PF('edit1').show();" />
                                         </p:splitButton>
                                     </h:form>
                                 </p:panelGrid>
@@ -118,9 +132,7 @@
                                     <img src="rsrc/type_de_compte.png" alt="Gestion des types de compte" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" onclick="PF('dlg3').show();"/>
-                                            <p:separator />
-                                            <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_type_compte?login=#{comptesController.compteConnecte.login}" />
+                                            <p:menuitem value="Editer" icon="ui-icon-pencil" onclick="PF('edit2').show();" />
                                         </p:splitButton>
                                     </h:form>
                                 </p:panelGrid>
@@ -128,20 +140,36 @@
                     </p:tab>
                 </p:accordionPanel>     
             </div>
-                 
-            <p:dialog header="Cadastro" widgetVar="dlg1" resizable="false" modal="true" width="700" height="500">
-                <f:include src="ajout_exercice.xhtml" />
-            </p:dialog>
             
-            <p:dialog header="Cadastro" widgetVar="dlg2" resizable="false" modal="true" width="700" height="500">
+            <!-- ajout -->
+            <p:dialog header="Ajout d'un exercice" widgetVar="dlg1" resizable="false" modal="true" width="70%" height="70%">
+                <f:include src="ajout_exercice.xhtml" />
+            </p:dialog>   
+            
+            <p:dialog header="Ajout d'un niveau" widgetVar="dlg2" resizable="false" modal="true" width="70%" height="70%">
                 <f:include src="ajout_niveau.xhtml" />
             </p:dialog>
             
-            <p:dialog header="Cadastro" widgetVar="dlg3" resizable="false" modal="true" width="700" height="500">
-                <f:include src="ajout_type_compte.xhtml" />
+            <!-- edit -->
+            <p:dialog header="Modifier - Niveaux" widgetVar="edit1" resizable="false" modal="true" width="70%" height="70%">
+                <f:include src="edit_niveau.xhtml" />
             </p:dialog>
             
-        </div>
+            <p:dialog header="Modifier - Types de Comptes" widgetVar="edit2" resizable="false" modal="true" width="70%" height="70%">
+                <f:include src="edit_type_compte.xhtml" />
+            </p:dialog>
+            
+            <!-- validation et mdp perdu -->
+            <p:dialog header="Mots de passe perdus" widgetVar="mdp" resizable="false" modal="true" width="70%" height="70%">
+                <f:include src="mdp_perdu.xhtml" />
+            </p:dialog>
+            
+            <p:dialog header="Valider - Defis" widgetVar="val" resizable="false" modal="true" width="70%" height="70%">
+                <f:include src="validation_defi.xhtml" />
+            </p:dialog>
+            
+        </div> 
+        
     </h:body>
 </html>
 

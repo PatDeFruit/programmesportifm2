@@ -5,7 +5,6 @@
  */
 package Exercices;
 
-import Defis.Defis;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,6 +45,20 @@ public class ExercicesDAO {
         return query.getResultList();
     }
     
+    //Ajout
+    public void saveExercice(Exercices newExercice){
+        try{
+            if(newExercice.getIdExercice()!= null){
+                em.merge(newExercice);
+            }
+            else {
+                em.persist(newExercice);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
     //Update
     public void updateExercice(Exercices newExercices){
         try{
@@ -55,6 +68,7 @@ public class ExercicesDAO {
         }   
     }
     
+    //suppression
     public void suppExo(Exercices newExercices){
         try{
             em.remove(em.merge(newExercices));

@@ -37,6 +37,36 @@ public class NiveauxDAO {
         Query query = em.createNamedQuery("Niveaux.findByIdNiveau").setParameter("idNiveau", id);
         return (Niveaux) query.getSingleResult();
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
+    //Ajout
+    public void saveNiveau(Niveaux newNiveau){
+        try{
+            if(newNiveau.getIdNiveau()!= null){
+                em.merge(newNiveau);
+            }
+            else {
+                em.persist(newNiveau);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    //Update
+    public void updateNiveau(Niveaux newNiveaux){
+        try{
+            em.merge(newNiveaux);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
+    }
+    
+    //suppression
+    public void suppNiveau(Niveaux newNiveaux){
+        try{
+            em.remove(em.merge(newNiveaux));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
 }

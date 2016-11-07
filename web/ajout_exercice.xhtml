@@ -7,37 +7,23 @@
         xmlns:p="http://primefaces.org/ui" 
         xmlns:jsf="http://java.sun.com/jsp/jstl/core">
 
-    <c:metadata>
-        <c:viewParam name="login" value="#{comptesController.login}"/>
-    </c:metadata>
-    
-    <h:head>
-        <title>Programme Sportif - Accueil</title>
-        <style type="text/css" media="all"> 
-       @import "CSS/cssProgrammeSportifUtilisateur.css"; 
-        </style> 
-    </h:head>
     <h:body>
         <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
             
-        <div class="wrapper">
-            <div id="sidebar-wrapper">
-                <div id="sidebar-header">
-                    <div id="logo-wrapper">
-                        <img id="logo" src="rsrc/logo_appli.png" width="76px" height="76px"/>
-                        <br />
-                        <h1 class="titreAppliUser">Ajouter un exercice</h1>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="main-wrapper">
-                <c:view>
-                    <c:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
-                </c:view>
-            </div>
-                          
-        </div>
+         <c:view>
+            <h:form>
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Nom de l'exercice : " for="nomExercice" />
+                        <h:inputText id="nomExercice" value="#{exercicesController.saisie.nomExercice}" title="nomExercice" required="true" requiredMessage="Le nom de l'exercice est obligatoire."/>
+                    <h:outputLabel value="Description : " for="description" />
+                        <h:inputText id="description" value="#{exercicesController.saisie.description}" title="description" required="true" requiredMessage="La description de l'exercice est obligatoire."/>
+                    <h:outputLabel value="Difficulte : " for="difficulte" />
+                        <h:inputText id="difficulte" value="#{exercicesController.saisie.difficulte}" title="difficulte" required="true" requiredMessage="La difficulté de l'exercice est obligatoire."/>
+                </p:panelGrid>
+                <h:commandButton value="Sauvegarder" action="#{exercicesController.saveExercice()}"/>
+            </h:form>
+        </c:view>
+                                      
     </h:body>
 </html>
 

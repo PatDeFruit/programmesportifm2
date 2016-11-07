@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "entrainements")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Entrainements.findAll", query = "SELECT e FROM Entrainements e"),
-    @NamedQuery(name = "Entrainements.findByIdEntrainements", query = "SELECT e FROM Entrainements e WHERE e.idEntrainements = :idEntrainements"),
+    @NamedQuery(name = "Entrainements.findAll", query = "SELECT e FROM Entrainements e order by e.idProgramme ASC, e.dateEntrainement DESC"),
+    @NamedQuery(name = "Entrainements.findByIdEntrainements", query = "SELECT e FROM Entrainements e WHERE e.idEntrainements = :idEntrainements order by e.idProgramme ASC, e.dateEntrainement DESC"),
     @NamedQuery(name = "Entrainements.findByDateEntrainement", query = "SELECT e FROM Entrainements e WHERE e.dateEntrainement = :dateEntrainement"),
     @NamedQuery(name = "Entrainements.findByNbRepetEffect", query = "SELECT e FROM Entrainements e WHERE e.nbRepetEffect = :nbRepetEffect"),
     @NamedQuery(name = "Entrainements.findByNbSerieEffect", query = "SELECT e FROM Entrainements e WHERE e.nbSerieEffect = :nbSerieEffect"),
