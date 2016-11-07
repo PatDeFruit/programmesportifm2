@@ -5,6 +5,7 @@
  */
 package Comptes;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -25,17 +26,19 @@ public class ComptesDAO {
     //Entity Manager
     @PersistenceContext(unitName = "programmesportifm2PU")
     private EntityManager em;
-
+    
+    
     public void persist(Object object) {
         em.persist(object);
     }
-
+  
+    
     //Liste des comptes
     public List<Comptes> getAllComptes() {
         Query query = em.createNamedQuery("Comptes.findAll");
         return query.getResultList();
     }
-    
+     
         //compteur de la présence d'un login dans la BDD
     //trouver un niveau via l'Id
     public int getCountLogin(String login) {
@@ -104,6 +107,16 @@ public class ComptesDAO {
             return (Comptes) query.getSingleResult();
         }catch (NoResultException e){
             System.err.println("pas de Compte avec ce login");
+            return null;
+        }
+    }
+    
+    public Comptes getOneEmailComptes(String email){
+        Query query = em.createNamedQuery("Comptes.findByEmail").setParameter("email", email);
+        try{
+            return (Comptes) query.getSingleResult();
+        }catch (NoResultException e){
+            System.err.println("Pas de Compte avec cet email !");
             return null;
         }
     }
