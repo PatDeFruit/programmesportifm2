@@ -5,6 +5,7 @@
  */
 package Exercices;
 
+import Programmes.Programmes;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -76,5 +77,16 @@ public class ExercicesDAO {
             System.err.println(e.getMessage());
         }
     }
+    
+    public List<Exercices> getExoByProgrammes(String prog){
+        Query query = em.createQuery("SELECT DISTINCT e FROM Exercices e left join e.entrainementsCollection t left join t.idProgramme p WHERE p.nomProgramme = :prog").setParameter("prog", prog);
+        try{
+                return query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
+    }
+    
 
 }

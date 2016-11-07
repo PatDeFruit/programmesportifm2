@@ -5,6 +5,7 @@
  */
 package Exercices;
 
+import Programmes.Programmes;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,4 +100,9 @@ public class ExercicesController implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Exercice supprimé"));
         }
+    
+    public List<Exercices> getExoByProgrammes(Programmes prog){
+        return exercicesDAO.getExoByProgrammes(prog.getNomProgramme());
+    }
+    
 }

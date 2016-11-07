@@ -66,4 +66,8 @@ public class EntrainementsDAO {
             System.err.println(e.getMessage());
         }
     }
+    
+
+    
+    
 }

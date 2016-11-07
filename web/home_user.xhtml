@@ -32,7 +32,7 @@
                                 <p:accordionPanel id="prog" style="width: 175px;">
                                     <p:tab title="Programmes suivis">
                                         <p:dataList value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
-                                            <p:link value="#{item}"/>
+                                            <h:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}"/>
                                         </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
@@ -105,10 +105,37 @@
                 <tr>
                     <td style="vertical-align: top">
                         <div>
+                            <h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>
                         <h:form>
                             <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;">
                                 <h:panelGrid columns="2" cellpadding="10">
-                                </h:panelGrid>   
+                                    <h:commandButton id="add_training" image="rsrc/icon-plus.png" styleClass="iconTraining" onclick="PF('addExo').show()" />
+                                    <h:outputText value="Ajouter un entrainement ce jour"/>
+                                </h:panelGrid> 
+                                <p:panel widgetVar="addExo" closable="true" toggleable="true">
+                                    <h:form>                                        
+                                    <table border="0">
+                                        <thead>
+                                            <tr>
+                                                <th>   <h:outputText value="Exercice" /></th>
+                                                <th>    <h:outputText value="Nombre de répétitions"/></th>
+                                                <th>    <h:outputText value="Nombres de séries"/></th>
+                                                <th>    <h:outputText value="Temps"/></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>    <p:selectOneMenu value="#{exercicesController.getExoByProgrammes(programmesController.selectedProgramme)}" var="exo">
+                                                                <c:selectItem itemLabel="#{exo.nomExercice}" value="#{entrainementsController.saisie.idProgramme}"  />
+                                                            </p:selectOneMenu></td>
+                                                <td>    <h:inputText id="nbRepetEffect" value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" style="width : 75px;" /></td>
+                                                <td>    <h:inputText value="#{entrainementsController.saisie.nbSerieEffect}" style="width : 50px;"/></td>
+                                                <td>    <h:inputText value="#{entrainementsController.saisie.tempsEffect}" style="width : 50px;" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                     </h:form>
+                                </p:panel>
                             </p:panel>
                             <p:panel id="test" header="Hier"  style="margin-bottom:20px;">
                                 <h:panelGrid columns="2" cellpadding="10">

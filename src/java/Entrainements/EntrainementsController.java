@@ -7,6 +7,7 @@ package Entrainements;
 
 import Comptes.Comptes;
 import Programmes.Programmes;
+import Programmes.ProgrammesDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -15,6 +16,7 @@ import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.persistence.Query;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -29,7 +31,10 @@ public class EntrainementsController implements Serializable{
     private EntrainementsDAO entrainementsDAO;
     
     private Entrainements result;
+    private Entrainements newEntrainement;
     private Programmes resultProgramme;
+    private Programmes myProgramme;
+    private ProgrammesDAO programmeDAO;
     
     private Entrainements saisie;
     
@@ -65,9 +70,11 @@ public class EntrainementsController implements Serializable{
     /**
      *Ajout d'un nouvel exercice 
      */
-    public void saveEntrainement() {
+    public void saveEntrainement(Programmes prog) {
+        this.myProgramme = programmeDAO.getTheIdProgramme(prog.getNomProgramme());
+        saisie.setIdProgramme(this.myProgramme);
         entrainementsDAO.saveEntrainement(saisie);
-        FacesMessage msg = new FacesMessage("Successful", "Ajout de : " + saisie.getDateEntrainement() +" réalisé");
+        FacesMessage msg = new FacesMessage("Successful", "Ajout du : " + saisie.getDateEntrainement() +" réalisé");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     }
@@ -100,5 +107,7 @@ public class EntrainementsController implements Serializable{
         context.addMessage(null, new FacesMessage("Niveau supprimé"));
         }
     
+        
+
     
 }
