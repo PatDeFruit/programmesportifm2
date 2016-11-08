@@ -105,14 +105,14 @@
                 <tr>
                     <td style="vertical-align: top">
                         <div>
-                            <h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>
                         <h:form>
-                            <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;">
+                            <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;"> <h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>
                                 <h:panelGrid columns="2" cellpadding="10">
                                     <h:commandButton id="add_training" image="rsrc/icon-plus.png" styleClass="iconTraining" onclick="PF('addExo').show()" />
                                     <h:outputText value="Ajouter un entrainement ce jour"/>
                                 </h:panelGrid> 
-                                <p:panel widgetVar="addExo" closable="true" toggleable="true">
+                                <p:panel widgetVar="addExo" closable="true" toggleable="true" visible="false">
+                                    <c:view>
                                     <h:form>                                        
                                     <table border="0">
                                         <thead>
@@ -125,15 +125,17 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>    <p:selectOneMenu value="#{exercicesController.getExoByProgrammes(programmesController.selectedProgramme)}" var="exo">
-                                                                <c:selectItem itemLabel="#{exo.nomExercice}" value="#{entrainementsController.saisie.idProgramme}"  />
-                                                            </p:selectOneMenu></td>
+                                                <td>    <p:selectOneMenu value="#{exercicesController.getExoByProgrammes(programmesController.selectedProgramme.idProgramme)}" var="exo">     
+                                                        <c:selectItem itemLabel="#{exo.nomExercice}"></c:selectItem>
+                                                            </p:selectOneMenu>
+                                                             </td>
                                                 <td>    <h:inputText id="nbRepetEffect" value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" style="width : 75px;" /></td>
                                                 <td>    <h:inputText value="#{entrainementsController.saisie.nbSerieEffect}" style="width : 50px;"/></td>
                                                 <td>    <h:inputText value="#{entrainementsController.saisie.tempsEffect}" style="width : 50px;" /></td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                        <h:commandButton id="ajouterEntrainement" label="Ajouter" value="#{entrainementsController.saisie}"  />
                                      </h:form>
                                 </p:panel>
                             </p:panel>
@@ -155,6 +157,7 @@
                                 </h:panelGrid>
                             </p:panel>
                         </h:form>
+                    </c:view>
                     </div>
                     </td>
                     <td width="240px">

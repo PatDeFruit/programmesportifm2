@@ -78,8 +78,8 @@ public class ExercicesDAO {
         }
     }
     
-    public List<Exercices> getExoByProgrammes(String prog){
-        Query query = em.createQuery("SELECT DISTINCT e FROM Exercices e left join e.entrainementsCollection t left join t.idProgramme p WHERE p.nomProgramme = :prog").setParameter("prog", prog);
+    public List<Exercices> getExoByProgrammes(int prog){
+        Query query = em.createQuery("SELECT DISTINCT e FROM Exercices e left join e.entrainementsCollection t left join t.idProgramme p WHERE p.idProgramme = :prog").setParameter("prog", prog);
         try{
                 return query.getResultList();
             } catch(Exception e){

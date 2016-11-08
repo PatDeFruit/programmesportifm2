@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.swing.SortOrder;
@@ -34,7 +35,8 @@ public class ExercicesController implements Serializable{
     private ExercicesDAO exercicesDAO;
     
     private List<Exercices> listeExo;
-    
+    private List<String> mesExos = new ArrayList<String>();
+    private String selectedExo = "";
     private Exercices saisie;
     
 
@@ -53,6 +55,24 @@ public class ExercicesController implements Serializable{
         return listeExo;
     }
 
+    public List<String> getMesExos() {
+        return mesExos;
+    }
+
+    public void setMesExos(List<String> mesExos) {
+        this.mesExos = mesExos;
+    }
+
+    public String getSelectedExo() {
+        return selectedExo;
+    }
+
+    public void setSelectedExo(String selectedExo) {
+        this.selectedExo = selectedExo;
+    }
+
+    
+    
     // getter et setter   
 
     public Exercices getSaisie() {
@@ -101,8 +121,11 @@ public class ExercicesController implements Serializable{
         context.addMessage(null, new FacesMessage("Exercice supprimé"));
         }
     
-    public List<Exercices> getExoByProgrammes(Programmes prog){
-        return exercicesDAO.getExoByProgrammes(prog.getNomProgramme());
+    public  List<Exercices> getExoByProgrammes(int prog){
+        listeExo =   exercicesDAO.getExoByProgrammes(prog);        
+        return listeExo;
     }
     
+    
+
 }
