@@ -10,7 +10,7 @@
     <h:body>
         <c:view>
             <h:form>
-                <p:dataTable id="data_table" var="var" value="#{comptesController.listeCompteMDP}" widgetVar="varTable"
+                <p:dataTable id="data_table" var="var" value="#{comptesController.getListeCompteMDP()}" widgetVar="varTable"
                              emptyMessage="Aucune donnée trouvée" paginator="true" rows="20"
                              editable="true"
                              > 
@@ -45,8 +45,8 @@
                     </p:column>
 
                     <p:column style="width:35px">
-                         <p:commandButton id="fait" icon="ui-icon-trash" style="color:red"
-                                          update="data_table,menuform" actionListener="#{comptesController.notifcompte(var.email, true)}">
+                         <p:commandButton id="fait" icon="ui-icon-check" style="color:red"
+                                          update="data_table,menuform,accordeon" actionListener="#{comptesController.notifcompte(var.email, true)}">
                          </p:commandButton>
                     </p:column>
                 </p:dataTable>

@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p ="http://primefaces.org/ui" >
+    
     <h:head>
         <title>Programme Sportif - Accueil</title>
       <style type="text/css" media="all"> 
@@ -38,7 +39,7 @@
                                 <br/>
                                 <p:inputText id="login" title="Login" value="#{comptesController.newComptes.login}"/>
                                 <br/><br/><br/>
-                                <p:outputLabel value="Mot de passe" for="pswd" />
+                                <p:outputLabel value="Mot de passe" for="pswd" />                               
                                 <br/>
                                 <p:password style="width:200px;height:5px" id="pswd" value="#{comptesController.newComptes.pswd}" title="Mot de passe" />
                                 <br/><br/><br/>
@@ -54,10 +55,12 @@
                     <f:view>
                         <h:form>
                             <p:panelGrid columns="2">
-                                <h:outputLabel value="Adresse mail : "  />
-                                
+                                <h:outputText value="eMail" />
+                                 <p:inputText id="email" style="float:left;" value="#{comptesController.newComptes.email}" required="true" label="email" validatorMessage="#{settingsBean.aFriendEmail} L'email n'est pas valide. Veuillez recommencer !">
+                                 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                 </p:inputText>
                             </p:panelGrid>
-                            <p:commandButton value="Mot de passe perdu" action="#{comptesController.notifcompte('juju', false)}" update="formulaireSaisie"/>
+                            <p:commandButton value="Mot de passe perdu" action="#{comptesController.notifcompte(comptesController.newComptes.email, false)}" update="formulaireSaisie"/>
                         </h:form>
                     </f:view>
                 </p:dialog>

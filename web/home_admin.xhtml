@@ -65,15 +65,15 @@
                 </div>
             </div>
             <div class="main-wrapper">
-                <p:accordionPanel style="margin: 20px;width: 95%;">
-                    <p:tab title="Gestion des utilisateurs #{comptesController.cptMdp}">
+                <p:accordionPanel style="margin: 20px;width: 95%;" id="accordeon">
+                    <p:tab title="Gestion des utilisateurs #{comptesController.getCptMdp()}">
                         <p:panelGrid columns="3" columnClasses="ui-grid-col-10,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
                             <img src="rsrc/gestion_user.png" alt="Gestion des utilisateurs" width="50px" height="50px"/>
                             <h:form>
                                 <p:splitButton value="Options">
                                     <p:menuitem value="Editer" icon="ui-icon-pencil" outcome="edit_compte?login=#{comptesController.compteConnecte.login}"/>
                                     <p:separator />
-                                    <p:menuitem value="Mots de passe perdus" icon="ui-icon-pencil" onclick="PF('mdp').show();"/>
+                                    <p:menuitem value="Mots de passe perdus : #{comptesController.getCptMdp()}" icon="ui-icon-pencil" onclick="PF('mdp').show();"/>
                                 </p:splitButton>
                             </h:form>
                             <img src="rsrc/gestion_user.png" alt="Gestion des utilisateurs" width="50px" height="50px"/>
