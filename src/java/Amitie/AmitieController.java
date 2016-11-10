@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import Comptes.ComptesDAO;
 
 /**
  *
@@ -26,6 +27,8 @@ public class AmitieController implements Serializable{
     //insert code -> call entreprise bean -> AmitieDAO
     @EJB
     private AmitieDAO amitieDAO;
+    
+
     
     private Amitie newAmitie;
 
@@ -63,6 +66,8 @@ public class AmitieController implements Serializable{
     public int getCountAmities(){
         return amitieDAO.getCountAmities();
     }
+    
+
     
     public List<Comptes> getMyFriendsWithLogin1(String login){
         return amitieDAO.getMyFriendsWithLogin1(login);

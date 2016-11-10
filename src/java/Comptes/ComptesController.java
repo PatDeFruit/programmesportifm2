@@ -177,6 +177,15 @@ public class ComptesController implements Serializable{
         return comptesDAO.getCountComptes();
     }
     
+    /**
+     * Get all compte different du login connecté
+     * @param login
+     * @return 
+     */
+        public List<Comptes> getAllComptesDiffLogin(String login){
+            System.out.println("***************"+ login +"*******************");
+        return comptesDAO.getAllComptesDiffLogin(login);
+    }
     
     
     /**
