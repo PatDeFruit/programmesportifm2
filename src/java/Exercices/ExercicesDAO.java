@@ -88,5 +88,10 @@ public class ExercicesDAO {
             }
     }
     
-
+    public Exercices getExoByName(String name){
+        Query query = em.createNamedQuery("Exercices.findByNomExercice").setParameter("nomExercice", name);
+        return (Exercices) query.getSingleResult();
+    }
+    
+    
 }

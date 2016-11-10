@@ -7,6 +7,7 @@ package Entrainements;
 
 import Comptes.Comptes;
 import Programmes.Programmes;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -67,7 +68,10 @@ public class EntrainementsDAO {
         }
     }
     
-
+    public List<Entrainements> getEntrainementsByDate(Date d){
+         Query query = em.createNamedQuery("Entrainements.findByDateEntrainement").setParameter("dateEntrainement", d);
+        return query.getResultList();
+    }
     
     
 }

@@ -19,6 +19,7 @@ import Niveaux.NiveauxDAO;
 import Types_comptes.TypesComptesDAO;
 import com.sun.xml.bind.util.ListImpl;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
@@ -52,6 +53,8 @@ public class ComptesController implements Serializable{
     private boolean skip;
     private List<Comptes> listeCompte;
     private int cptMdp;
+    private Date connectingDate;
+    private Date yesterdayDate;
     
     private List<Comptes> listeCompteMDP;
     
@@ -113,6 +116,22 @@ public class ComptesController implements Serializable{
 
     public void setCptMdp(int cptMdp) {
         this.cptMdp = cptMdp;
+    }
+
+    public Date getConnectingDate() {
+        return connectingDate;
+    }
+
+    public void setConnectingDate(Date connectingDate) {
+        this.connectingDate = connectingDate;
+    }
+
+    public Date getYesterdayDate() {
+        return yesterdayDate;
+    }
+
+    public void setYesterdayDate(Date yesterdayDate) {
+        this.yesterdayDate = yesterdayDate;
     }
 
 
@@ -222,6 +241,8 @@ public class ComptesController implements Serializable{
     public String connect(){
         result = comptesDAO.connect(newComptes.getLogin(),newComptes.getPswd());
         compteConnecte = result;
+        //connectingDate = new Date();
+        //yesterdayDate = connectingDate;
         if(result != null){
             if(result.getIdType().getIdType()==1){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connexion réussie !", "Vous êtes connecté en tant que modérateur."));

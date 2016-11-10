@@ -106,7 +106,7 @@
                     <td style="vertical-align: top">
                         <div>
                         <h:form>
-                            <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;"> <h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>
+                            <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;"><h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>                                
                                 <h:panelGrid columns="2" cellpadding="10">
                                     <h:commandButton id="add_training" image="rsrc/icon-plus.png" styleClass="iconTraining" onclick="PF('addExo').show()" />
                                     <h:outputText value="Ajouter un entrainement ce jour"/>
@@ -125,25 +125,28 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>    <p:selectOneMenu value="#{exercicesController.getExoByProgrammes(programmesController.selectedProgramme.idProgramme)}" var="exo">     
-                                                        <c:selectItem itemLabel="#{exo.nomExercice}"></c:selectItem>
-                                                            </p:selectOneMenu>
-                                                             </td>
-                                                <td>    <h:inputText id="nbRepetEffect" value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" style="width : 75px;" /></td>
+                                                <td>
+                                                    <p:selectOneMenu value="#{entrainementsController.maVariable}">     
+                                                        <c:selectItems value="#{exercicesController.initialiserSelectItem(programmesController.selectedProgramme.idProgramme)}"/>
+                                                    </p:selectOneMenu>
+                                                </td>
+                                                <td>    <h:inputText value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" style="width : 75px;" /></td>
                                                 <td>    <h:inputText value="#{entrainementsController.saisie.nbSerieEffect}" style="width : 50px;"/></td>
                                                 <td>    <h:inputText value="#{entrainementsController.saisie.tempsEffect}" style="width : 50px;" /></td>
                                             </tr>
+                                            <tr>
+                                                <td><p:commandButton action="#{entrainementsController.saveEntrainement()}" value="Ajouter"/></td>
+                                            </tr>
                                         </tbody>
                                     </table>
-                                        <h:commandButton id="ajouterEntrainement" label="Ajouter" value="#{entrainementsController.saisie}"  />
                                      </h:form>
+                                        </c:view>
+
                                 </p:panel>
                             </p:panel>
                             <p:panel id="test" header="Hier"  style="margin-bottom:20px;">
                                 <h:panelGrid columns="2" cellpadding="10">
-                                    <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-                                    <h:outputText
-                                        value="The story begins as Don Vito Corleone..." />
+                                  
                                 </h:panelGrid>
                             </p:panel>
                              <p:panel id="graphic" header="Mon évolution"  style="margin-bottom:20px;">
@@ -157,7 +160,6 @@
                                 </h:panelGrid>
                             </p:panel>
                         </h:form>
-                    </c:view>
                     </div>
                     </td>
                     <td width="240px">

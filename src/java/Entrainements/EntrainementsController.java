@@ -6,9 +6,14 @@
 package Entrainements;
 
 import Comptes.Comptes;
+import Exercices.Exercices;
+import Exercices.ExercicesController;
+import Exercices.ExercicesDAO;
 import Programmes.Programmes;
 import Programmes.ProgrammesDAO;
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,10 +40,14 @@ public class EntrainementsController implements Serializable{
     private Programmes resultProgramme;
     private Programmes myProgramme;
     private ProgrammesDAO programmeDAO;
+    private ExercicesDAO exerciceDAO;
+    private Exercices myExercice;
+    private Comptes myCompte;
     
     private Entrainements saisie;
-    
+    private String maVariable;
     private List<Entrainements> listeEntrainements;
+    
     
 
     /**
@@ -52,6 +61,16 @@ public class EntrainementsController implements Serializable{
     public void postConstruct(){
          listeEntrainements = (List<Entrainements>) entrainementsDAO.getAllEntrainement();
     }
+
+    public String getMaVariable() {
+        return maVariable;
+    }
+
+    public void setMaVariable(String maVariable) {
+        this.maVariable = maVariable;
+    }
+    
+    
     
        
     //getter du compte
@@ -67,16 +86,29 @@ public class EntrainementsController implements Serializable{
         this.saisie = saisie;
     }
     
+    
+            
+    
     /**
-     *Ajout d'un nouvel exercice 
+     *Ajout d'un nouvel exercice
+     * @param prog
+     * @param c
      */
-    public void saveEntrainement(Programmes prog) {
-        this.myProgramme = programmeDAO.getTheIdProgramme(prog.getNomProgramme());
-        saisie.setIdProgramme(this.myProgramme);
+    public String saveEntrainement() {
+        System.out.println("*********************************"+getMaVariable()+"*****************************");
+        saisie.setIdExercice(exerciceDAO.getExoByName(maVariable));
+        System.out.println("*********************************"+saisie.getIdExercice().getNomExercice()+"*****************************");
+//        saisie.setIdProgramme(this.myProgramme);
+        System.out.println("*********************************"+saisie.getIdProgramme().getNomProgramme()+"*****************************");
+//        this.myCompte = c;
+        System.out.println("*********************************"+saisie.getLogin().getLogin()+"*****************************");
+        //saisie.setLogin(myCompte);
+        saisie.setDateEntrainement(Date.from(Instant.MIN));
         entrainementsDAO.saveEntrainement(saisie);
         FacesMessage msg = new FacesMessage("Successful", "Ajout du : " + saisie.getDateEntrainement() +" réalisé");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        return("home_user");
     }
     
     /**
@@ -106,8 +138,8 @@ public class EntrainementsController implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Niveau supprimé"));
         }
-    
-        
 
-    
+    public List<Entrainements> getEntrainementsByDate(Date d){
+        return entrainementsDAO.getEntrainementsByDate(d);
+    }
 }

@@ -39,6 +39,8 @@ public class ExercicesController implements Serializable{
     private String selectedExo = "";
     private Exercices saisie;
     
+    private List<SelectItem> myList;
+    
 
     //constructeur du compte   
     public ExercicesController(){
@@ -122,10 +124,18 @@ public class ExercicesController implements Serializable{
         }
     
     public  List<Exercices> getExoByProgrammes(int prog){
-        listeExo =   exercicesDAO.getExoByProgrammes(prog);        
-        return listeExo;
+        return  exercicesDAO.getExoByProgrammes(prog);        
+
     }
     
-    
+    public List<SelectItem> initialiserSelectItem(int prog){
+        listeExo = getExoByProgrammes(prog);
+        myList = new ArrayList<SelectItem>();
+        myList.add(new SelectItem("null", "Select"));
+        for(int i =0; i < listeExo.size(); i++){
+            myList.add(new SelectItem(listeExo.get(i).getNomExercice(), listeExo.get(i).getNomExercice()));
+        }        
+        return myList;
+    }
 
 }
