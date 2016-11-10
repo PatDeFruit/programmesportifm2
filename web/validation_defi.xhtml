@@ -10,7 +10,7 @@
 <h:body>
         <c:view>
             <h:form>
-                <p:dataTable id="data_table" var="var" value="#{defisController.getAllDefisEnCours()}" widgetVar="varTable"
+                <p:dataTable id="data_table2" var="var" value="#{defisController.getAllDefisEnCours()}" widgetVar="varTable2"
                              emptyMessage="Aucune donnée trouvée" paginator="true" rows="20"
                              editable="true"
                              > 
@@ -22,7 +22,7 @@
                     <c:facet name="header">
                         <p:outputPanel>
                             <h:outputText value="Recherche : " />
-                            <p:inputText id="globalFilter" onkeyup="PF('varTable').filter()" style="width:150px" placeholder="..."/>
+                            <p:inputText id="globalFilter" onkeyup="PF('varTable2').filter()" style="width:150px" placeholder="..."/>
                         </p:outputPanel>
                     </c:facet>
 
@@ -54,7 +54,7 @@
 
                     <p:column style="width:35px">
                          <p:commandButton id="fait" icon="ui-icon-check" style="color:red"
-                                          update="data_table,menuform,accordeon" actionListener="#{defisController.notifValidationDefis(var.idDefis, true)}">
+                                          update="data_table2,menuform,accordeon" actionListener="#{defisController.notifValidationDefis(var.idDefis, true)}">
                          </p:commandButton>
                     </p:column>
                 </p:dataTable>
