@@ -17,6 +17,8 @@ import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
 import Types_comptes.TypesComptesDAO;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
@@ -47,6 +49,8 @@ public class ComptesController implements Serializable{
     private Comptes result;
     private boolean skip;
     private List<Comptes> listeCompte;
+    private Date connectingDate;
+    private Date yesterdayDate;
     
     private static int cptMdp;
     private static List<Comptes> listeCompteMDP = new ArrayList<Comptes>();
@@ -103,6 +107,27 @@ public class ComptesController implements Serializable{
 
     public static int getCptMdp() {
         return cptMdp;
+    }
+
+
+    public Date getConnectingDate() {
+        return connectingDate;
+    }
+
+    public void setConnectingDate(Date connectingDate) {
+        this.connectingDate = connectingDate;
+    }
+
+    public Date getYesterdayDate() {
+        return yesterdayDate;
+    }
+
+    public void setYesterdayDate(Date yesterdayDate) {
+        this.yesterdayDate = yesterdayDate;
+    }
+    
+    public static void setCptMdp(int cptMdp) {
+        ComptesController.cptMdp = cptMdp;
     }
 
 
