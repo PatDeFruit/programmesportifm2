@@ -37,7 +37,7 @@
                                     </p:tab>
                                 </p:accordionPanel>
                                 <p:menu style="width:175px" styleClass="myMenu">
-                                    <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
+                                    <p:menuitem value="Lancer un défi" id="addDefi" styleClass="myMenuItem" onclick="PF('lancerDefis').show();"/>
                                 </p:menu>
                                 <p:accordionPanel id="defis" style="width: 175px;">
                                     <p:tab title="Défis en cours">
@@ -238,8 +238,8 @@
             </table>
             <h:form>
                 <!-- Les fenetres de dialogue -->
-                <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                     <h:outputText value="This is a Modal Dialog." />
+                <p:dialog header="Lancer un défis" widgetVar="lancerDefis" modal="true" height="100">
+                     <f:include src="lancerDefis.xhtml" />
                  </p:dialog>   
             </h:form>
         </div>

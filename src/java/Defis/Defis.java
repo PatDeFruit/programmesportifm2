@@ -79,6 +79,19 @@ public class Defis implements Serializable {
     public boolean getEffectue() {
         return effectue;
     }
+    
+    /////////////////////////////////////
+    public String getEffectueAffichage() {
+        String EffectueAffichage;
+        if (effectue == true){
+            EffectueAffichage = "Défis exécuté";
+        } else if (effectue == false) {
+            EffectueAffichage = "Défis en cours";
+        }else {
+            EffectueAffichage = "Non renseigné";
+        }
+        return EffectueAffichage;
+    }
 
     public void setEffectue(boolean effectue) {
         this.effectue = effectue;

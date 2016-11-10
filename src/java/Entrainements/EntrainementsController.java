@@ -180,7 +180,7 @@ public class EntrainementsController implements Serializable{
         return entrainementsDAO.getEntrainementsByDateAndByProgrammes(d, prog);
     }
     
-       /* public void initialiserGraphic(int prog){
+        /*public void initialiserGraphic(int prog){
         dateModel = new LineChartModel();
         
         for(int )

@@ -91,7 +91,7 @@ public class ComptesDAO {
     }
    
     
-        public Comptes connect(String login,String mdp){
+    public Comptes connect(String login,String mdp){
         Query query = em.createQuery("SELECT c FROM Comptes c WHERE c.login = :login AND c.pswd = :pswd").setParameter("login", login).setParameter("pswd", mdp);
         try{
             return (Comptes) query.getSingleResult();

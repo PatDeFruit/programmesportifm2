@@ -138,5 +138,14 @@ public class ExercicesController implements Serializable{
         }        
         return myList;
     }
+    
+        /**
+     * @return integer
+     */
+    public List<Exercices> getAllExercice(){
+        return exercicesDAO.getAllExercices();
+    }
+    
+    
 
 }
