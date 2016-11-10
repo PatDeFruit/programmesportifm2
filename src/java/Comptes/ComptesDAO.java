@@ -38,6 +38,18 @@ public class ComptesDAO {
         Query query = em.createNamedQuery("Comptes.findAll");
         return query.getResultList();
     }
+    
+    //Liste des comptes
+    public List<Comptes> getAllComptesDiffLogin(String login) {
+        Query query = em.createQuery("SELECT c FROM Comptes c left join c.idType t Where c.login != :login and c.idType.idType ='2'").setParameter("login", login);
+        try{
+        return query.getResultList();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
      
         //compteur de la présence d'un login dans la BDD
     //trouver un niveau via l'Id

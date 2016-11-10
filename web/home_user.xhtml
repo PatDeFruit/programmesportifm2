@@ -90,8 +90,7 @@
                             <h:form>
                             <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="friend_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Ajouter un ami" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Supprimer un ami" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Gestion des amis" onclick="PF('gestion_amis').show();" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
                         </div>
@@ -233,14 +232,15 @@
                     </td>
                 </tr>
             </table>
-            <h:form>
                 <!-- Les fenetres de dialogue -->
                 <p:dialog header="Lancer un défis" widgetVar="lancerDefis" modal="true" height="100">
                      <f:include src="lancerDefis.xhtml" />
                  </p:dialog>   
-            </h:form>
-            </div>
-        </c:view>
+                
+                 <p:dialog header="Gestion des amis" widgetVar="gestion_amis" modal="true" height="100">
+                     <f:include src="gestion_amis.xhtml" />
+                 </p:dialog>   
+        </div>
     </h:body>
 </html>
 
