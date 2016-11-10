@@ -26,9 +26,6 @@
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container has-scrollbar">
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
-                                  <p:menu style="width:175px" styleClass="myMenu">
-                                        <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
-                                </p:menu>
                                 <p:accordionPanel id="prog" style="width: 175px;">
                                     <p:tab title="Programmes suivis">
                                         <p:dataList value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
@@ -36,9 +33,6 @@
                                         </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
-                                <p:menu style="width:175px" styleClass="myMenu">
-                                    <p:menuitem value="Lancer un défi" id="addDefi" styleClass="myMenuItem" onclick="PF('lancerDefis').show();"/>
-                                </p:menu>
                                 <p:accordionPanel id="defis" style="width: 175px;">
                                     <p:tab title="Défis en cours">
                                         <p:dataList value="#{defisController.getMyDefis(comptesController.compteConnecte.login)}" var="itemDefis">
@@ -75,8 +69,9 @@
                             <h:form>
                             <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Lancer un défi" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Lancer un défi" onclick="PF('lancerDefis').show();" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Défis effectués" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Défis reçus" outcome="index" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
                         </div>
@@ -85,7 +80,7 @@
                              <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Ajouter un programme" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Programmes en attentes" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Supprimer un programme" outcome="index" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
                         </div>
