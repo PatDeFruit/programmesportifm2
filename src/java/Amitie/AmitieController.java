@@ -14,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import Comptes.ComptesDAO;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,13 +29,17 @@ public class AmitieController implements Serializable{
     @EJB
     private AmitieDAO amitieDAO;
     
-
+    @EJB
+    private ComptesDAO comptesDAO;
+    
+    private boolean boolAmitie;
+    
+    private boolean boolAmitie2;
     
     private Amitie newAmitie;
 
     
     //getter et setter newAmitie
-
     public Amitie getNewAmitie() {
         return newAmitie;
     }
@@ -42,6 +47,24 @@ public class AmitieController implements Serializable{
     public void setNewAmitie(Amitie newAmitie) {
         this.newAmitie = newAmitie;
     }
+
+    public boolean isBoolAmitie() {
+        return boolAmitie;
+    }
+
+    public void setBoolAmitie(boolean boolAmitie) {
+        this.boolAmitie = boolAmitie;
+    }
+
+    public boolean isBoolAmitie2() {
+        return boolAmitie2;
+    }
+
+    public void setBoolAmitie2(boolean boolAmitie2) {
+        this.boolAmitie2 = boolAmitie2;
+    }
+
+    
     
     
     
@@ -77,4 +100,43 @@ public class AmitieController implements Serializable{
         return amitieDAO.getMyFriendsWithLogin2(login);
     }
     
+    public boolean compareAmitie1(String login){
+        List<Comptes> listAmitie1 = amitieDAO.getMyFriendsWithLogin1(login);
+        //List<Comptes> listAmitie2 = amitieDAO.getMyFriendsWithLogin2(login);
+         
+        List<Comptes> listeCompte = comptesDAO.getAllComptes();
+
+        //je veux comparer listCompte total avec ListAmitie1 
+            //si le compte est présent dans ListAmitie1 je veux retourner true ou 1
+            // sinon retourner false ou 0
+        ArrayList<Integer> al4= new ArrayList<Integer>();
+          for (Comptes temp : listeCompte )
+              boolAmitie =  al4.add(listAmitie1.contains(temp) ? 1 : 0);
+          
+          System.out.println(boolAmitie);
+
+        //au final veux pouvoir affficher mes bouton dans le xhtml en fonction des 0 et 1
+        
+        return boolAmitie;
+    }
+    
+    public boolean compareAmitie2(String login){
+        List<Comptes> listAmitie2 = amitieDAO.getMyFriendsWithLogin2(login);
+        //List<Comptes> listAmitie2 = amitieDAO.getMyFriendsWithLogin2(login);
+         
+        List<Comptes> listeCompte = comptesDAO.getAllComptes();
+
+        //je veux comparer listCompte total avec ListAmitie1 
+            //si le compte est présent dans ListAmitie1 je veux retourner true ou 1
+            // sinon retourner false ou 0
+        ArrayList<Integer> al5= new ArrayList<Integer>();
+          for (Comptes temp : listeCompte )
+              boolAmitie2 =  al5.add(listAmitie2.contains(temp) ? 1 : 0);
+          
+          System.out.println(boolAmitie);
+
+        //au final veux pouvoir affficher mes bouton dans le xhtml en fonction des 0 et 1
+        
+        return boolAmitie2;
+    }
 }
