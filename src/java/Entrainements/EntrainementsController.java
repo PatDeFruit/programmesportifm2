@@ -12,6 +12,7 @@ import Exercices.ExercicesDAO;
 import Programmes.Programmes;
 import Programmes.ProgrammesDAO;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,6 +30,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.persistence.Query;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 
@@ -47,10 +50,12 @@ public class EntrainementsController implements Serializable{
     private Entrainements newEntrainement;
     private Programmes resultProgramme;
     private Programmes myProgramme;
+    
     @EJB
     private ProgrammesDAO programmeDAO;
     @EJB
     private ExercicesDAO exerciceDAO;
+    
     private Exercices myExercice;
     
     private Comptes myCompte;
@@ -66,6 +71,10 @@ public class EntrainementsController implements Serializable{
     private Entrainements saisie;
     private String maVariable;
     private List<Entrainements> listeEntrainements;
+    private List<Entrainements> listeEntrainementsByProgrammes;
+    private List<Entrainements> listeEntrainementsByExos;
+    private List<Exercices> listeExoByProgrammes;
+    private int countEntrainementsByExos;
     private LineChartModel dateModel;
     
     
@@ -111,7 +120,6 @@ public class EntrainementsController implements Serializable{
     public void setYesterday(Date yesterday) {
         this.yesterday = yesterday;
     }
-    
     
     
        
@@ -180,44 +188,53 @@ public class EntrainementsController implements Serializable{
         return entrainementsDAO.getEntrainementsByDateAndByProgrammes(d, prog);
     }
     
-        /*public void initialiserGraphic(int prog){
+        public List<Entrainements> getEntrainementsByProgrammes(int prog){
+        return entrainementsDAO.getEntrainementsByProgrammes(prog);
+    }
+    
+        public int getCountByProgrammesAndExercices(int prog, int exo){
+            return entrainementsDAO.getCountByProgrammesAndExercices(prog, exo);
+        }
+
+    public LineChartModel getDateModel() {
+        return dateModel;
+    }
+
+    public void setDateModel(LineChartModel dateModel) {
+        this.dateModel = dateModel;
+    }
+        
+        
+        public void initialiserGraphic(int prog){
         dateModel = new LineChartModel();
+        listeExoByProgrammes = exerciceDAO.getExoByProgrammes(prog);
+        LineChartSeries series[] = new LineChartSeries[listeExoByProgrammes.size()]; 
         
-        for(int )
+            for(int j = 0; j < listeExoByProgrammes.size(); j++){
+                series[j] = new LineChartSeries();
+                series[j].setLabel(listeExoByProgrammes.get(j).getNomExercice());
+                listeEntrainementsByExos = entrainementsDAO.getEntrainementsByProgrammesAndExercices(prog, listeExoByProgrammes.get(j).getIdExercice());
+                countEntrainementsByExos = entrainementsDAO.getCountByProgrammesAndExercices(prog, listeExoByProgrammes.get(j).getIdExercice());
+                
+                for(int k = 0; k < countEntrainementsByExos; k ++){
+                    Date theDate = listeEntrainementsByExos.get(k).getDateEntrainement();
+                    String theDateFinal = new SimpleDateFormat("yyyy-MM-dd").format(theDate);
+                    Number nombreRepet = (Number) listeEntrainementsByExos.get(k).getIdEntrainements();
+                    System.out.println("***********************"+nombreRepet+"******************");
+                    series[j].set(theDateFinal, nombreRepet);
+                }
+                dateModel.addSeries(series[j]);
+            }      
         
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Series 1");
- 
-        series1.set("2014-01-01", 51);
-        series1.set("2014-01-06", 22);
-        series1.set("2014-01-12", 65);
-        series1.set("2014-01-18", 74);
-        series1.set("2014-01-24", 24);
-        series1.set("2014-01-30", 51);
- 
-        LineChartSeries series2 = new LineChartSeries();
-        series2.setLabel("Series 2");
- 
-        series2.set("2014-01-01", 32);
-        series2.set("2014-01-06", 73);
-        series2.set("2014-01-12", 24);
-        series2.set("2014-01-18", 12);
-        series2.set("2014-01-24", 74);
-        series2.set("2014-01-30", 62);
- 
-        dateModel.addSeries(series1);
-        dateModel.addSeries(series2);
-         
-        dateModel.setTitle("Zoom for Details");
-        dateModel.setZoom(true);
-        dateModel.getAxis(AxisType.Y).setLabel("Values");
+        dateModel.setTitle("Par nombre de répétitions");
+        dateModel.getAxis(AxisType.Y).setLabel("Nombre de répétitions");
         DateAxis axis = new DateAxis("Dates");
         axis.setTickAngle(-50);
-        axis.setMax("2014-02-01");
         axis.setTickFormat("%b %#d, %y");
          
         dateModel.getAxes().put(AxisType.X, axis);
-    }*/
+     
+    }
     
-    
+        
 }

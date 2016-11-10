@@ -61,9 +61,9 @@ public class ProgrammesDAO {
     }
     
         public Programmes getDefaultSelectedProgramme(String login){
-        Query query = em.createQuery("SELECT DISTINCT p FROM Programmes p, Entrainements e, Comptes c where c.login = :login").setParameter("login", login);
+        Query query = em.createQuery("SELECT p FROM Programmes p left join p.entrainementsCollection e where e.login.login = :login").setParameter("login", login);
         try{
-            return (Programmes) query.getSingleResult();
+            return (Programmes) query.getResultList().get(0);
         } catch(Exception e){
             System.err.println(e.getMessage());
             return null;

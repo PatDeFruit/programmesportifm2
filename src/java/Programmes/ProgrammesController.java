@@ -5,8 +5,11 @@
  */
 package Programmes;
 
+import Comptes.Comptes;
 import Comptes.ComptesController;
 import Comptes.ComptesDAO;
+import Entrainements.Entrainements;
+import Entrainements.EntrainementsDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -34,8 +37,11 @@ public class ProgrammesController implements Serializable{
     @EJB
     private ComptesDAO compteDAO;
     
+    
+    
     private Programmes newProgramme;
     private Programmes selectedProgramme;
+    private Entrainements entrainement;
     
     private List<Programmes> temp;
     private List<Programmes> listeProgramme;
@@ -83,7 +89,6 @@ public class ProgrammesController implements Serializable{
     }
     
     public List<Programmes> getMyProgrammes(String login){
-        selectedProgramme = getDefaultSelectedProgramme(login);
         return programmesDAO.getMyProgrammes(login);
     }
     
@@ -159,16 +164,13 @@ public class ProgrammesController implements Serializable{
         context.addMessage(null, new FacesMessage("Programme supprimé"));
         }
     
+    public void  getDefaultProgramme(Comptes c){
+        selectedProgramme = programmesDAO.getDefaultSelectedProgramme(c.getLogin());
+    }
+    
     
     public void updateSelectedProgramme(String prog){
         selectedProgramme = programmesDAO.updateSelectedProgramme(prog);
-    }
-    
-    public Programmes getDefaultSelectedProgramme(String login){
-        if(selectedProgramme == null){
-        selectedProgramme = programmesDAO.getDefaultSelectedProgramme(login);
-        } 
-        return selectedProgramme;
     }
     
     public Programmes getTheIdProgramme(Programmes prog){

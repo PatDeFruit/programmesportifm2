@@ -78,5 +78,35 @@ public class EntrainementsDAO {
             }
     }
     
+        public List<Entrainements> getEntrainementsByProgrammes(int prog){
+        Query query = em.createQuery("SELECT DISTINCT e FROM Entrainements e left join e.idProgramme p WHERE p.idProgramme = :prog").setParameter("prog", prog);
+        try{
+                return query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
+    }
+        
+        public List<Entrainements> getEntrainementsByProgrammesAndExercices(int prog, int exo){
+        Query query = em.createQuery("SELECT DISTINCT e FROM Entrainements e left join e.idProgramme p left join e.idExercice ex WHERE p.idProgramme = :prog AND ex.idExercice = :exo").setParameter("prog", prog).setParameter("exo", exo);
+        try{
+                return query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
+    }
+        
+        public int getCountByProgrammesAndExercices(int prog, int exo){
+        Query query = em.createQuery("SELECT COUNT(DISTINCT e) FROM Entrainements e left join e.idProgramme p left join e.idExercice ex WHERE p.idProgramme = :prog AND ex.idExercice = :exo").setParameter("prog", prog).setParameter("exo", exo);
+        try{
+                return ((Number) query.getSingleResult()).intValue();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return -1;
+            }
+    }
+    
     
 }

@@ -35,12 +35,14 @@ public class ExercicesController implements Serializable{
     private ExercicesDAO exercicesDAO;
     
     private List<Exercices> listeExo;
+    private List<Exercices> listeAllExo;
     private List<String> mesExos = new ArrayList<String>();
     private String selectedExo = "";
     private Exercices saisie;
    
     
     private List<SelectItem> myList;
+    private List<SelectItem> myListAllExo;
     
 
     //constructeur du compte   
@@ -51,6 +53,7 @@ public class ExercicesController implements Serializable{
     @PostConstruct
     public void postConstruct(){
          listeExo = (List<Exercices>) exercicesDAO.getAllExercices();
+         listeAllExo = (List<Exercices>) exercicesDAO.getAllExercices();
     }
     
     //getter liste
@@ -137,6 +140,16 @@ public class ExercicesController implements Serializable{
             myList.add(new SelectItem(listeExo.get(i).getNomExercice(), listeExo.get(i).getNomExercice()));
         }        
         return myList;
+    }
+    
+    
+        public List<SelectItem> oneMenuAllExercices(){
+        myListAllExo = new ArrayList<SelectItem>();
+        myListAllExo.add(new SelectItem("null", "Select"));
+        for(int i =0; i < listeAllExo.size(); i++){
+            myListAllExo.add(new SelectItem(listeAllExo.get(i).getNomExercice(), listeAllExo.get(i).getNomExercice()));
+        }        
+        return myListAllExo;
     }
     
         /**
