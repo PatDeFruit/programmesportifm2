@@ -55,6 +55,16 @@ public class ProgrammesDAO {
         }
     }
     
+        public Programmes getDefaultSelectedProgramme(String login){
+        Query query = em.createQuery("SELECT DISTINCT p FROM Programmes p, Entrainements e, Comptes c where c.login = :login").setParameter("login", login);
+        try{
+            return (Programmes) query.getSingleResult();
+        } catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+    
         //Ajout
     public void saveProgramme (Programmes newProg){
         try{
@@ -86,4 +96,25 @@ public class ProgrammesDAO {
             System.err.println(e.getMessage());
         }
     }
+    
+     public Programmes updateSelectedProgramme(String prog){
+        Query query = em.createQuery("SELECT DISTINCT p FROM Programmes p WHERE p.nomProgramme = :prog").setParameter("prog", prog);
+        try{
+            return (Programmes) query.getSingleResult();
+        } catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+    
+        public Programmes getTheIdProgramme(String prog){
+        Query query = em.createQuery("SELECT p FROM Programmes p left join p.entrainementsCollection t WHERE t.idProgramme.nomProgramme = :prog").setParameter("prog", prog);
+        try{
+                return (Programmes) query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
+    }
+     
 }

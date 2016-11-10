@@ -5,6 +5,7 @@
  */
 package Programmes;
 
+import Comptes.ComptesController;
 import Comptes.ComptesDAO;
 import java.io.Serializable;
 import java.util.List;
@@ -33,6 +34,7 @@ public class ProgrammesController implements Serializable{
     private ComptesDAO compteDAO;
     
     private Programmes newProgramme;
+    private Programmes selectedProgramme;
     
     private List<Programmes> listeProgramme;
 
@@ -77,6 +79,40 @@ public class ProgrammesController implements Serializable{
     public List<Programmes> getMyProgrammes(String login){
         return programmesDAO.getMyProgrammes(login);
     }
+
+    public ProgrammesDAO getProgrammesDAO() {
+        return programmesDAO;
+    }
+
+    public void setProgrammesDAO(ProgrammesDAO programmesDAO) {
+        this.programmesDAO = programmesDAO;
+    }
+
+    public ComptesDAO getCompteDAO() {
+        return compteDAO;
+    }
+
+    public void setCompteDAO(ComptesDAO compteDAO) {
+        this.compteDAO = compteDAO;
+    }
+
+    public Programmes getSelectedProgramme() {
+        return selectedProgramme;
+    }
+
+    public void setSelectedProgramme(Programmes selectedProgramme) {
+        this.selectedProgramme = selectedProgramme;
+    }
+
+    public List<Programmes> getListeProgramme() {
+        return listeProgramme;
+    }
+
+    public void setListeProgramme(List<Programmes> listeProgramme) {
+        this.listeProgramme = listeProgramme;
+    }
+    
+    
     
     /**
      *Ajout d'un nouvel exercice 
@@ -115,4 +151,13 @@ public class ProgrammesController implements Serializable{
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Programme supprimé"));
         }
+    
+    
+    public void updateSelectedProgramme(String prog){
+        selectedProgramme = programmesDAO.updateSelectedProgramme(prog);
+    }
+    
+    public Programmes getTheIdProgramme(Programmes prog){
+       return programmesDAO.getTheIdProgramme(prog.getNomProgramme());
+    }
 }

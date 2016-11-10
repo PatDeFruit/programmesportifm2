@@ -208,6 +208,8 @@ public class ComptesController implements Serializable{
     public String connect(){
         result = comptesDAO.connect(newComptes.getLogin(),newComptes.getPswd());
         compteConnecte = result;
+        //connectingDate = new Date();
+        //yesterdayDate = connectingDate;
         if(result != null){
             if(result.getIdType().getIdType()==1){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connexion réussie !", "Vous êtes connecté en tant que modérateur."));

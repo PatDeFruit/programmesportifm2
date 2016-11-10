@@ -17,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -163,4 +164,6 @@ public class DefisController implements Serializable{
         return listeDefisVal;
     }
     
+    
+   
 }
