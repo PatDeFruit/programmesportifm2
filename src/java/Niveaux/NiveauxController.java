@@ -66,6 +66,7 @@ public class NiveauxController implements Serializable{
     
     /**
      * find one niveau
+     * @param event
      */
     public void getFindByOneNiveaux(ComponentSystemEvent event){
         newNiveaux = niveauxDAO.getFindByOneNiveaux(id);

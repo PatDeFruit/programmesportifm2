@@ -7,10 +7,63 @@
         xmlns:p="http://primefaces.org/ui" 
         xmlns:jsf="http://java.sun.com/jsp/jstl/core">
     
-    <h:body>
- 
-                
+<h:body>
+        <c:view>
+            <h:form>
+                <p:dataTable id="data_table" var="var" value="#{defisController.getAllDefisEnCours()}" widgetVar="varTable"
+                             emptyMessage="Aucune donnée trouvée" paginator="true" rows="20"
+                             editable="true"
+                             > 
+                    
+                            <p:ajax event="rowEdit" listener="#{defisController.onRowEdit}" update="menuform"/>
+                            <p:ajax event="rowEditCancel" listener="#{defisController.onRowCancel}" update="menuform"/>
+                            
+
+                    <c:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Recherche : " />
+                            <p:inputText id="globalFilter" onkeyup="PF('varTable').filter()" style="width:150px" placeholder="..."/>
+                        </p:outputPanel>
+                    </c:facet>
+
+                    <p:column headerText="Nom Exercice" footerText="" sortBy="#{var.idExercice.nomExercice}" filterBy="#{var.idExercice.nomExercice}">
+                        <h:outputText value="#{var.idExercice.nomExercice}" />
+                    </p:column>
+                    
+                    <p:column headerText="Lanceur" footerText="" sortBy="#{var.login1.login}" filterBy="#{var.login1.login}">
+                        <h:outputText value="#{var.login1.login}" />
+                    </p:column>
+                    
+                    <p:column headerText="Receveur" footerText="" sortBy="#{var.login2.login}" filterBy="#{var.login2.login}">
+                        <h:outputText value="#{var.login2.login}" />
+                    </p:column>
+                    
+                    <p:column headerText="Statut" footerText="" sortBy="#{var.effectueAffichage}" filterBy="#{var.effectueAffichage}">
+                        
+                        <p:cellEditor>
+                            <c:facet name="output"><h:outputText value="#{var.effectueAffichage}" /></c:facet>
+                            <c:facet name="input">
+                                <p:inputText id="effectueAffichage" value="#{var.effectue}" style="width:100%"/>
+                            </c:facet>
+                        </p:cellEditor>
+                    </p:column>
+                            
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+
+                    <p:column style="width:35px">
+                         <p:commandButton id="fait" icon="ui-icon-check" style="color:red"
+                                          update="data_table,menuform,accordeon" actionListener="#{defisController.notifValidationDefis(var.idDefis, true)}">
+                         </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+        </c:view>
 
     </h:body>
 </html>
+
+
 

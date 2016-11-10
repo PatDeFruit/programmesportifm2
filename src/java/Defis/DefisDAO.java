@@ -10,6 +10,7 @@ import Programmes.Programmes;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -68,4 +69,23 @@ public class DefisDAO {
                 return null;
             }
         }
+     
+     public Defis getOneDefis(int idDefis){
+        Query query = em.createNamedQuery("Defis.findByIdDefis").setParameter("idDefis", idDefis);
+        try{
+            return (Defis) query.getSingleResult();
+        }catch (NoResultException e){
+            System.err.println("pas de Compte avec ce login");
+            return null;
+        }
+    }
+     
+    //Update
+    public void updateDefisEnCours(Defis newDefis){
+        try{
+            em.merge(newDefis);
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
+    }
 }
