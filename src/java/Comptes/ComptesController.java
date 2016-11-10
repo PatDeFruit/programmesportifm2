@@ -15,6 +15,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
+import Programmes.Programmes;
+import Programmes.ProgrammesDAO;
 import Types_comptes.TypesComptesDAO;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -40,6 +42,9 @@ public class ComptesController implements Serializable{
     @EJB
     private TypesComptesDAO typeDAO;
     
+    @EJB
+    private ProgrammesDAO programmeDAO;
+    
     private Comptes newComptes;
     private Comptes compteConnecte;
     private Niveaux niveaux;
@@ -47,6 +52,7 @@ public class ComptesController implements Serializable{
     private Comptes result;
     private boolean skip;
     private List<Comptes> listeCompte;
+    private Programmes programmeSelected;
     
     private static int cptMdp;
     private static List<Comptes> listeCompteMDP = new ArrayList<Comptes>();
@@ -209,6 +215,17 @@ public class ComptesController implements Serializable{
             return event.getNewStep();
         }
     }
+
+    public Programmes getProgrammeSelected() {
+        return programmeSelected;
+    }
+
+    public void setProgrammeSelected(Programmes programmeSelected) {
+        this.programmeSelected = programmeSelected;
+    }
+    
+    
+    
         
     /**
      * Fonction de connexion
@@ -217,8 +234,6 @@ public class ComptesController implements Serializable{
     public String connect(){
         result = comptesDAO.connect(newComptes.getLogin(),newComptes.getPswd());
         compteConnecte = result;
-        //connectingDate = new Date();
-        //yesterdayDate = connectingDate;
         if(result != null){
             if(result.getIdType().getIdType()==1){
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connexion réussie !", "Vous êtes connecté en tant que modérateur."));

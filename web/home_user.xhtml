@@ -13,7 +13,9 @@
     </h:head>
     <h:body>
         <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
-            
+        <c:view>
+            <c:event type="preRenderView" listener="#{programmesController.getDefaultProgramme(comptesController.compteConnecte)}"/>
+            <c:event type="preRenderView" listener="#{entrainementsController.initialiserGraphic(programmesController.getDefaultProgramme(comptesController.compteConnecte))}"/>
         <div class="wrapper">
             <div id="sidebar-wrapper">
                 <div id="sidebar-header">
@@ -197,8 +199,8 @@
                                             </p:dataTable>
                                         </p:panel>
                             </p:panel>
-                             <p:panel id="graphic" header="Mon évolution"  style="margin-bottom:20px;">
-                               <p:chart type="line" model="#{chartView.lineModel1}" />
+                             <p:panel id="graphic" header="Mon évolution - Nombre de répétitions"  style="margin-bottom:20px;">
+                                 <p:chart type="line" model="#{entrainementsController.dateModel}" />
                             </p:panel>
                             <p:panel id="test2" header="Test"  style="margin-bottom:20px;">
                                 <h:panelGrid columns="2" cellpadding="10">

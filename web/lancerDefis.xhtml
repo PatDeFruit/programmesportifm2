@@ -14,7 +14,9 @@
             <h:form>
                 <p:panelGrid columns="2">
                     <h:outputLabel value="Nom de l'exercice : " for="nomExercice"/>
-    
+                    <p:selectOneMenu value="#{exercicesController.selectedExo}">     
+                        <c:selectItems value="#{exercicesController.oneMenuAllExercices()}"/>
+                        </p:selectOneMenu>
                     
                     
 
