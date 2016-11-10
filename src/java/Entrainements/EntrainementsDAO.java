@@ -68,9 +68,14 @@ public class EntrainementsDAO {
         }
     }
     
-    public List<Entrainements> getEntrainementsByDate(Date d){
-         Query query = em.createNamedQuery("Entrainements.findByDateEntrainement").setParameter("dateEntrainement", d);
-        return query.getResultList();
+    public List<Entrainements> getEntrainementsByDateAndByProgrammes(Date d, int prog){
+        Query query = em.createQuery("SELECT DISTINCT e FROM Entrainements e left join e.idProgramme p WHERE p.idProgramme = :prog AND e.dateEntrainement = :d").setParameter("prog", prog).setParameter("d", d);
+        try{
+                return query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
     }
     
     

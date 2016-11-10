@@ -38,6 +38,7 @@ public class ExercicesController implements Serializable{
     private List<String> mesExos = new ArrayList<String>();
     private String selectedExo = "";
     private Exercices saisie;
+   
     
     private List<SelectItem> myList;
     

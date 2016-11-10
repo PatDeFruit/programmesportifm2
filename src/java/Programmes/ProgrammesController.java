@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.persistence.Query;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -36,6 +37,7 @@ public class ProgrammesController implements Serializable{
     private Programmes newProgramme;
     private Programmes selectedProgramme;
     
+    private List<Programmes> temp;
     private List<Programmes> listeProgramme;
 
     
@@ -76,10 +78,15 @@ public class ProgrammesController implements Serializable{
         return programmesDAO.getCountProgrammes();
     }
     
+        public Programmes getByNameProgrammes(String prog) {
+        return programmesDAO.getByNameProgrammes(prog);
+    }
+    
     public List<Programmes> getMyProgrammes(String login){
+        selectedProgramme = getDefaultSelectedProgramme(login);
         return programmesDAO.getMyProgrammes(login);
     }
-
+    
     public ProgrammesDAO getProgrammesDAO() {
         return programmesDAO;
     }
@@ -155,6 +162,13 @@ public class ProgrammesController implements Serializable{
     
     public void updateSelectedProgramme(String prog){
         selectedProgramme = programmesDAO.updateSelectedProgramme(prog);
+    }
+    
+    public Programmes getDefaultSelectedProgramme(String login){
+        if(selectedProgramme == null){
+        selectedProgramme = programmesDAO.getDefaultSelectedProgramme(login);
+        } 
+        return selectedProgramme;
     }
     
     public Programmes getTheIdProgramme(Programmes prog){

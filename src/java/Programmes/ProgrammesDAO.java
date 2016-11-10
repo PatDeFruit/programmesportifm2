@@ -32,6 +32,11 @@ public class ProgrammesDAO {
         Query query = em.createNamedQuery("Programmes.findAll");
         return query.getResultList();
     }
+    
+     public Programmes getByNameProgrammes(String prog) {
+        Query query = em.createNamedQuery("Programmes.findByNomProgramme").setParameter("nomProgramme", prog);
+        return (Programmes) query.getSingleResult();
+    }
 
     //compteur du nombre de compte
     public int getCountProgrammes() {

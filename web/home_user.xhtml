@@ -106,14 +106,15 @@
                     <td style="vertical-align: top">
                         <div>
                         <h:form>
-                            <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;"><h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>                                
+                            <h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>  
+                            <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;">  
+                                <c:view>
+                                   
                                 <h:panelGrid columns="2" cellpadding="10">
                                     <h:commandButton id="add_training" image="rsrc/icon-plus.png" styleClass="iconTraining" onclick="PF('addExo').show()" />
                                     <h:outputText value="Ajouter un entrainement ce jour"/>
                                 </h:panelGrid> 
-                                <p:panel widgetVar="addExo" closable="true" toggleable="true" visible="false">
-                                    <c:view>
-                                    <h:form>                                        
+                                <p:panel widgetVar="addExo" closable="true" toggleable="true" visible="false">                                     
                                     <table border="0">
                                         <thead>
                                             <tr>
@@ -135,19 +136,72 @@
                                                 <td>    <h:inputText value="#{entrainementsController.saisie.tempsEffect}" style="width : 50px;" /></td>
                                             </tr>
                                             <tr>
-                                                <td><p:commandButton action="#{entrainementsController.saveEntrainement()}" value="Ajouter"/></td>
+                                                <td><p:commandButton action="#{entrainementsController.saveEntrainement(programmesController.selectedProgramme, comptesController.compteConnecte)}" value="Ajouter" onclick="PF('addExo').close()" update="entrainementsDuJour"/></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                     </h:form>
-                                        </c:view>
-
                                 </p:panel>
+                                     <p:panel id="entrainementsDuJour">
+                                            <p:dataTable value="#{entrainementsController.getEntrainementsByDateAndByProgrammes(entrainementsController.today, programmesController.selectedProgramme.idProgramme)}" var="exoDuJour">
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Exercices"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.idExercice.nomExercice}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Répétitions effectuées"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.nbRepetEffect}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Séries effectuées"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.nbSerieEffect}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Temps mis"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.tempsEffect}"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </p:panel>
+                                </c:view>
                             </p:panel>
+                            
+                            
                             <p:panel id="test" header="Hier"  style="margin-bottom:20px;">
-                                <h:panelGrid columns="2" cellpadding="10">
-                                  
-                                </h:panelGrid>
+                                 <p:panel id="entrainementLaVeille">
+                                     <p:dataTable value="#{entrainementsController.getEntrainementsByDateAndByProgrammes(entrainementsController.yesterday, programmesController.selectedProgramme.idProgramme)}" var="exoDuJour">
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Exercices"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.idExercice.nomExercice}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Répétitions effectuées"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.nbRepetEffect}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Séries effectuées"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.nbSerieEffect}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <c:facet name="header">
+                                                        <h:outputText value="Temps mis"/>
+                                                    </c:facet>
+                                                    <h:outputText value="#{exoDuJour.tempsEffect}"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </p:panel>
                             </p:panel>
                              <p:panel id="graphic" header="Mon évolution"  style="margin-bottom:20px;">
                                <p:chart type="line" model="#{chartView.lineModel1}" />
@@ -167,16 +221,14 @@
                             <c:view>
                                 <h:form>
                                     <h1><h:outputText value="Amis"/></h1>
-                                    <p:dataTable value="#{amitieController.getMyFriendsWithLogin1(comptesController.compteConnecte.login)}" var="log">
-                                        <p:column>
-                                            <h:outputText value="#{log.login}"/>
-                                        </p:column>
-                                    </p:dataTable>
-                                    <p:dataTable value="#{amitieController.getMyFriendsWithLogin2(comptesController.compteConnecte.login)}" var="log2">
-                                        <p:column>
-                                            <h:outputText value="#{log2.login}"/>
-                                        </p:column>
-                                    </p:dataTable>
+                                    
+                                    <p:dataList value="#{amitieController.getMyFriendsWithLogin1(comptesController.compteConnecte.login)}" var="friends1">
+                                        #{friends1.login}
+                                     </p:dataList>
+                                    <p:dataList value="#{amitieController.getMyFriendsWithLogin2(comptesController.compteConnecte.login)}" var="friends2">
+                                        #{friends2.login}
+                                        </p:dataList>
+                                    
                                 </h:form>
                             </c:view>
 
@@ -184,15 +236,12 @@
                     </td>
                 </tr>
             </table>
-            
             <h:form>
                 <!-- Les fenetres de dialogue -->
                 <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                      <h:outputText value="This is a Modal Dialog." />
                  </p:dialog>   
             </h:form>
-            
-            
         </div>
     </h:body>
 </html>
