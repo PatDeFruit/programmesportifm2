@@ -13,16 +13,11 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 import org.primefaces.event.FlowEvent;
 import Niveaux.NiveauxDAO;
 import Types_comptes.TypesComptesDAO;
-import com.sun.xml.bind.util.ListImpl;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import org.primefaces.event.RowEditEvent;
@@ -31,7 +26,7 @@ import org.primefaces.event.RowEditEvent;
  *
  * @author Asus
  */
-@Named(value = "comptesController")
+
 @SessionScoped
 @ManagedBean
 public class ComptesController implements Serializable{
@@ -52,11 +47,9 @@ public class ComptesController implements Serializable{
     private Comptes result;
     private boolean skip;
     private List<Comptes> listeCompte;
-    private int cptMdp;
-    private Date connectingDate;
-    private Date yesterdayDate;
     
-    private List<Comptes> listeCompteMDP;
+    private static int cptMdp;
+    private static List<Comptes> listeCompteMDP = new ArrayList<Comptes>();
     
     String login;
     
@@ -71,12 +64,10 @@ public class ComptesController implements Serializable{
     @PostConstruct
     public void postConstruct(){
          listeCompte = (List<Comptes>) comptesDAO.getAllComptes();
-         listeCompteMDP = new ArrayList<Comptes>();
-        cptMdp = 0;
     }
 
     //getter du compte
-    public List<Comptes> getListeCompteMDP() {
+    public static List<Comptes> getListeCompteMDP() {
         return listeCompteMDP;
     }
     
@@ -110,32 +101,14 @@ public class ComptesController implements Serializable{
         this.login = login;
     }
 
-    public int getCptMdp() {
+    public static int getCptMdp() {
         return cptMdp;
     }
 
-    public void setCptMdp(int cptMdp) {
-        this.cptMdp = cptMdp;
-    }
-
-    public Date getConnectingDate() {
-        return connectingDate;
-    }
-
-    public void setConnectingDate(Date connectingDate) {
-        this.connectingDate = connectingDate;
-    }
-
-    public Date getYesterdayDate() {
-        return yesterdayDate;
-    }
-
-    public void setYesterdayDate(Date yesterdayDate) {
-        this.yesterdayDate = yesterdayDate;
-    }
 
 
-    
+
+//////////////////////////////////////////////////////////////////////////////////////////////////    
     
        
     /**
@@ -170,18 +143,8 @@ public class ComptesController implements Serializable{
      * @return string (nom de la page)
      */
     public String updateComptes() { 
-            //modif du niveau
-                //this.niveaux = niveauxDAO.getFindByOneNiveaux(1);
-                //compteConnecte.setIdNiveau(this.niveaux);
-            //modif du type
-                //this.typeComptes = typeDAO.getFindByOneTypesComptes(2);
-                //compteConnecte.setIdType(this.typeComptes);
-            //update du compte
-                comptesDAO.updateComptes(compteConnecte);  
-                //FacesMessage msg = new FacesMessage("Successful", "Modification prise en compte" + compteConnecte.getLogin());
-                //FacesContext.getCurrentInstance().addMessage(null, msg);
-                //FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-                return "profil?login=#{comptesController.compteConnecte.login}";       
+        comptesDAO.updateComptes(compteConnecte);  
+        return "profil?login=#{comptesController.compteConnecte.login}";       
     }
     
     /**
@@ -266,6 +229,7 @@ public class ComptesController implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("comptesController");
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Déconnexion !", "Vous êtes déconnecté"));
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+         System.out.println("********************"+cptMdp+"****************");
         return "index";
         }  
      
@@ -298,23 +262,21 @@ public class ComptesController implements Serializable{
     public List<Comptes> notifcompte(String emailCompte, boolean validate){ 
         //this.comptesDAO.suppCompte(compte);
         //listeCompte.remove(compte);
-        System.out.println("*****************************" + emailCompte +"*****************************" );
-                  Comptes c = this.getOneEmailComptes(emailCompte);
-        System.out.println("*****************************" + c.getLogin() +"*****************************" );
+
+            Comptes c = comptesDAO.getOneEmailComptes(emailCompte);
           
         if (validate == false){
          cptMdp++;   
-         System.out.println("*****************************" + c.getLogin() +"*****************************" );
          listeCompteMDP.add(c);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Information : ", "Demande de modification de mot de passe envoyée !"));
+             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }
         else{
           cptMdp--;
-        }
-        
-        
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " info : ", "cptMdp : "+ cptMdp));
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-        
+          listeCompteMDP.remove(c);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Information : ", "Modification prise en compte !"));
+             FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        }    
         return listeCompteMDP;
-        }
+    }
 }
