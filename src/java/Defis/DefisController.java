@@ -109,6 +109,41 @@ public class DefisController implements Serializable{
         return defisDAO.getAllDefisEnCours();
     }
     
+    /**
+     * 
+     * @param login
+     * @return 
+     */
+    public List<Defis> getAllMyDefisEffectue(String login){
+    return defisDAO.getAllMyDefisEffectue(login);
+     }
+    
+    /**
+     * 
+     * @param login
+     * @return 
+     */
+    public int countAllMyDefisEffectue(String login){
+        return defisDAO.countAllMyDefisEffectue(login);
+     }
+    
+        /**
+     * 
+     * @param login
+     * @return 
+     */
+    public List<Defis> getAllMyDefisCours(String login){
+    return defisDAO.getAllMyDefisCours(login);
+     }
+    
+    /**
+     * 
+     * @param login
+     * @return 
+     */
+    public int countAllMyDefisCours(String login){
+        return defisDAO.countAllMyDefisCours(login);
+     }
     
     
     

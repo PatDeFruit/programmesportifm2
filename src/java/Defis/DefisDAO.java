@@ -70,6 +70,44 @@ public class DefisDAO {
             }
         }
      
+     public List<Defis> getAllMyDefisEffectue(String login){
+            Query query = em.createQuery("SELECT d FROM Defis d where d.effectue='1' and (d.login1.login = :login OR d.login2.login = :login)").setParameter("login", login);
+            try{
+                return query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
+        }
+     public int countAllMyDefisEffectue(String login){
+            Query query = em.createQuery("SELECT count(d) FROM Defis d where d.effectue='1' and (d.login1.login = :login OR d.login2.login = :login)").setParameter("login", login);
+            try{
+                return ((Number) query.getSingleResult()).intValue();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return -1;
+            }
+        }
+     
+      public List<Defis> getAllMyDefisCours(String login){
+            Query query = em.createQuery("SELECT d FROM Defis d WHERE d.effectue='0' and (d.login1.login = :login OR d.login2.login = :login)").setParameter("login", login);
+            try{
+                return query.getResultList();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return null;
+            }
+        }
+     public int countAllMyDefisCours(String login){
+            Query query = em.createQuery("SELECT count(d) FROM Defis d where d.effectue='0' and (d.login1.login = :login OR d.login2.login = :login)").setParameter("login", login);
+            try{
+                return ((Number) query.getSingleResult()).intValue();
+            } catch(Exception e){
+                System.err.println(e.getMessage());
+                return -1;
+            }
+        }
+     
      public Defis getOneDefis(int idDefis){
         Query query = em.createNamedQuery("Defis.findByIdDefis").setParameter("idDefis", idDefis);
         try{

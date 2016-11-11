@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui" 
+        xmlns:jsf="http://java.sun.com/jsp/jstl/core">
+
+    <h:body>
+        <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
+            
+         <c:view>
+            <h:form>
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Date de l'entrainement : " />
+                        <p:calendar style="float:left;" id="button" value="#{entrainementsController.saisie.dateEntrainement}" showOn="button" />
+                    <h:outputLabel value="nomExercice : " for="nomExercice" />
+                        <h:inputText id="nomExercice" value="#{entrainementsController.saisie.idExercice.nomExercice}" title="nomExercice" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <h:outputLabel value="description : " for="description" />
+                        <h:inputText id="description" value="#{entrainementsController.saisie.idExercice.description}" title="description" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <h:outputLabel value="difficulte : " for="difficulte" />
+                        <h:inputText id="difficulte" value="#{entrainementsController.saisie.idExercice.difficulte}" title="difficulte" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    
+                    <h:outputLabel value="nomProgramme : " for="nomProgramme" />
+                        <h:inputText id="nomProgramme" value="#{entrainementsController.saisie.idProgramme.nomProgramme}" title="nomProgramme" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <h:outputLabel value="Objectif du programme : " for="objectif" />
+                        <h:inputText id="objectif" value="#{entrainementsController.saisie.idProgramme.objectif}" title="objectif" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    
+                    <h:outputLabel value="nbRepetEffect : " for="nbRepetEffect" />
+                        <h:inputText id="nbRepetEffect" value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <h:outputLabel value="nbSerieEffect : " for="nbSerieEffect" />
+                        <h:inputText id="nbSerieEffect" value="#{entrainementsController.saisie.nbSerieEffect}" title="nbSerieEffect" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <h:outputLabel value="Objectif du programme : " for="objectif" />
+                        <h:inputText id="tempsEffect" value="#{entrainementsController.saisie.tempsEffect}" title="tempsEffect" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    
+                
+                </p:panelGrid>
+                <h:commandButton value="Sauvegarder - !!!!!!!! TODO !!!!" action="#"/>
+            </h:form>
+        </c:view>
+                                      
+    </h:body>
+</html>
+

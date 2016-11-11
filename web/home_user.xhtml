@@ -16,7 +16,8 @@
         <c:view>
             <c:event type="preRenderView" listener="#{programmesController.getDefaultProgramme(comptesController.compteConnecte)}"/>
             <c:event type="preRenderView" listener="#{entrainementsController.initialiserGraphic(programmesController.getDefaultProgramme(comptesController.compteConnecte))}"/>
-        <div class="wrapper">
+        </c:view>
+            <div class="wrapper">
             <div id="sidebar-wrapper">
                 <div id="sidebar-header">
                     <div id="logo-wrapper">
@@ -72,8 +73,8 @@
                             <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Lancer un défi" onclick="PF('lancerDefis').show();" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Défis effectués" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Défis reçus" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Défis effectués" onclick="PF('view_defis_effectues').show();" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Défis en cours : #{defisController.countAllMyDefisCours(comptesController.compteConnecte.login)}" onclick="PF('gestion_defis_recu').show();" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
                         </div>
@@ -81,7 +82,7 @@
                             <h:form>
                              <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Ajouter un programme" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Suivre un nouveau programme" onclick="PF('ajout_new_programme').show();" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Supprimer un programme" outcome="index" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
@@ -200,7 +201,7 @@
                                         </p:panel>
                             </p:panel>
                              <p:panel id="graphic" header="Mon évolution - Nombre de répétitions"  style="margin-bottom:20px;">
-                                 <p:chart type="line" model="#{entrainementsController.dateModel}" />
+                                <!-- <p:chart type="line" model="#{entrainementsController.dateModel}" /> -->
                             </p:panel>
                             <p:panel id="test2" header="Test"  style="margin-bottom:20px;">
                                 <h:panelGrid columns="2" cellpadding="10">
@@ -233,13 +234,25 @@
                 </tr>
             </table>
                 <!-- Les fenetres de dialogue -->
-                <p:dialog header="Lancer un défis" widgetVar="lancerDefis" modal="true" height="100">
+                <p:dialog header="Lancer un défis" widgetVar="lancerDefis" modal="true" width="70%" height="70%">
                      <f:include src="lancerDefis.xhtml" />
                  </p:dialog>   
                 
-                 <p:dialog header="Gestion des amis" widgetVar="gestion_amis" modal="true" height="100">
+                 <p:dialog header="Gestion des amis" widgetVar="gestion_amis" modal="true" width="70%" height="70%">
                      <f:include src="gestion_amis.xhtml" />
-                 </p:dialog>   
+                 </p:dialog> 
+                
+                <p:dialog header="Visualisation des #{defisController.countAllMyDefisEffectue(comptesController.compteConnecte.login)} défis effectués" widgetVar="view_defis_effectues" modal="true" width="70%" height="70%">
+                     <f:include src="view_defis_effectues.xhtml" />
+                 </p:dialog> 
+                
+                <p:dialog header="Gestion des #{defisController.countAllMyDefisCours(comptesController.compteConnecte.login)} défis en cours" widgetVar="gestion_defis_recu" modal="true" width="70%" height="70%">
+                     <f:include src="gestion_defis_recu.xhtml" />
+                 </p:dialog> 
+                
+                <p:dialog header="Ajouter un nouveau programme" widgetVar="ajout_new_programme" modal="true" width="70%" height="70%">
+                    <f:include src="ajout_new_programme.xhtml" />
+                </p:dialog> 
         </div>
     </h:body>
 </html>

@@ -127,7 +127,7 @@ public class ProgrammesController implements Serializable{
     
     
     /**
-     *Ajout d'un nouvel exercice 
+     *Ajout d'un nouveau programme 
      */
     public void saveProgramme() {
         programmesDAO.saveProgramme(newProgramme);
