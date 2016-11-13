@@ -92,33 +92,20 @@
                             </p:column>
                             
                             <p:column headerText="Nombre de répétitions" footerText="" sortBy="#{var.nbRepetEffect}" filterBy="#{var.nbRepetEffect}">        
-                                <p:cellEditor>
-                                    <c:facet name="output"><h:outputText value="#{var.nbRepetEffect}" /></c:facet>
-                                    <c:facet name="input"><p:inputText id="nbRepetEffect" value="#{var.nbRepetEffect}" style="width:100%"/></c:facet>
-                                </p:cellEditor>
+                                <h:outputText value="#{var.nbRepetEffect}" />
                             </p:column>
                             
                             <p:column headerText="Nombre de séries" footerText="" sortBy="#{var.nbSerieEffect}" filterBy="#{var.nbSerieEffect}">
-                                <p:cellEditor>
-                                    <c:facet name="output"><h:outputText value="#{var.nbSerieEffect}" /></c:facet>
-                                    <c:facet name="input"><p:inputText id="nbSerieEffect" value="#{var.nbSerieEffect}" style="width:100%"/></c:facet>
-                                </p:cellEditor>
+                                <h:outputText value="#{var.nbSerieEffect}" />
                             </p:column>
                             
                             <p:column headerText="Temps" footerText="" sortBy="#{var.tempsEffect}" filterBy="#{var.tempsEffect}">
-                                <p:cellEditor>
-                                    <c:facet name="output"><h:outputText value="#{var.tempsEffect}" /></c:facet>
-                                    <c:facet name="input"><p:inputText id="tempsEffect" value="#{var.tempsEffect}" style="width:100%"/></c:facet>
-                                </p:cellEditor> 
-                            </p:column>
-                                         
-                            <p:column style="width:32px">
-                                <p:rowEditor />
+                                <h:outputText value="#{var.tempsEffect}" />
                             </p:column>
                             
                             <p:column style="width:35px">
                                  <p:commandButton id="supp" icon="ui-icon-trash" style="color:red"
-                                                  update="data_entrainement" actionListener="#">
+                                                  update="data_entrainement" actionListener="#{entrainementsController.suppEntrainement(var)}">
                                  </p:commandButton>
                             </p:column>
                         </p:dataTable>
