@@ -10,29 +10,41 @@
     
           <c:view>
             <h:form id="supp_amis">
-                <h1><h:outputText value="Supprimer un ami" /></h1>
-                <p:panelGrid columns="2">
-                    <h:outputLabel value="Choix de l'ami à supprimer : " for="friend" />
-                    <p:selectOneMenu id="friend" value="#{amitieController.selectedFriend}" required="true" requiredMessage="Si vous voulez supprimer un ami, il faut en sélectionner un">     
-                        <c:selectItems value="#{amitieController.oneMenuAllFriends(comptesController.compteConnecte.login)}"/>
-                        </p:selectOneMenu>
-                    
-                </p:panelGrid>
-                <p:commandButton value="Supprimer" action="#{amitieController.suppAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis"/>
+                    <p:fieldset legend="Supprimer un ami" toggleable="true" collapsed="true" toggleSpeed="500">                   
+                     <h:form>
+                         <br/>
+                        <h:outputLabel value="Choix de l'ami à supprimer : " for="friend" />
+                            <p:selectOneMenu id="friend" value="#{amitieController.selectedFriend}" required="true" requiredMessage="Si vous voulez supprimer un ami, il faut en sélectionner un">     
+                                <c:selectItems value="#{amitieController.oneMenuAllFriends(comptesController.compteConnecte.login)}"/>
+                            </p:selectOneMenu>
+                        <br/><br/>
+                        <center> 
+                            <p:commandButton value="Supprimer" action="#{amitieController.suppAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis,liste_amis,menuform"/>
+                        </center>
+                     </h:form>
+                 </p:fieldset>
             </h:form>
         </c:view>
     
+
+    
+    
+    
      <c:view>
             <h:form id="ajout_ami">
-                <h1><h:outputText value="Ajouter un ami" /></h1>
-                <p:panelGrid columns="2">
-                    <h:outputLabel value="Choix de la personne à ajouter : " for="friend2" />
-                    <p:selectOneMenu id="friend" value="#{amitieController.selectedPeople}" required="true" requiredMessage="Si vous voulez ajouter un ami, il faut en sélectionner un">     
-                        <c:selectItems value="#{amitieController.oneMenuAllNoFriends(comptesController.compteConnecte.login)}"/>
-                        </p:selectOneMenu>
-                    
-                </p:panelGrid>
-                <p:commandButton value="Ajouter" action="#{amitieController.saveAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis"/>
+                    <p:fieldset legend="Ajouter un ami" toggleable="true" collapsed="true" toggleSpeed="500">                   
+                     <h:form>
+                         <br/>
+                        <h:outputLabel value="Choix de la personne à ajouter : " for="friend2" />
+                            <p:selectOneMenu id="friend" value="#{amitieController.selectedPeople}" required="true" requiredMessage="Si vous voulez ajouter un ami, il faut en sélectionner un">     
+                                <c:selectItems value="#{amitieController.oneMenuAllNoFriends(comptesController.compteConnecte.login)}"/>
+                            </p:selectOneMenu>
+                        <br/><br/>
+                        <center> 
+                            <p:commandButton value="Ajouter" action="#{amitieController.saveAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis,liste_amis,menuform"/>
+                        </center>
+                     </h:form>
+                 </p:fieldset>
             </h:form>
         </c:view>
 </html>

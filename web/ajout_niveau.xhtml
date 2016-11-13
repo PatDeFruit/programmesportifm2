@@ -12,11 +12,13 @@
             
          <c:view>
             <h:form>
-                <p:panelGrid columns="2">
+                <br/>
                     <h:outputLabel value="Nom du niveau : " for="nomNiveau" />
                         <h:inputText id="nomNiveau" value="#{niveauxController.newNiveaux.nomNiveau}" title="nomNiveau" required="true" requiredMessage="Le nom du niveau est obligatoire."/>
-                </p:panelGrid>
-                <h:commandButton value="Sauvegarder" action="#{niveauxController.saveNiveau()}"/>
+                <br/><br/>
+                <center>
+                    <p:commandButton value="Sauvegarder" action="#{niveauxController.saveNiveau()}" update="menuform,accordeon,table_niveau"/>
+                </center>
             </h:form>
         </c:view>
                                       

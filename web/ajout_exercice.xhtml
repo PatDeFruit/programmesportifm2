@@ -12,15 +12,20 @@
             
          <c:view>
             <h:form>
-                <p:panelGrid columns="2">
+                <br/>
                     <h:outputLabel value="Nom de l'exercice : " for="nomExercice" />
                         <h:inputText id="nomExercice" value="#{exercicesController.saisie.nomExercice}" title="nomExercice" required="true" requiredMessage="Le nom de l'exercice est obligatoire."/>
+                    <br/><br/>
                     <h:outputLabel value="Description : " for="description" />
-                        <h:inputText id="description" value="#{exercicesController.saisie.description}" title="description" required="true" requiredMessage="La description de l'exercice est obligatoire."/>
+                        <h:inputText id="description" value="#{exercicesController.saisie.description}" style="width: 350px" title="description" required="true" requiredMessage="La description de l'exercice est obligatoire."/>
+                    <br/><br/>
                     <h:outputLabel value="Difficulte : " for="difficulte" />
                         <h:inputText id="difficulte" value="#{exercicesController.saisie.difficulte}" title="difficulte" required="true" requiredMessage="La difficulté de l'exercice est obligatoire."/>
-                </p:panelGrid>
-                <h:commandButton value="Sauvegarder" action="#{exercicesController.saveExercice()}"/>
+                        <p:slider for="difficulte" minValue="1" maxValue="3" style="background: white; width: 220px; margin-left: 92px"/>
+                    <br/><br/>
+                <center>
+                    <p:commandButton value="Sauvegarder" action="#{exercicesController.saveExercice()}" update="menuform,accordeon"/>
+                </center>
             </h:form>
         </c:view>
                                       

@@ -11,18 +11,21 @@
         <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
             <c:view>
             <h:form>
-                <p:panelGrid columns="2">
+                <br/>
                     <h:outputLabel value="Nom de l'exercice : " for="nomExercice"/>
                     <p:selectOneMenu value="#{defisController.selectedExo}" required="true" requiredMessage="Si vous voulez lancer un défi, il faut choisir un exercice!">     
                         <c:selectItems value="#{exercicesController.oneMenuAllExercices()}"/>
-                        </p:selectOneMenu>
+                    </p:selectOneMenu>
+                    <br/><br/>
                     <h:outputLabel value="Lancer le Défis à : " for="friend" />
                     <p:selectOneMenu id="friend" value="#{defisController.selectedFriend}" required="true" requiredMessage="Si vous voulez lancer un défi, il faut choisir un ami!">     
                         <c:selectItems value="#{amitieController.oneMenuAllFriends(comptesController.compteConnecte.login)}"/>
-                        </p:selectOneMenu>
+                    </p:selectOneMenu>
                     
-                </p:panelGrid>
-                <h:commandButton value="Lancer!" action="#{defisController.saveDefi(comptesController.compteConnecte.login)}" update="gestion_defis_recu,form_defis,data_table2,menuform"/>
+                <br/><br/>
+                <center>
+                    <p:commandButton value="Lancer !" action="#{defisController.saveDefi(comptesController.compteConnecte.login)}" update="gestion_defis_recu,form_defis,menuform"/>
+                </center>
             </h:form>
         </c:view>
                                       

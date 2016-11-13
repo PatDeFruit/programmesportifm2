@@ -42,7 +42,7 @@
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
                             <p:menuitem value="Profil" styleClass="profilMenuItem" outcome="profil?login=#{comptesController.compteConnecte.login}"/>
                             <p:separator/>
-                            <p:menuitem value="Deconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
+                            <p:menuitem value="Déconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
                         </p:menu>
                         </h:form>
                     </div>
@@ -122,8 +122,8 @@
                                     <img src="rsrc/niveau.png" alt="Gestion des niveaux" width="200px" height="200px"/>
                                     <h:form>
                                         <p:splitButton value="Options">
-                                            <p:menuitem value="Ajout" icon="ui-icon-plusthick" onclick="PF('dlg2').show();"/>
-                                            <p:separator />
+                                            <!--<p:menuitem value="Ajout" icon="ui-icon-plusthick" onclick="PF('dlg2').show();"/>
+                                            <p:separator />-->
                                             <p:menuitem value="Editer" icon="ui-icon-pencil" onclick="PF('edit1').show();" />
                                         </p:splitButton>
                                     </h:form>

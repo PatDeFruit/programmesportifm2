@@ -230,6 +230,7 @@ public class DefisController implements Serializable{
      public void defiRealise(Defis d){
          d.setEffectue(true);
          listeDefisVal.add(d);
+         listeDefis.remove(d);
          //this.defisDAO.defiRealise(d);
          cptDefis++;
          FacesContext context = FacesContext.getCurrentInstance();
