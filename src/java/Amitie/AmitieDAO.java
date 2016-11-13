@@ -45,8 +45,8 @@ public class AmitieDAO {
         }
     }
     
-    public List<Comptes> getMyFriendsWithLogin(String login){
-        Query query = em.createQuery("SELECT c FROM Comptes c left join c.amitieCollection a WHERE a.login1.login = :login or a.login2.login := :login").setParameter("login", login);        
+    public List<Amitie> getMyFriendsWithLogin(String login){
+        Query query = em.createQuery("SELECT a From Amitie a WHERE a.login1.login = :login or a.login2.login = :login").setParameter("login", login);        
         try{
                 return query.getResultList();
         } catch(Exception e){
