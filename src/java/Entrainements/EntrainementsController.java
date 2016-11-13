@@ -6,6 +6,7 @@
 package Entrainements;
 
 import Comptes.Comptes;
+import Comptes.ComptesDAO;
 import Exercices.Exercices;
 import Exercices.ExercicesController;
 import Exercices.ExercicesDAO;
@@ -54,6 +55,8 @@ public class EntrainementsController implements Serializable{
     private ProgrammesDAO programmeDAO;
     @EJB
     private ExercicesDAO exerciceDAO;
+    @EJB
+    private ComptesDAO compteDAO;
     
     private Exercices myExercice;
     
@@ -202,8 +205,8 @@ public class EntrainementsController implements Serializable{
     public void setDateModel(LineChartModel dateModel) {
         this.dateModel = dateModel;
     }
-        
-        
+    
+    
         public void initialiserGraphic(int prog){
         dateModel = new LineChartModel();
         listeExoByProgrammes = exerciceDAO.getExoByProgrammes(prog);
@@ -219,17 +222,13 @@ public class EntrainementsController implements Serializable{
                     Date theDate = listeEntrainementsByExos.get(k).getDateEntrainement();
                     String theDateFinal = new SimpleDateFormat("yyyy-MM-dd").format(theDate);
                     Number nombreRepet = (Number) listeEntrainementsByExos.get(k).getIdEntrainements();
-                    System.out.println("***********************"+nombreRepet+"******************");
                     series[j].set(theDateFinal, nombreRepet);
                 }
                 dateModel.addSeries(series[j]);
             }      
         
-        dateModel.setTitle("Par nombre de répétitions");
         dateModel.getAxis(AxisType.Y).setLabel("Nombre de répétitions");
         DateAxis axis = new DateAxis("Dates");
-        axis.setTickAngle(-50);
-        axis.setTickFormat("%b %#d, %y");
          
         dateModel.getAxes().put(AxisType.X, axis);
      

@@ -55,6 +55,16 @@ public class AmitieDAO {
         }
     }
     
+    public List<Comptes> getPeopleNotMyFriends(String login){
+        Query query = em.createQuery("SELECT c FROM Comptes c left join c.amitieCollection a left join a.login1 log left join a.login2 log2 WHERE log.login != :login AND log.login != c.login AND log2.login != c.login AND log2.login != :login AND c.login != :login").setParameter("login", login);        
+        try{
+                return query.getResultList();
+        } catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+    
     public List<Comptes> getMyFriendsWithLogin2(String login){
         Query query = em.createQuery("SELECT c FROM Comptes c left join c.amitieCollection1 a left join a.login2 log2 WHERE log2.login = :login").setParameter("login", login);        
         try{
@@ -64,8 +74,49 @@ public class AmitieDAO {
             return null;
         }
     }
+    
+    
+    public Amitie getAmitieByLogs(String login1, String login2){
+        Query query = em.createQuery("SELECT a FROM Amitie a left join a.login1 c left join a.login2 c2 WHERE c.login = :login1 AND c2.login = :login2").setParameter("login2", login2).setParameter("login1", login1);
+        Query query2 = em.createQuery("SELECT a FROM Amitie a left join a.login1 c left join a.login2 c2 WHERE c.login = :login2 AND c2.login = :login1").setParameter("login2", login2).setParameter("login1", login1);
+         try{
+             if(query.getSingleResult() != null){
+                return (Amitie) query.getSingleResult(); 
+             } else {
+                 return (Amitie) query2.getSingleResult();
+             }
+        } catch(Exception e){
+            System.err.println(e.getMessage());
+            return null;
+        }
+         }
+    
+    
+     public void suppAmitie(Amitie a){
+        //suppression
+        try{
+            em.remove(em.merge(a));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        }
 
-
+     
+       //Ajout
+    public void saveAmitie(Amitie newAmitie){
+        try{
+            if(newAmitie.getIdAmitie()!= null){
+                em.merge(newAmitie);
+            }
+            else {
+                em.persist(newAmitie);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+     
+     
 }
 
    

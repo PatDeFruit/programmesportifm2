@@ -12,7 +12,6 @@
         </style> 
     </h:head>
     <h:body>
-        <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
         <c:view>
             <c:event type="preRenderView" listener="#{programmesController.getDefaultProgramme(comptesController.compteConnecte)}"/>
             <c:event type="preRenderView" listener="#{entrainementsController.initialiserGraphic(programmesController.getDefaultProgramme(comptesController.compteConnecte))}"/>
@@ -32,14 +31,14 @@
                                 <p:accordionPanel id="prog" style="width: 175px;">
                                     <p:tab title="Programmes suivis">
                                         <p:dataList value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
-                                            <h:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}"/>
+                                            <p:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}"/>
                                         </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
                                 <p:accordionPanel id="defis" style="width: 175px;">
                                     <p:tab title="Défis en cours">
                                         <p:dataList value="#{defisController.getMyDefis(comptesController.compteConnecte.login)}" var="itemDefis">
-                                            <p:link value="#{itemDefis.nomExercice}"/>
+                                            <p:commandLink value="#{itemDefis.nomExercice}" onclick="PF('gestion_defis_recu').show();"/>
                                     </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
@@ -73,7 +72,7 @@
                             <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Lancer un défi" onclick="PF('lancerDefis').show();" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Défis effectués" onclick="PF('view_defis_effectues').show();" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Défis effectués : #{defisController.countAllMyDefisEffectue(comptesController.compteConnecte.login)}" onclick="PF('view_defis_effectues').show();" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Défis en cours : #{defisController.countAllMyDefisCours(comptesController.compteConnecte.login)}" onclick="PF('gestion_defis_recu').show();" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
@@ -201,14 +200,7 @@
                                         </p:panel>
                             </p:panel>
                              <p:panel id="graphic" header="Mon évolution - Nombre de répétitions"  style="margin-bottom:20px;">
-                                <!-- <p:chart type="line" model="#{entrainementsController.dateModel}" /> -->
-                            </p:panel>
-                            <p:panel id="test2" header="Test"  style="margin-bottom:20px;">
-                                <h:panelGrid columns="2" cellpadding="10">
-                                    <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-                                    <h:outputText
-                                        value="The story begins as Don Vito Corleone..." />
-                                </h:panelGrid>
+                                <!--<p:chart type="line" model="#{entrainementsController.dateModel}" />-->
                             </p:panel>
                         </h:form>
                     </div>
@@ -234,7 +226,7 @@
                 </tr>
             </table>
                 <!-- Les fenetres de dialogue -->
-                <p:dialog header="Lancer un défis" widgetVar="lancerDefis" modal="true" width="70%" height="70%">
+                <p:dialog header="Lancer un défi" widgetVar="lancerDefis" modal="true" width="70%" height="70%">
                      <f:include src="lancerDefis.xhtml" />
                  </p:dialog>   
                 

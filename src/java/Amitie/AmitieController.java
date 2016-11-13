@@ -15,6 +15,9 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import Comptes.ComptesDAO;
 import java.util.ArrayList;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -37,6 +40,15 @@ public class AmitieController implements Serializable{
     private boolean boolAmitie2;
     
     private Amitie newAmitie;
+    private Amitie saisie;
+    private Amitie amitieToDelete;
+    
+    
+    private List<SelectItem>myListFriends;
+    private List<SelectItem>myListNoFriends;
+    
+    private String selectedFriend;
+    private String selectedPeople;
 
     
     //getter et setter newAmitie
@@ -64,6 +76,22 @@ public class AmitieController implements Serializable{
         this.boolAmitie2 = boolAmitie2;
     }
 
+    public List<SelectItem> getMyListFriends() {
+        return myListFriends;
+    }
+
+    public void setMyListFriends(List<SelectItem> myListFriends) {
+        this.myListFriends = myListFriends;
+    }
+
+    public String getSelectedFriend() {
+        return selectedFriend;
+    }
+
+    public void setSelectedFriend(String selectedFriend) {
+        this.selectedFriend = selectedFriend;
+    }
+
     
     
     
@@ -89,6 +117,22 @@ public class AmitieController implements Serializable{
     public int getCountAmities(){
         return amitieDAO.getCountAmities();
     }
+
+    public List<SelectItem> getMyListNoFriends() {
+        return myListNoFriends;
+    }
+
+    public void setMyListNoFriends(List<SelectItem> myListNoFriends) {
+        this.myListNoFriends = myListNoFriends;
+    }
+
+    public String getSelectedPeople() {
+        return selectedPeople;
+    }
+
+    public void setSelectedPeople(String selectedPeople) {
+        this.selectedPeople = selectedPeople;
+    }
     
 
     
@@ -99,6 +143,11 @@ public class AmitieController implements Serializable{
     public List<Comptes> getMyFriendsWithLogin2(String login){
         return amitieDAO.getMyFriendsWithLogin2(login);
     }
+    
+    public List<Comptes> getPeopleNotMyFriends(String login){
+        return amitieDAO.getPeopleNotMyFriends(login);
+    }
+    
     
     public boolean compareAmitie1(String login){
         List<Comptes> listAmitie1 = amitieDAO.getMyFriendsWithLogin1(login);
@@ -138,5 +187,56 @@ public class AmitieController implements Serializable{
         //au final veux pouvoir affficher mes bouton dans le xhtml en fonction des 0 et 1
         
         return boolAmitie2;
+    }
+    
+    public List<SelectItem> oneMenuAllFriends(String login){
+        myListFriends = new ArrayList<SelectItem>();
+        myListFriends.add(new SelectItem("null", "Select"));
+        List<Comptes> listFriendsAll = new ArrayList<Comptes>();
+        List<Comptes> listFriends1 = amitieDAO.getMyFriendsWithLogin1(login);
+        List<Comptes> listFriends2 = amitieDAO.getMyFriendsWithLogin2(login);
+        for(int i =0; i < listFriends1.size(); i++){
+            listFriendsAll.add(listFriends1.get(i));
+        }
+        for(int i =0; i < listFriends2.size(); i++){
+            listFriendsAll.add(listFriends2.get(i));
+        }    
+        for(int i =0; i < listFriendsAll.size(); i++){
+            myListFriends.add(new SelectItem(listFriendsAll.get(i).getLogin(),listFriendsAll.get(i).getLogin()));
+        }        
+        return myListFriends;
+    }
+    
+    
+        
+    public List<SelectItem> oneMenuAllNoFriends(String login){
+        myListNoFriends = new ArrayList<SelectItem>();
+        myListNoFriends.add(new SelectItem("null", "Select"));
+        List<Comptes> listNoFriendsAll = new ArrayList<Comptes>();
+        listNoFriendsAll = amitieDAO.getPeopleNotMyFriends(login);   
+        System.out.println("*************************"+listNoFriendsAll.size()+"********************");
+        for(int i =0; i < listNoFriendsAll.size(); i++){
+            
+            myListNoFriends.add(new SelectItem(listNoFriendsAll.get(i).getLogin(),listNoFriendsAll.get(i).getLogin()));
+        }        
+        return myListNoFriends;
+    }
+    
+     public void suppAmitie(String login){
+         amitieToDelete = amitieDAO.getAmitieByLogs(login, selectedFriend);
+         amitieDAO.suppAmitie(amitieToDelete);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Amitié supprimée"));
+     }
+    
+     
+          public void saveAmitie(String me) {
+        saisie.setLogin1(comptesDAO.getOneComptes(me));
+        saisie.setLogin2(comptesDAO.getOneComptes(selectedPeople));
+        
+        amitieDAO.saveAmitie(saisie);
+        FacesMessage msg = new FacesMessage("Successful", "Ajout de l'amitié");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     }
 }

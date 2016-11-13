@@ -9,6 +9,8 @@ import Exercices.Exercices;
 import Programmes.Programmes;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -58,6 +60,8 @@ public class DefisDAO {
             return null;
         }
     }
+    
+
     
 
      public List<Exercices> getMyDefis(String login){
@@ -126,4 +130,52 @@ public class DefisDAO {
             System.err.println(e.getMessage());
         }   
     }
+    
+ public void saveDefis(Defis newDefis){
+        try{
+            if(newDefis.getIdDefis()!= null){
+                em.merge(newDefis);
+            }
+            else {
+                em.persist(newDefis);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
+        public Defis getTheDefis(int exo, String login) {
+        Query query = em.createQuery("SELECT d FROM Defis d left join d.idExercice e left join d.login1 c left join d.login2 c2 WHERE (c.login = :login OR c2.login = :login) AND e.idExercice = :exo").setParameter("login", login).setParameter("exo", exo);
+        try{
+            return (Defis) query.getSingleResult();
+        }catch(Exception e){
+            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Erreur: Login déjà existant !",null));
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+        
+        public void defiRealise(Defis d){
+         try{
+            if(d.getIdDefis()!= null){
+                em.merge(d);
+            }
+            else {
+                em.persist(d);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }   
+        }
+        
+        
+        public void defiAnnule(Defis d){
+        //suppression
+        try{
+            em.remove(em.merge(d));
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+        }
+ 
 }

@@ -14,16 +14,16 @@
             <h:form>
                 <p:panelGrid columns="2">
                     <h:outputLabel value="Nom de l'exercice : " for="nomExercice"/>
-                    <p:selectOneMenu value="#{exercicesController.selectedExo}">     
+                    <p:selectOneMenu value="#{defisController.selectedExo}" required="true" requiredMessage="Si vous voulez lancer un défi, il faut choisir un exercice!">     
                         <c:selectItems value="#{exercicesController.oneMenuAllExercices()}"/>
                         </p:selectOneMenu>
+                    <h:outputLabel value="Lancer le Défis à : " for="friend" />
+                    <p:selectOneMenu id="friend" value="#{defisController.selectedFriend}" required="true" requiredMessage="Si vous voulez lancer un défi, il faut choisir un ami!">     
+                        <c:selectItems value="#{amitieController.oneMenuAllFriends(comptesController.compteConnecte.login)}"/>
+                        </p:selectOneMenu>
                     
-                    
-
-                    <h:outputLabel value="Lancer le Défis à : " for="description" />
-                    <h:inputText id="description" value="#{defisController.newDefis.login2.login}" title="description" required="true" requiredMessage="La description de l'exercice est obligatoire."/>
                 </p:panelGrid>
-                <h:commandButton value="Lancer !!!!TODO !!!!" action="#"/>
+                <h:commandButton value="Lancer!" action="#{defisController.saveDefi(comptesController.compteConnecte.login)}"/>
             </h:form>
         </c:view>
                                       
