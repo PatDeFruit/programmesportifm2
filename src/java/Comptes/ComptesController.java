@@ -150,11 +150,11 @@ public class ComptesController implements Serializable{
     
     /**
      * Update information du compte
-     * @return string (nom de la page)
      */
-    public String updateComptes() { 
+    public void updateComptes() { 
         comptesDAO.updateComptes(compteConnecte);  
-        return "profil?login=#{comptesController.compteConnecte.login}";       
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Information :", "Modification effectuée !"));
+           FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);  
     }
     
     /**

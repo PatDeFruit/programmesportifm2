@@ -13,7 +13,11 @@
         </style> 
     </h:head>
     <h:body>
-        
+        <!--
+        <c:view>
+            <c:event type="preRenderView" listener="#{programmesController.getDefaultProgramme(comptesController.compteConnecte)}"/>
+            <c:event type="preRenderView" listener="#{entrainementsController.initialiserGraphic(programmesController.getDefaultProgramme(comptesController.compteConnecte))}"/>
+        </c:view> -->
             <div class="wrapper">
             <div id="sidebar-wrapper">
                 <div id="sidebar-header">
@@ -26,7 +30,7 @@
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container has-scrollbar">
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
-                                <p:accordionPanel id="prog" style="width: 175px;">
+                                <p:accordionPanel id="prog" style="width: 175px;" activeIndex="-1">
                                     <p:tab title="Programmes suivis">
                                         <p:dataList id="progSuivis" value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
                                             <h:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}">
@@ -35,7 +39,7 @@
                                         </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
-                                <p:accordionPanel id="defis" style="width: 175px;">
+                                <p:accordionPanel id="defis" style="width: 175px;" activeIndex="-1">
                                     <p:tab title="Défis en cours">
                                         <p:dataList value="#{defisController.getMyDefis(comptesController.compteConnecte.login)}" var="itemDefis">
                                             <p:commandLink value="#{itemDefis.nomExercice}" onclick="PF('gestion_defis_recu').show();"/>

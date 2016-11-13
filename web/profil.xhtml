@@ -31,42 +31,6 @@
                         <div class="nano-content sidebar-scroll-content" tabindex="0" style="margin-right: -14px;">
                             <h:form id="menuform" title="menuform" styleClass="sidebar-nav-container">
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
-                                
-                                <jsf:choose>
-                                <jsf:when test="${comptesController.compteConnecte.idNiveau.idNiveau=='1'}">
-                                <p:menu style="width:175px" styleClass="myMenu">
-                                        <p:menuitem value="Proposer programme" id="addProg" action="index" styleClass="myMenuItem" />
-                                </p:menu>
-                                <p:panelMenu style="width:175px" styleClass="myMenu">
-                                        <p:submenu label="Programmes suivis">
-                                            <p:menuitem value="Programme 1" actionListener="home_user" styleClass="myMenuItem"/>
-                                            <p:menuitem value="Programme 2" actionListener="home_user" styleClass="myMenuItem"/>
-                                            <p:menuitem value="Programme 3" actionListener="home_user" styleClass="myMenuItem"/>
-                                        </p:submenu>
-                                        <p:submenu label="Programmes en attentes" >
-                                            <p:menuitem value="My Programme" styleClass="myMenuItem"/>
-                                        </p:submenu>
-                                </p:panelMenu>
-                                <p:menu style="width:175px" styleClass="myMenu">
-                                    <p:menuitem value="Lancer un défi" id="addDefi" action="index" styleClass="myMenuItem" />
-                                </p:menu>
-                                 <p:panelMenu style="width:175px" styleClass="myMenu">
-                                    <p:submenu label="Défis en cours">
-                                        <p:menuitem value="25 burpees" actionListener="home_user" styleClass="myMenuItem"/>
-                                        <p:menuitem value="30 squats" actionListener="home_user" styleClass="myMenuItem"/>
-                                    </p:submenu>
-                                    <p:submenu label="Défis gagnés" >
-                                        <p:menuitem value="20 crunchs par Sissi02" actionListener="home_user" styleClass="myMenuItem" />
-                                    </p:submenu>
-                                    <p:submenu label="Défis perdus" >
-                                        <p:menuitem value="20 burpees par AllanTheBos" actionListener="home_user" styleClass="myMenuItem"/>
-                                    </p:submenu>
-                                </p:panelMenu>
-                                <p:menu style="width:175px" styleClass="myMenu">
-                                    <p:menuitem value="Contacter" id="contact" action="index" styleClass="myMenuItem" />
-                                </p:menu>
-                            </jsf:when>    
-                            </jsf:choose>
                             </h:form>
                         </div>
                     </div>
@@ -93,62 +57,10 @@
                                 </jsf:otherwise>
                             </jsf:choose>
                             
-                            <p:menuitem value="Deconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
+                            <p:menuitem value="Déconnexion" action="#{comptesController.disconnect()}" styleClass="profilMenuItem"/>
                         </p:menu>
                         </h:form>
                     </div>
-                   
-                    <jsf:choose>
-                        <jsf:when test="${comptesController.compteConnecte.idNiveau.idNiveau=='1'}">              
-                    <div class="top-menu">
-                        <div class="top-bar-icon">
-                            <h:form>
-                            <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
-                                <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
-                                </p:menu>
-                            </h:form>
-                        </div>
-                        <div class="top-bar-icon">
-                            <h:form>
-                             <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
-                                <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
-                                </p:menu>
-                            </h:form>
-                        </div>
-                        <div class="top-bar-icon">
-                            <h:form>
-                            <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
-                                <p:menu overlay="true" trigger="friend_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Profil" outcome="index" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Deconnexion" outcome="index" styleClass="profilMenuItem"/>
-                                </p:menu>
-                            </h:form>
-                        </div>
-                    </div>
-                   </jsf:when>    
-                   <jsf:otherwise>
-                                        <div class="top-menu">
-                        <div class="top-bar-icon">
-                            <h:form>                                
-                            <h:commandButton id="view_stat" image="rsrc/stat.png" styleClass="iconMenuBar" />
-                            <p:menu overlay="true" trigger="view_stat" my="left top" at="left bottom" styleClass="profilMenu" >                         
-                                <p:menuitem value="Nombre d'amitiés : #{amitieController.countAmities}" styleClass="profilMenuItem"/>
-                                <p:separator/>
-                                <p:menuitem value="Nombre d'utilisateurs : #{comptesController.countComptes}" styleClass="profilMenuItem"/>
-                                <p:separator/>
-                                <p:menuitem value="Nombre de défis : #{defisController.countDefis}" styleClass="profilMenuItem"/>
-                                <p:separator/>
-                                <p:menuitem value="Nombre de programmes : #{programmesController.countProgrammes}" styleClass="profilMenuItem"/>
-                            </p:menu>
-                            </h:form>
-                        </div>
-                    </div>
-                    </jsf:otherwise>
-                    </jsf:choose>
                 </div>
             </div>
                   
@@ -158,74 +70,62 @@
                     <f:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
                 <h:form>
                 <!--tableau -->
-                <h1> Informations sur le compte Utilisateur </h1>
-                <p:dataTable id="TableauCompte" value="#{comptesController.compteConnecte}" var="cp" >
-                        <p:column>
-                            <f:facet name='header'>
-                                <h:outputText value="Login" />
-                            </f:facet>
-                            <h:outputText value="#{cp.login}" />
-                        </p:column>
-                         <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Mot de passe" />
-                            </f:facet>
-                            <p:password value="#{cp.pswd}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Nom" />
-                            </f:facet>
-                            <h:inputText value="#{cp.nom}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Prénom" />
-                            </f:facet>
-                            <h:inputText value="#{cp.prenom}" />
-                        </p:column>
-                    </p:dataTable>
-                <p:commandButton value="Sauvegarder" action="#{comptesController.updateComptes()}" />
+                
+                <p:fieldset legend="Informations sur le compte Utilisateur" toggleable="true" collapsed="true" toggleSpeed="500">                   
+                     <h:form>
+                         <br/>
+                        <h:outputLabel value="Login : "/>
+                        <h:outputText value="#{comptesController.compteConnecte.login}" style="color: gray"/>
+                        <br/><br/>
+                        <h:outputLabel value="Mot de passe : "/>
+                        <p:password value="#{comptesController.compteConnecte.pswd}" style="width: 150px;height: 15px"/>
+                        <br/>   
+                        <h:outputLabel value="Nom : "/>
+                            <h:outputText value="#{comptesController.compteConnecte.nom}" style="color: gray" />
+                        <br/><br/>
+                        <h:outputLabel value="Prénom : "/>
+                            <h:outputText value="#{comptesController.compteConnecte.prenom}" style="color: gray" />
+                        <br/><br/>
+                        <center> 
+                            <p:commandButton value="Sauvegarder" action="#{comptesController.updateComptes()}" update="menuform"/>
+                        </center>
+                     </h:form>
+                 </p:fieldset>
                 </h:form>
                 </f:view>
-                 <f:view>
-                <f:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
+                
+                
+                
+                                <f:view>
+                    <f:event type="preRenderView" listener="#{comptesController.lireCompte}"/>
                 <h:form>
                 <!--tableau -->
-                <h1> Informations personnelles </h1>
-                <p:dataTable id="TableauCompte" value="#{comptesController.compteConnecte}" var="cp" >
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Age" />
-                            </f:facet>
-                            <h:outputText value="#{cp.age}">
-                              <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Sexe" />
-                            </f:facet>
-                            <h:outputText value="#{cp.sexe}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Taille" />
-                            </f:facet>
-                            <h:inputText value="#{cp.taille}" />
-                        </p:column>
-                        <p:column >
-                            <f:facet name='header'>
-                                <h:outputText value="Poids" />
-                            </f:facet>
-                            <h:inputText value="#{cp.poids}" />
-                        </p:column> 
-                    
-                    </p:dataTable>
-                <p:commandButton value="Sauvegarder" action="#{comptesController.updateComptes}" />
-                </h:form>
                 
+                <p:fieldset legend="Informations personnelles" toggleable="true" collapsed="true" toggleSpeed="500">                   
+                     <h:form>
+                         <br/>
+                        <h:outputLabel value="Age : "/>
+                        <h:outputText value="#{comptesController.compteConnecte.age}" style="color: gray">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <br/><br/>
+                        <h:outputLabel value="Sexe : "/>
+                            <h:outputText value="#{comptesController.compteConnecte.sexeAffichage}" style="color: gray"/>
+                        <br/><br/>   
+                        <h:outputLabel value="Taille : "/>
+                            <h:inputText value="#{comptesController.compteConnecte.taille}" style="color: gray" />
+                        <br/><br/>
+                        <h:outputLabel value="Poids : "/>
+                            <h:inputText value="#{comptesController.compteConnecte.poids}" style="color: gray" />
+                        <br/><br/>
+                        <center> 
+                            <p:commandButton value="Sauvegarder" action="#{comptesController.updateComptes}" update="menuform" />
+                        </center>
+                     </h:form>
+                 </p:fieldset>
+                </h:form>
                 </f:view>
+
             </div>
         
         </div>
