@@ -143,6 +143,16 @@ public class ExercicesController implements Serializable{
     }
     
 
+    
+        public List<SelectItem> oneMenuAllExercices(){
+        myListAllExo = new ArrayList<SelectItem>();
+        myListAllExo.add(new SelectItem("null", "Select"));
+        for(int i =0; i < listeAllExo.size(); i++){
+            myListAllExo.add(new SelectItem(listeAllExo.get(i).getNomExercice(), listeAllExo.get(i).getNomExercice()));
+        }        
+        return myListAllExo;
+    }
+    
         /**
      * @return integer
      */

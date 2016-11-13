@@ -19,9 +19,9 @@
                     <h:outputLabel value="Objectif du programme : " for="objectif" />
                         <h:inputText id="objectif" value="#{programmesController.newProgramme.objectif}" title="objectif" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
                     
-                        
+                    <h:outputLabel value="Exercices eistants : " />    
                         <p:selectOneMenu value="#{entrainementsController.maVariable}">     
-                            <c:selectItems value="#{exercicesController.allExercice()}"/>
+                            <c:selectItems value="#{exercicesController.allExercice}"/>
                         </p:selectOneMenu>          
                         
                     <h:outputLabel value="nbRepetEffect : " for="nbRepetEffect" />
