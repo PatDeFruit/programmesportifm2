@@ -136,10 +136,7 @@ public class EntrainementsController implements Serializable{
 
     public void setSaisie(Entrainements saisie) {
         this.saisie = saisie;
-    }
-    
-    
-            
+    }         
     
     /**
      *Ajout d'un nouvel exercice

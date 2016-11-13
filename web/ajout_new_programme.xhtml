@@ -13,20 +13,17 @@
          <c:view>
             <h:form>
                 <p:panelGrid columns="2">
-                    <h:outputLabel value="Date de l'entrainement : " />
-                        <p:calendar style="float:left;" id="button" value="#{entrainementsController.saisie.dateEntrainement}" showOn="button" />
-                    <h:outputLabel value="nomExercice : " for="nomExercice" />
-                        <h:inputText id="nomExercice" value="#{entrainementsController.saisie.idExercice.nomExercice}" title="nomExercice" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
-                    <h:outputLabel value="description : " for="description" />
-                        <h:inputText id="description" value="#{entrainementsController.saisie.idExercice.description}" title="description" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
-                    <h:outputLabel value="difficulte : " for="difficulte" />
-                        <h:inputText id="difficulte" value="#{entrainementsController.saisie.idExercice.difficulte}" title="difficulte" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
                     
                     <h:outputLabel value="nomProgramme : " for="nomProgramme" />
-                        <h:inputText id="nomProgramme" value="#{entrainementsController.saisie.idProgramme.nomProgramme}" title="nomProgramme" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <h:inputText id="nomProgramme" value="#{programmesController.newProgramme.nomProgramme}" title="nomProgramme" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
                     <h:outputLabel value="Objectif du programme : " for="objectif" />
-                        <h:inputText id="objectif" value="#{entrainementsController.saisie.idProgramme.objectif}" title="objectif" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                        <h:inputText id="objectif" value="#{programmesController.newProgramme.objectif}" title="objectif" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
                     
+                        
+                        <p:selectOneMenu value="#{entrainementsController.maVariable}">     
+                            <c:selectItems value="#{exercicesController.allExercice()}"/>
+                        </p:selectOneMenu>          
+                        
                     <h:outputLabel value="nbRepetEffect : " for="nbRepetEffect" />
                         <h:inputText id="nbRepetEffect" value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
                     <h:outputLabel value="nbSerieEffect : " for="nbSerieEffect" />
