@@ -50,11 +50,13 @@ public class DefisController implements Serializable{
     
     private List<Defis> listeDefis;
     
-    private int cptDefis;
+    private static int cptDefis;
     private String selectedExo;
     private String selectedFriend;
     
-    private List<Defis> listeDefisVal = new ArrayList<Defis>();
+    private static List<Defis> listeDefisVal = new ArrayList<Defis>();
+    
+    
     @PersistenceContext(unitName = "programmesportifm2PU")
     private EntityManager em;
     @Resource
@@ -92,13 +94,15 @@ public class DefisController implements Serializable{
         this.newDefis = newDefis;
     }
 
-    public int getCptDefis() {
+    public static int getCptDefis() {
         return cptDefis;
     }
 
-    public void setCptDefis(int cptDefis) {
-        this.cptDefis = cptDefis;
+    public static void setCptDefis(int cptDefis) {
+        DefisController.cptDefis = cptDefis;
     }
+
+    
 
     public List<Defis> getListeDefisVal() {
         return listeDefisVal;
@@ -225,10 +229,11 @@ public class DefisController implements Serializable{
     
      public void defiRealise(Defis d){
          d.setEffectue(true);
-         this.defisDAO.defiRealise(d);
+         listeDefisVal.add(d);
+         //this.defisDAO.defiRealise(d);
          cptDefis++;
          FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Défi réalisé!"));
+        context.addMessage(null, new FacesMessage("Défi réalisé : Demande de validation par le médiateur !"));
      }
     
      public void defiAnnule(Defis d){
@@ -254,16 +259,19 @@ public class DefisController implements Serializable{
 
             Defis d = defisDAO.getOneDefis(idDefis);
           
-        if (validate == false){
-         cptDefis++;   
-         listeDefisVal.add(d);
-             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Information : ", "Défis réalisé. Demande de validation envoyé au médiateur !"));
+        if (validate == true){
+         cptDefis--;   
+            d.setEffectue(true);
+            this.defisDAO.defiRealise(d);
+            listeDefisVal.remove(d);
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Information : ", "Validation effectuée !"));
              FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }
         else{
           cptDefis--;
+          this.defisDAO.defiAnnule(d);
           listeDefisVal.remove(d);
-             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Information : ", "Défis Validé !"));
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, " Information : ", "Défis supprimé !"));
              FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         }    
         return listeDefisVal;

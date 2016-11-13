@@ -45,8 +45,10 @@ public class AmitieDAO {
         }
     }
     
-    public List<Amitie> getMyFriendsWithLogin(String login){
-        Query query = em.createQuery("SELECT a From Amitie a WHERE a.login1.login = :login or a.login2.login = :login").setParameter("login", login);        
+    public List<Comptes> getMyFriendsWithLogin(String login){
+        Query query = em.createQuery("SELECT c FROM Comptes c WHERE c.login != :login and c.idType.idType='2'"
+                + "and (c.login in(SELECT a.login1.login FROM Amitie a WHERE a.login1.login != :login or a.login2.login != :login)"
+                + "or c.login in(SELECT a.login2.login FROM Amitie a WHERE a.login1.login != :login or a.login2.login != :login))").setParameter("login", login);        
         try{
                 return query.getResultList();
         } catch(Exception e){
@@ -65,9 +67,12 @@ public class AmitieDAO {
             return null;
         }
     }
-    
-    public List<Comptes> getPeopleNotMyFriends(String login){
-        Query query = em.createQuery("SELECT c FROM Comptes c left join c.amitieCollection a left join a.login1 log left join a.login2 log2 WHERE log.login != :login AND log.login != c.login AND log2.login != c.login AND log2.login != :login AND c.login != :login").setParameter("login", login);        
+       
+    public List<Comptes> getMyNoFriendsWithLogin(String login){
+        Query query = em.createQuery("SELECT c FROM Comptes c WHERE c.login != :login "
+                + "and c.idType.idType='2'"
+                + "and c.login not in(SELECT a.login1.login FROM Amitie a WHERE a.login1.login = :login or a.login2.login = :login)"
+                + "and c.login not in(SELECT a.login2.login FROM Amitie a WHERE a.login1.login = :login or a.login2.login = :login)").setParameter("login", login);        
         try{
                 return query.getResultList();
         } catch(Exception e){

@@ -40,7 +40,6 @@ public class AmitieController implements Serializable{
     private boolean boolAmitie2;
     
     private Amitie newAmitie;
-    private Amitie saisie;
     private Amitie amitieToDelete;
     
     
@@ -92,6 +91,7 @@ public class AmitieController implements Serializable{
         this.selectedFriend = selectedFriend;
     }
 
+
     
     
     
@@ -134,7 +134,9 @@ public class AmitieController implements Serializable{
         this.selectedPeople = selectedPeople;
     }
     
-
+    public List<Comptes> getMyFriendsWithLogin(String login){
+        return amitieDAO.getMyFriendsWithLogin(login);
+    }
     
     public List<Comptes> getMyFriendsWithLogin1(String login){
         return amitieDAO.getMyFriendsWithLogin1(login);
@@ -144,8 +146,8 @@ public class AmitieController implements Serializable{
         return amitieDAO.getMyFriendsWithLogin2(login);
     }
     
-    public List<Comptes> getPeopleNotMyFriends(String login){
-        return amitieDAO.getPeopleNotMyFriends(login);
+    public List<Comptes> getMyNoFriendsWithLogin(String login){
+        return amitieDAO.getMyNoFriendsWithLogin(login);
     }
     
     
@@ -213,7 +215,7 @@ public class AmitieController implements Serializable{
         myListNoFriends = new ArrayList<SelectItem>();
         myListNoFriends.add(new SelectItem("null", "Select"));
         List<Comptes> listNoFriendsAll = new ArrayList<Comptes>();
-        listNoFriendsAll = amitieDAO.getPeopleNotMyFriends(login);   
+        listNoFriendsAll = amitieDAO.getMyNoFriendsWithLogin(login);   
         System.out.println("*************************"+listNoFriendsAll.size()+"********************");
         for(int i =0; i < listNoFriendsAll.size(); i++){
             
@@ -231,10 +233,18 @@ public class AmitieController implements Serializable{
     
      
           public void saveAmitie(String me) {
-        saisie.setLogin1(comptesDAO.getOneComptes(me));
-        saisie.setLogin2(comptesDAO.getOneComptes(selectedPeople));
+              System.out.println("***//////////*******************"+me+"************////////*************");
+              System.out.println("**********///************"+selectedPeople+"*************************");
+              
+              Comptes amCompte = comptesDAO.getOneComptes(me);
+                
+            newAmitie.setLogin1(amCompte);
+            
+            Comptes amCompte2 = comptesDAO.getOneComptes(selectedPeople);
+            newAmitie.setLogin2(amCompte2);
+                
+        amitieDAO.saveAmitie(newAmitie);
         
-        amitieDAO.saveAmitie(saisie);
         FacesMessage msg = new FacesMessage("Successful", "Ajout de l'amitié");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);

@@ -9,7 +9,7 @@
 
     
           <c:view>
-            <h:form>
+            <h:form id="supp_amis">
                 <h1><h:outputText value="Supprimer un ami" /></h1>
                 <p:panelGrid columns="2">
                     <h:outputLabel value="Choix de l'ami à supprimer : " for="friend" />
@@ -18,12 +18,12 @@
                         </p:selectOneMenu>
                     
                 </p:panelGrid>
-                <h:commandButton value="Supprimer" action="#{amitieController.suppAmitie(comptesController.compteConnecte.login)}"/>
+                <p:commandButton value="Supprimer" action="#{amitieController.suppAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis"/>
             </h:form>
         </c:view>
     
      <c:view>
-            <h:form>
+            <h:form id="ajout_ami">
                 <h1><h:outputText value="Ajouter un ami" /></h1>
                 <p:panelGrid columns="2">
                     <h:outputLabel value="Choix de la personne à ajouter : " for="friend2" />
@@ -32,72 +32,8 @@
                         </p:selectOneMenu>
                     
                 </p:panelGrid>
-                <h:commandButton value="Ajouter" action="#{amitieController.saveAmitie(comptesController.compteConnecte.login)}"/>
+                <p:commandButton value="Ajouter" action="#{amitieController.saveAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis"/>
             </h:form>
         </c:view>
-    
-<c:view>
-    <h:form>
-        
-        
-        
-        
-        <p:dataTable id="data_table2" var="var" value="#{comptesController.getAllComptesDiffLogin(comptesController.compteConnecte.login)}" widgetVar="varTable"
-                         emptyMessage="Aucune donnée trouvée" paginator="true" rows="20"
-                         editable="true"
-                         > 
-
-                <c:facet name="header">
-                    <p:outputPanel>
-                        <h:outputText value="Recherche : " />
-                        <p:inputText id="globalFilter" onkeyup="PF('varTable').filter()" style="width:150px" placeholder="..."/>
-                            <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
-                            <p:columnToggler datasource="data_table2" trigger="toggler" />         
-                    </p:outputPanel>                      
-                </c:facet>
-
-            <p:column headerText="Login" footerText="" sortBy="#{var.login}" filterBy="#{var.login}" >
-                    <h:outputText value="#{var.login}" />
-                </p:column>
-
-                <p:column headerText="eMail" footerText="" sortBy="#{var.email}" filterBy="#{var.email}" visible="false">
-                    <h:outputText value="#{var.email}" />
-                </p:column>
-
-                <p:column headerText="Date de naissance" footerText="" sortBy="#{var.age}" filterBy="#{var.age}" visible="false">
-                    <h:outputText value="#{var.age}">
-                        <c:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                </p:column>
-
-            <p:column headerText="Sexe" footerText="" sortBy="#{var.sexeAffichage}" filterBy="#{var.sexeAffichage}" >
-                    <h:outputText value="#{var.sexeAffichage}" />
-                </p:column>
-
-                <p:column headerText="Niveau" footerText="" sortBy="#{var.idNiveau.nomNiveau}" filterBy="#{var.idNiveau.nomNiveau}">
-                    <h:outputText value="#{var.idNiveau.nomNiveau}" />
-                </p:column>
-
-            
-            <jsf:choose>
-            <jsf:when test="${amitieController.compareAmitie1(comptesController.compteConnecte.login)=='false' or amitieController.compareAmitie2(comptesController.compteConnecte.login)=='false'}">
-                <p:column style="width:35px">
-                     <p:commandButton id="add" icon="fa fa-plus" style="color:green"
-                                      update="data_table2,menuform" actionListener="#">
-                     </p:commandButton>
-                </p:column>
-            </jsf:when>
-                <jsf:when test="${amitieController.compareAmitie1(comptesController.compteConnecte.login)=='true' or amitieController.compareAmitie2(comptesController.compteConnecte.login)=='true'}">
-                <p:column style="width:35px">
-                     <p:commandButton id="supp" icon="ui-icon-trash" style="color:red"
-                                      update="data_table2,menuform" actionListener="#">
-                     </p:commandButton>
-                </p:column>
-            </jsf:when>
-            </jsf:choose>
-            </p:dataTable>
-
-        </h:form>
-</c:view>
 </html>
 

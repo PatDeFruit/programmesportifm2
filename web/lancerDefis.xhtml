@@ -9,8 +9,7 @@
 
     <h:body>
         <!--<h:outputStylesheet name="CSS/cssProgrammeSportifUtilisateur.css"/>-->
-            
-         <c:view>
+            <c:view>
             <h:form>
                 <p:panelGrid columns="2">
                     <h:outputLabel value="Nom de l'exercice : " for="nomExercice"/>
@@ -23,7 +22,7 @@
                         </p:selectOneMenu>
                     
                 </p:panelGrid>
-                <h:commandButton value="Lancer!" action="#{defisController.saveDefi(comptesController.compteConnecte.login)}"/>
+                <h:commandButton value="Lancer!" action="#{defisController.saveDefi(comptesController.compteConnecte.login)}" update="gestion_defis_recu,form_defis,data_table2,menuform"/>
             </h:form>
         </c:view>
                                       

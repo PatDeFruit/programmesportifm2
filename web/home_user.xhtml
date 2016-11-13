@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsf/core"
 	xmlns:f="http://java.sun.com/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui" >
+        xmlns:p="http://primefaces.org/ui" 
+        xmlns:jsf="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title>Programme Sportif - Accueil</title>
         <style type="text/css" media="all"> 
@@ -58,7 +59,7 @@
                             <br/>
                                 <span><h:outputText value="#{comptesController.compteConnecte.idType.nomType}" /></span>
                         </div>
-                        <h:form style="display :inline">
+                        <h:form style="display :inline" >
                         <h:commandButton id="profile-image" styleClass="imgButton" image="rsrc/profil.png"/>
                         <p:menu overlay="true" trigger="profile-image" my="left top" at="left bottom" styleClass="profilMenu" >                         
                             <p:menuitem value="Profil" styleClass="profilMenuItem" outcome="profil?login=#{comptesController.compteConnecte.login}"/>
@@ -68,7 +69,7 @@
                     </div>
                     <div class="top-menu">
                         <div class="top-bar-icon">
-                            <h:form>
+                            <h:form id="form_defis">
                             <h:commandButton id="defi_notif" image="rsrc/defi.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="defi_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Lancer un défi" onclick="PF('lancerDefis').show();" styleClass="profilMenuItem"/>
@@ -78,7 +79,7 @@
                             </h:form>
                         </div>
                         <div class="top-bar-icon">
-                            <h:form>
+                            <h:form id="form_prog">
                              <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Suivre un nouveau programme" onclick="PF('ajout_new_programme').show();" styleClass="profilMenuItem"/>
@@ -86,7 +87,7 @@
                                 </p:menu>
                             </h:form>
                         </div>
-                        <div class="top-bar-icon">
+                        <div class="top-bar-icon" id="form_frien">
                             <h:form>
                             <h:commandButton id="friend_notif" image="rsrc/add_friend_icon.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="friend_notif" my="left top" at="left bottom" styleClass="profilMenu" >
@@ -208,15 +209,11 @@
                     <td width="240px">
                         <div id="sidebar-wrapper2">
                             <c:view>
-                                <h:form>
+                                <h:form id="liste_amis">
                                     <h1><h:outputText value="Amis"/></h1>
-                                    
-                                    <p:dataList value="#{amitieController.getMyFriendsWithLogin1(comptesController.compteConnecte.login)}" var="friends1">
-                                        #{friends1.login}
-                                     </p:dataList>
-                                    <p:dataList value="#{amitieController.getMyFriendsWithLogin2(comptesController.compteConnecte.login)}" var="friends2">
-                                        #{friends2.login}
-                                        </p:dataList>
+                                    <p:dataList value="#{amitieController.getMyFriendsWithLogin(comptesController.compteConnecte.login)}" var="friends">
+                                                #{friends.login}
+                                     </p:dataList>                                    
                                     
                                 </h:form>
                             </c:view>
@@ -234,11 +231,11 @@
                      <f:include src="gestion_amis.xhtml" />
                  </p:dialog> 
                 
-                <p:dialog header="Visualisation des #{defisController.countAllMyDefisEffectue(comptesController.compteConnecte.login)} défis effectués" widgetVar="view_defis_effectues" modal="true" width="70%" height="70%">
+                <p:dialog header="Visualisation des #{defisController.countAllMyDefisEffectue(comptesController.compteConnecte.login)} défis effectués" id="view_defis_effectues" widgetVar="view_defis_effectues" modal="true" width="70%" height="70%">
                      <f:include src="view_defis_effectues.xhtml" />
                  </p:dialog> 
                 
-                <p:dialog header="Gestion des #{defisController.countAllMyDefisCours(comptesController.compteConnecte.login)} défis en cours" widgetVar="gestion_defis_recu" modal="true" width="70%" height="70%">
+                <p:dialog header="Gestion des #{defisController.countAllMyDefisCours(comptesController.compteConnecte.login)} défis en cours" id="gestion_defis_recu" widgetVar="gestion_defis_recu" modal="true" width="70%" height="70%">
                      <f:include src="gestion_defis_recu.xhtml" />
                  </p:dialog> 
                 

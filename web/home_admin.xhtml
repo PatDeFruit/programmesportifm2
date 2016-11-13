@@ -93,14 +93,14 @@
                             <img src="rsrc/dashboard-icon-32.png" alt="Gestion des entrainements" width="50px" height="50px"/>
                         </p:panelGrid>
                     </p:tab>
-                    <p:tab title="Gestion des Défis #{defisController.cptDefis}">
+                    <p:tab title="Gestion des Défis #{defisController.getCptDefis()}">
                         <p:panelGrid columns="3" columnClasses="ui-grid-col-10,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
                             <img src="rsrc/defi.png" alt="Gestion des défis" width="50px" height="50px"/>
                             <h:form>
                                 <p:splitButton value="Options">
                                     <p:menuitem value="Défis en cours" icon="ui-icon-plusthick" outcome="defi_en_cours?login=#{comptesController.compteConnecte.login}"/>
                                     <p:separator />
-                                    <p:menuitem value="Validation des défis #{defisController.cptDefis}" icon="ui-icon-pencil" onclick="PF('val').show();"/>
+                                    <p:menuitem value="Validation des défis #{defisController.getCptDefis()}" icon="ui-icon-pencil" onclick="PF('val').show();"/>
                                 </p:splitButton>
                             </h:form>
                             <img src="rsrc/defi.png" alt="Gestion des défis" width="50px" height="50px"/>

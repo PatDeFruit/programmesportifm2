@@ -35,16 +35,18 @@
                     <h:outputText value="#{var.login2.login}" />
                 </p:column>
             
-            <p:column headerText="Etat" footerText="">
+            <p:column headerText="Etat" footerText="" visible="false">
                 <h:outputText value="#{var.effectueAffichage}" />
                 </p:column>
 
-                <p:column headerText="" footerText="">
-                    <p:commandButton value="Réaliser le défi" id="add" icon="ui-icon-check" style="color:green"
-                                     update="data_table2,menuform" actionListener="#{defisController.defiRealise(var)}">
+                <p:column headerText="" footerText="" style="width:35px">
+                    <p:commandButton id="add" icon="ui-icon-check" style="color:green"
+                                     update="view_defis_effectues,gestion_defis_recu,form_defis,data_table2,menuform" actionListener="#{defisController.defiRealise(var)}">
                     </p:commandButton>
-                    <p:commandButton value="Annuler le défi" id="remove" icon="ui-icon-check" style="color:green"
-                                     update="data_table2,menuform" actionListener="#{defisController.defiAnnule(var)}">
+                </p:column>
+                <p:column headerText="" footerText="" style="width:35px">
+                    <p:commandButton id="remove" icon="ui-icon-trash" style="color:red"
+                                     update="view_defis_effectues,gestion_defis_recu,form_defis,data_table2,menuform" actionListener="#{defisController.defiAnnule(var)}">
                     </p:commandButton>
                 </p:column>
             

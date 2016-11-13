@@ -10,7 +10,7 @@
 <h:body>
         <c:view>
             <h:form>
-                <p:dataTable id="data_table2" var="var" value="#{defisController.getAllDefisEnCours()}" widgetVar="varTable2"
+                <p:dataTable id="data_table2" var="var" value="#{defisController.listeDefisVal}" widgetVar="varTable2"
                              emptyMessage="Aucune donnée trouvée" paginator="true" rows="20"
                              editable="true"
                              > 
@@ -53,8 +53,14 @@
                     </p:column>
 
                     <p:column style="width:35px">
-                         <p:commandButton id="fait" icon="ui-icon-check" style="color:red"
+                         <p:commandButton id="validation" icon="ui-icon-check" style="color:red"
                                           update="data_table2,menuform,accordeon" actionListener="#{defisController.notifValidationDefis(var.idDefis, true)}">
+                         </p:commandButton>
+                    </p:column>
+                    
+                    <p:column style="width:35px">
+                         <p:commandButton id="supp" icon="ui-icon-trash" style="color:red"
+                                          update="data_table2,menuform,accordeon" actionListener="#{defisController.notifValidationDefis(var.idDefis, false)}">
                          </p:commandButton>
                     </p:column>
                 </p:dataTable>
