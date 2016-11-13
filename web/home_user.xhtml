@@ -83,7 +83,7 @@
                              <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
                                     <p:menuitem value="Suivre un nouveau programme" onclick="PF('ajout_new_programme').show();" styleClass="profilMenuItem"/>
-                                    <p:menuitem value="Supprimer un programme" outcome="index" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Gestion des entrainements" outcome="gestion_entrainement?login=#{comptesController.compteConnecte.login}" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
                         </div>

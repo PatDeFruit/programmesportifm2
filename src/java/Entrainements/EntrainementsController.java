@@ -203,6 +203,10 @@ public class EntrainementsController implements Serializable{
         this.dateModel = dateModel;
     }
     
+    public List<Entrainements> getEntrainementByLogin (String login){
+        return entrainementsDAO.getEntrainementByLogin(login);
+    }
+    
     
         public void initialiserGraphic(int prog){
         dateModel = new LineChartModel();

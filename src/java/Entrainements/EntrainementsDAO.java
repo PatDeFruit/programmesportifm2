@@ -35,6 +35,12 @@ public class EntrainementsDAO {
         return query.getResultList();
     }
     
+    //coder
+    public List<Entrainements> getEntrainementByLogin(String login) {
+        Query query = em.createQuery("Select e from Entrainements e where e.login.login = :login order by e.idProgramme.nomProgramme").setParameter("login", login);
+        return query.getResultList();
+    }
+    
   
     //Ajout
     public void saveEntrainement(Entrainements newEntrainement){
