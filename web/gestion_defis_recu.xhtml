@@ -35,13 +35,16 @@
                     <h:outputText value="#{var.login2.login}" />
                 </p:column>
             
-            <p:column headerText="Défis reçu par" footerText="">
+            <p:column headerText="Etat" footerText="">
                 <h:outputText value="#{var.effectueAffichage}" />
                 </p:column>
 
                 <p:column headerText="" footerText="">
-                    <p:commandButton value="!!! TODO !!!!" id="add" icon="ui-icon-check" style="color:green"
-                                     update="data_table2,menuform" actionListener="#">
+                    <p:commandButton value="Réaliser le défi" id="add" icon="ui-icon-check" style="color:green"
+                                     update="data_table2,menuform" actionListener="#{defisController.defiRealise(var)}">
+                    </p:commandButton>
+                    <p:commandButton value="Annuler le défi" id="remove" icon="ui-icon-check" style="color:green"
+                                     update="data_table2,menuform" actionListener="#{defisController.defiAnnule(var)}">
                     </p:commandButton>
                 </p:column>
             

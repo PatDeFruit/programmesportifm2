@@ -5,12 +5,16 @@
  */
 package Defis;
 
+import Comptes.ComptesDAO;
 import Exercices.Exercices;
 import Exercices.ExercicesDAO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -18,6 +22,8 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -31,21 +37,39 @@ public class DefisController implements Serializable{
 
     @EJB
     private DefisDAO defisDAO;
+
+    @EJB
+    private ExercicesDAO exerciceDAO;
+
+    @EJB
+    private ComptesDAO compteDAO;
     
     private Defis newDefis;
+    private Defis saisie;
+    private Defis selectedDefi;
     
     private List<Defis> listeDefis;
     
     private int cptDefis;
+    private String selectedExo;
+    private String selectedFriend;
     
     private List<Defis> listeDefisVal = new ArrayList<Defis>();
+    @PersistenceContext(unitName = "programmesportifm2PU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
 
+   
+    
     
     /**
      * Creates a new instance of DefisController
      */
     public DefisController() {
         newDefis = new Defis();
+        saisie = new Defis();
+        selectedDefi = new Defis();
     }
     
     @PostConstruct
@@ -135,6 +159,17 @@ public class DefisController implements Serializable{
     public List<Defis> getAllMyDefisCours(String login){
     return defisDAO.getAllMyDefisCours(login);
      }
+
+    public Defis getSelectedDefi() {
+        return selectedDefi;
+    }
+
+    public void setSelectedDefi(Defis selectedDefi) {
+        this.selectedDefi = selectedDefi;
+    }
+
+    
+    
     
     /**
      * 
@@ -162,12 +197,47 @@ public class DefisController implements Serializable{
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((Defis) event.getObject()).getLogin1().getLogin());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+
+    public Defis getSaisie() {
+        return saisie;
+    }
+
+    public void setSaisie(Defis saisie) {
+        this.saisie = saisie;
+    }
+
+    public String getSelectedExo() {
+        return selectedExo;
+    }
+
+    public void setSelectedExo(String selectedExo) {
+        this.selectedExo = selectedExo;
+    }
+
+    public String getSelectedFriend() {
+        return selectedFriend;
+    }
+
+    public void setSelectedFriend(String selectedFriend) {
+        this.selectedFriend = selectedFriend;
+    }
     
     
+     public void defiRealise(Defis d){
+         d.setEffectue(true);
+         this.defisDAO.defiRealise(d);
+         cptDefis++;
+         FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Défi réalisé!"));
+     }
     
-    
-    
-    
+     public void defiAnnule(Defis d){
+          this.defisDAO.defiAnnule(d);
+        listeDefis.remove(d);
+        cptDefis--;
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Défi supprimé"));
+     }
     
     
     
@@ -200,5 +270,16 @@ public class DefisController implements Serializable{
     }
     
     
+     public void saveDefi(String me) {
+        saisie.setEffectue(false);
+        saisie.setLogin1(compteDAO.getOneComptes(me));
+        saisie.setLogin2(compteDAO.getOneComptes(selectedFriend));
+        saisie.setIdExercice(exerciceDAO.getExoByName(selectedExo));
+        
+        defisDAO.saveDefis(saisie);
+        FacesMessage msg = new FacesMessage("Successful", "Ajout du défi : " + saisie.getIdExercice().getNomExercice()+" pour "+ saisie.getLogin2().getLogin() +"réalisé");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    }
    
 }
