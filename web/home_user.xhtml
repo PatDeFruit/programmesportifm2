@@ -13,10 +13,7 @@
         </style> 
     </h:head>
     <h:body>
-        <c:view>
-            <c:event type="preRenderView" listener="#{programmesController.getDefaultProgramme(comptesController.compteConnecte)}"/>
-            <c:event type="preRenderView" listener="#{entrainementsController.initialiserGraphic(programmesController.getDefaultProgramme(comptesController.compteConnecte))}"/>
-        </c:view>
+        
             <div class="wrapper">
             <div id="sidebar-wrapper">
                 <div id="sidebar-header">
@@ -31,8 +28,10 @@
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
                                 <p:accordionPanel id="prog" style="width: 175px;">
                                     <p:tab title="Programmes suivis">
-                                        <p:dataList value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
-                                            <p:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}"/>
+                                        <p:dataList id="progSuivis" value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
+                                            <h:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}">
+                                                <c:actionListener binding="#{entrainementsController.updateSelectedProgramme(item)}"/>
+                                            </h:commandLink>
                                         </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
@@ -43,9 +42,6 @@
                                     </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
-                                <p:menu style="width:175px" styleClass="myMenu">
-                                    <p:menuitem value="Contacter" id="contact" action="index" styleClass="myMenuItem" />
-                                </p:menu>
                             </h:form>
                         </div>
                     </div>
@@ -82,7 +78,7 @@
                             <h:form id="form_prog">
                              <h:commandButton id="prog_notif" image="rsrc/document.png" styleClass="iconMenuBar"/>
                                 <p:menu overlay="true" trigger="prog_notif" my="left top" at="left bottom" styleClass="profilMenu" >
-                                    <p:menuitem value="Suivre un nouveau programme" onclick="PF('ajout_new_programme').show();" styleClass="profilMenuItem"/>
+                                    <p:menuitem value="Créer un programme" onclick="PF('ajout_new_programme').show();" styleClass="profilMenuItem"/>
                                     <p:menuitem value="Gestion des entrainements" outcome="gestion_entrainement?login=#{comptesController.compteConnecte.login}" styleClass="profilMenuItem"/>
                                 </p:menu>
                             </h:form>
@@ -111,7 +107,8 @@
                                     <h:commandButton id="add_training" image="rsrc/icon-plus.png" styleClass="iconTraining" onclick="PF('addExo').show()" />
                                     <h:outputText value="Ajouter un entrainement ce jour"/>
                                 </h:panelGrid> 
-                                <p:panel widgetVar="addExo" closable="true" toggleable="true" visible="false">                                     
+                                <p:panel widgetVar="addExo" closable="true" toggleable="true" visible="false" id="addExo">             
+                                    
                                     <table border="0">
                                         <thead>
                                             <tr>
@@ -128,12 +125,25 @@
                                                         <c:selectItems value="#{exercicesController.initialiserSelectItem(programmesController.selectedProgramme.idProgramme)}"/>
                                                     </p:selectOneMenu>
                                                 </td>
-                                                <td>    <h:inputText value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" style="width : 75px;" /></td>
-                                                <td>    <h:inputText value="#{entrainementsController.saisie.nbSerieEffect}" style="width : 50px;"/></td>
-                                                <td>    <h:inputText value="#{entrainementsController.saisie.tempsEffect}" style="width : 50px;" /></td>
+                                                <td><div class="knob-container ui-corner-all">
+                                                        <p:knob value="#{entrainementsController.saisie.nbRepetEffect}" max="100" foregroundColor="#1B6A8C" backgroundColor="white" height="100px">  
+                                                            <p:ajax listener="#{entrainementsController.onChangeNbRepet()}"/>  
+                                                        </p:knob>
+                                                </div></td>
+                                                <td><div class="knob-container ui-corner-all">
+                                                        <p:knob value="#{entrainementsController.saisie.nbSerieEffect}" max="10" foregroundColor="#1B6A8C" backgroundColor="white" height="100px">  
+                                                            <p:ajax listener="#{entrainementsController.onChangeNbRepet()}"/>  
+                                                        </p:knob>
+                                                </div></td>
+                                                <td><div class="knob-container ui-corner-all">
+                                                        <p:knob value="#{entrainementsController.saisie.tempsEffect}" max="1200" foregroundColor="#1B6A8C" backgroundColor="white" height="100px">  
+                                                            <p:ajax listener="#{entrainementsController.onChangeNbRepet()}"/>  
+                                                        </p:knob>
+                                                </div></td>
+                                                
                                             </tr>
                                             <tr>
-                                                <td><p:commandButton action="#{entrainementsController.saveEntrainement(programmesController.selectedProgramme, comptesController.compteConnecte)}" value="Ajouter" onclick="PF('addExo').close()" update="entrainementsDuJour"/></td>
+                                                <td><p:commandButton action="#{entrainementsController.saveEntrainement(programmesController.selectedProgramme, comptesController.compteConnecte)}" value="Ajouter" onclick="PF('addExo').close()" update="entrainementsDuJour,graphic,addExo"/></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -201,7 +211,7 @@
                                         </p:panel>
                             </p:panel>
                              <p:panel id="graphic" header="Mon évolution - Nombre de répétitions"  style="margin-bottom:20px;">
-                                <!--<p:chart type="line" model="#{entrainementsController.dateModel}" />-->
+                                 <p:chart type="line" model="#{entrainementsController.dateModel}" responsive="true"/>
                             </p:panel>
                         </h:form>
                     </div>
@@ -211,7 +221,7 @@
                             <c:view>
                                 <h:form id="liste_amis">
                                     <h1><h:outputText value="Amis"/></h1>
-                                    <p:dataList value="#{amitieController.getMyFriendsWithLogin(comptesController.compteConnecte.login)}" var="friends">
+                                    <p:dataList id="listFriend" value="#{amitieController.getMyFriendsWithLogin(comptesController.compteConnecte.login)}" var="friends">
                                                 #{friends.login}
                                      </p:dataList>                                    
                                     
@@ -242,6 +252,7 @@
                 <p:dialog header="Ajouter un nouveau programme" widgetVar="ajout_new_programme" modal="true" width="70%" height="70%">
                     <f:include src="ajout_new_programme.xhtml" />
                 </p:dialog> 
+                
         </div>
     </h:body>
 </html>

@@ -19,21 +19,21 @@
                     <h:outputLabel value="Objectif du programme : " for="objectif" />
                         <h:inputText id="objectif" value="#{programmesController.newProgramme.objectif}" title="objectif" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
                     
-                    <h:outputLabel value="Exercices eistants : " />    
-                        <p:selectOneMenu value="#{entrainementsController.maVariable}">     
-                            <c:selectItems value="#{exercicesController.allExercice}"/>
+                    <h:outputLabel value="Exercices existants : " />    
+                        <p:selectOneMenu value="#{programmesController.maVariable}">     
+                            <c:selectItems value="#{exercicesController.oneMenuAllExercices()}"/>
                         </p:selectOneMenu>          
                         
-                    <h:outputLabel value="nbRepetEffect : " for="nbRepetEffect" />
-                        <h:inputText id="nbRepetEffect" value="#{entrainementsController.saisie.nbRepetEffect}" title="nbRepetEffect" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
-                    <h:outputLabel value="nbSerieEffect : " for="nbSerieEffect" />
-                        <h:inputText id="nbSerieEffect" value="#{entrainementsController.saisie.nbSerieEffect}" title="nbSerieEffect" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
-                    <h:outputLabel value="Objectif du programme : " for="objectif" />
-                        <h:inputText id="tempsEffect" value="#{entrainementsController.saisie.tempsEffect}" title="tempsEffect" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <h:outputLabel value="Nombre de répétitions réalisées : " for="nbRepetEffect" />
+                    <h:inputText id="nbRepetEffect" value="#{programmesController.entrainement.nbRepetEffect}" title="nbRepetEffect" required="true" requiredMessage="Le nombre de répétitions est obligatoire."/>    
+                    <h:outputLabel value="Nombre de séries réalisées : " for="nbSerieEffect" />
+                        <h:inputText id="nbSerieEffect" value="#{programmesController.entrainement.nbSerieEffect}" title="nbSerieEffect" required="true" requiredMessage="Le nombre de série est obligatoire."/>    
+                    <h:outputLabel value="Temps réalisé : " for="tempsEffect" />
+                        <h:inputText id="tempsEffect" value="#{programmesController.entrainement.tempsEffect}" title="tempsEffect" required="true" requiredMessage="Le temps est obligatoire."/>    
                     
                 
                 </p:panelGrid>
-                <h:commandButton value="Sauvegarder - !!!!!!!! TODO !!!!" action="#"/>
+                <h:commandButton value="Sauvegarder" action="#{programmesController.saveProgrammeAndExo(comptesController.compteConnecte)}"/>
             </h:form>
         </c:view>
                                       

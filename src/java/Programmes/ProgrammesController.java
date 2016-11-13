@@ -10,13 +10,17 @@ import Comptes.ComptesController;
 import Comptes.ComptesDAO;
 import Entrainements.Entrainements;
 import Entrainements.EntrainementsDAO;
+import Exercices.ExercicesDAO;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.persistence.Query;
@@ -37,14 +41,24 @@ public class ProgrammesController implements Serializable{
     @EJB
     private ComptesDAO compteDAO;
     
+    @EJB
+    private EntrainementsDAO entrainementDAO;
+    
+    @EJB
+    private ExercicesDAO exerciceDAO;
+    
     
     
     private Programmes newProgramme;
     private Programmes selectedProgramme;
     private Entrainements entrainement;
     
-    private List<Programmes> temp;
     private List<Programmes> listeProgramme;
+    private List<Programmes> temp;
+    
+    
+    String maVariable;
+    private List<SelectItem> myListProgrammes;
 
     
     /**
@@ -57,6 +71,7 @@ public class ProgrammesController implements Serializable{
     @PostConstruct
     public void postConstruct(){
          listeProgramme = (List<Programmes>) programmesDAO.getAllProgrammes();
+         entrainement = new Entrainements();
     }
     
     //getter
@@ -73,8 +88,35 @@ public class ProgrammesController implements Serializable{
     public void setNewProgramme(Programmes newProgramme) {
         this.newProgramme = newProgramme;
     }
+
+
+    public String getMaVariable() {
+        return maVariable;
+    }
+
+    public void setMaVariable(String maVariable) {
+        this.maVariable = maVariable;
+    }
+
+    public List<SelectItem> getMyListProgrammes() {
+        return myListProgrammes;
+    }
+
+    public void setMyListProgrammes(List<SelectItem> myListProgrammes) {
+        this.myListProgrammes = myListProgrammes;
+    }
+
+    public Entrainements getEntrainement() {
+        return entrainement;
+    }
+
+    public void setEntrainement(Entrainements entrainement) {
+        this.entrainement = entrainement;
+    }
     
        
+    
+    
     /**
      * get le nombre de programmes existant
      * @return integer
@@ -136,6 +178,19 @@ public class ProgrammesController implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     }
     
+        public void saveProgrammeAndExo(Comptes c) {
+        programmesDAO.saveProgramme(newProgramme);
+        
+        entrainement.setIdExercice(exerciceDAO.getExoByName(maVariable));
+        entrainement.setIdProgramme(newProgramme);
+        entrainement.setLogin(c);
+        entrainement.setDateEntrainement(new Date());
+        entrainementDAO.saveEntrainement(entrainement);
+        FacesMessage msg = new FacesMessage("Successful", "Ajout de : " + newProgramme.getNomProgramme() +" réalisé");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+    }
+    
     /**
      * modification des exercice via le Edit
      * @param event
@@ -170,10 +225,18 @@ public class ProgrammesController implements Serializable{
     
     
     public void updateSelectedProgramme(String prog){
-        selectedProgramme = programmesDAO.updateSelectedProgramme(prog);
+        setSelectedProgramme(programmesDAO.updateSelectedProgramme(prog));
     }
     
     public Programmes getTheIdProgramme(Programmes prog){
        return programmesDAO.getTheIdProgramme(prog.getNomProgramme());
     }
+
+    
+    public Programmes getTheIdProgrammeString(String prog){
+       return programmesDAO.getTheIdProgramme(prog);
+    }    
+    
+    
+    
 }

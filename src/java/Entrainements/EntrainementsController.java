@@ -46,13 +46,15 @@ public class EntrainementsController implements Serializable{
     @EJB
     private EntrainementsDAO entrainementsDAO;
     
+    @EJB
+    private ProgrammesDAO programmeDAO;
+    
     private Entrainements result;
     private Entrainements newEntrainement;
     private Programmes resultProgramme;
     private Programmes myProgramme;
+    private Programmes selectedProgramme;
     
-    @EJB
-    private ProgrammesDAO programmeDAO;
     @EJB
     private ExercicesDAO exerciceDAO;
     @EJB
@@ -92,11 +94,14 @@ public class EntrainementsController implements Serializable{
         calendar2 = new GregorianCalendar();
         calendar2.add(Calendar.DATE, -1);
         yesterday = calendar2.getTime();
+        
+
     }
     
     @PostConstruct
     public void postConstruct(){
          listeEntrainements = (List<Entrainements>) entrainementsDAO.getAllEntrainement();
+                 initialiserGraphic();
     }
 
     public String getMaVariable() {
@@ -121,6 +126,14 @@ public class EntrainementsController implements Serializable{
 
     public void setYesterday(Date yesterday) {
         this.yesterday = yesterday;
+    }
+
+    public Programmes getSelectedProgramme() {
+        return selectedProgramme;
+    }
+
+    public void setSelectedProgramme(Programmes selectedProgramme) {
+        this.selectedProgramme = selectedProgramme;
     }
     
     
@@ -207,33 +220,58 @@ public class EntrainementsController implements Serializable{
         return entrainementsDAO.getEntrainementByLogin(login);
     }
     
+        public void updateSelectedProgramme(String prog){
+        setSelectedProgramme(programmeDAO.updateSelectedProgramme(prog));
+        initialiserGraphic();
+    }
     
-        public void initialiserGraphic(int prog){
+    
+        public void initialiserGraphic(){
         dateModel = new LineChartModel();
-        listeExoByProgrammes = exerciceDAO.getExoByProgrammes(prog);
-        LineChartSeries series[] = new LineChartSeries[listeExoByProgrammes.size()]; 
-        
-            for(int j = 0; j < listeExoByProgrammes.size(); j++){
-                series[j] = new LineChartSeries();
-                series[j].setLabel(listeExoByProgrammes.get(j).getNomExercice());
-                listeEntrainementsByExos = entrainementsDAO.getEntrainementsByProgrammesAndExercices(prog, listeExoByProgrammes.get(j).getIdExercice());
-                countEntrainementsByExos = entrainementsDAO.getCountByProgrammesAndExercices(prog, listeExoByProgrammes.get(j).getIdExercice());
-                
-                for(int k = 0; k < countEntrainementsByExos; k ++){
-                    Date theDate = listeEntrainementsByExos.get(k).getDateEntrainement();
-                    String theDateFinal = new SimpleDateFormat("yyyy-MM-dd").format(theDate);
-                    Number nombreRepet = (Number) listeEntrainementsByExos.get(k).getIdEntrainements();
-                    series[j].set(theDateFinal, nombreRepet);
-                }
-                dateModel.addSeries(series[j]);
-            }      
-        
-        dateModel.getAxis(AxisType.Y).setLabel("Nombre de répétitions");
-        DateAxis axis = new DateAxis("Dates");
-         
-        dateModel.getAxes().put(AxisType.X, axis);
-     
+
+        if(selectedProgramme != null){
+                    System.out.println("*****************************"+selectedProgramme.getNomProgramme()+"**************");
+            listeExoByProgrammes = exerciceDAO.getExoByProgrammes(selectedProgramme.getIdProgramme());
+            LineChartSeries series[] = new LineChartSeries[listeExoByProgrammes.size()]; 
+
+                for(int j = 0; j < listeExoByProgrammes.size(); j++){
+                    series[j] = new LineChartSeries();
+                    series[j].setLabel(listeExoByProgrammes.get(j).getNomExercice());
+                    listeEntrainementsByExos = entrainementsDAO.getEntrainementsByProgrammesAndExercices(selectedProgramme.getIdProgramme(), listeExoByProgrammes.get(j).getIdExercice());
+                    countEntrainementsByExos = entrainementsDAO.getCountByProgrammesAndExercices(selectedProgramme.getIdProgramme(), listeExoByProgrammes.get(j).getIdExercice());
+
+                    for(int k = 0; k < countEntrainementsByExos; k ++){
+                        Date theDate = listeEntrainementsByExos.get(k).getDateEntrainement();
+                        String theDateFinal = new SimpleDateFormat("yyyy-MM-dd").format(theDate);
+                        Number nombreRepet = (Number) listeEntrainementsByExos.get(k).getIdEntrainements();
+                        series[j].set(theDateFinal, nombreRepet);
+                    }
+                    dateModel.addSeries(series[j]);
+                }      
+        } else {
+            LineChartSeries erreur = new LineChartSeries();
+            erreur.setLabel("Erreur");
+            erreur.set("2016-12-01", 0);
+            dateModel.addSeries(erreur);
+        }
+            dateModel.setLegendPosition("e");
+            dateModel.getAxis(AxisType.Y).setLabel("Nombre de répétitions");
+            DateAxis axis = new DateAxis("Dates");
+
+            dateModel.getAxes().put(AxisType.X, axis);
+
     }
     
         
+        public void onChangeNbRepet(){  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bravo ! Vous avez fait: " + saisie.getNbRepetEffect() + " répétitions", null));  
+    }  
+        
+        public void onChangeNbSeries(){  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bravo ! Vous avez fait: " + saisie.getNbSerieEffect() + " séries", null));  
+    }  
+       
+        public void onChangeTemps(){  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bravo ! Vous fait cet exercice en: " + saisie.getTempsEffect() + " secondes", null));  
+    }  
 }

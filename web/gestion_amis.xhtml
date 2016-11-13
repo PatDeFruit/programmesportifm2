@@ -18,7 +18,7 @@
                         </p:selectOneMenu>
                     
                 </p:panelGrid>
-                <p:commandButton value="Supprimer" action="#{amitieController.suppAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis"/>
+                <p:commandButton value="Supprimer" action="#{amitieController.suppAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis,liste_amis"/>
             </h:form>
         </c:view>
     
@@ -32,7 +32,7 @@
                         </p:selectOneMenu>
                     
                 </p:panelGrid>
-                <p:commandButton value="Ajouter" action="#{amitieController.saveAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis"/>
+                <p:commandButton value="Ajouter" action="#{amitieController.saveAmitie(comptesController.compteConnecte.login)}" update="ajout_ami,supp_amis,liste_amis"/>
             </h:form>
         </c:view>
 </html>
