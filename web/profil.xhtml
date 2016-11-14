@@ -81,10 +81,10 @@
                         <p:password value="#{comptesController.compteConnecte.pswd}" style="width: 150px;height: 15px"/>
                         <br/>   
                         <h:outputLabel value="Nom : "/>
-                            <h:outputText value="#{comptesController.compteConnecte.nom}" style="color: gray" />
+                            <h:inputText value="#{comptesController.compteConnecte.nom}" style="color: gray" />
                         <br/><br/>
                         <h:outputLabel value="Prénom : "/>
-                            <h:outputText value="#{comptesController.compteConnecte.prenom}" style="color: gray" />
+                            <h:inputText value="#{comptesController.compteConnecte.prenom}" style="color: gray" />
                         <br/><br/>
                         <center> 
                             <p:commandButton value="Sauvegarder" action="#{comptesController.updateComptes()}" update="menuform"/>
