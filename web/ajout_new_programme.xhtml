@@ -12,28 +12,30 @@
             
          <c:view>
             <h:form>
-                <p:panelGrid columns="2">
-                    
+                <br/>
                     <h:outputLabel value="nomProgramme : " for="nomProgramme" />
                     <h:inputText id="nomProgramme" value="#{programmesController.newProgramme.nomProgramme}" title="nomProgramme" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
+                    <br/><br/>
                     <h:outputLabel value="Objectif du programme : " for="objectif" />
                         <h:inputText id="objectif" value="#{programmesController.newProgramme.objectif}" title="objectif" required="true" requiredMessage="L'objectif du programme est obligatoire."/>    
-                    
+                    <br/><br/>
                     <h:outputLabel value="Exercices existants : " />    
                         <p:selectOneMenu value="#{programmesController.maVariable}">     
                             <c:selectItems value="#{exercicesController.oneMenuAllExercices()}"/>
                         </p:selectOneMenu>          
-                        
+                    <br/><br/>   
                     <h:outputLabel value="Nombre de répétitions réalisées : " for="nbRepetEffect" />
                     <h:inputText id="nbRepetEffect" value="#{programmesController.entrainement.nbRepetEffect}" title="nbRepetEffect" required="true" requiredMessage="Le nombre de répétitions est obligatoire."/>    
+                    <br/><br/>
                     <h:outputLabel value="Nombre de séries réalisées : " for="nbSerieEffect" />
                         <h:inputText id="nbSerieEffect" value="#{programmesController.entrainement.nbSerieEffect}" title="nbSerieEffect" required="true" requiredMessage="Le nombre de série est obligatoire."/>    
+                   <br/><br/>
                     <h:outputLabel value="Temps réalisé : " for="tempsEffect" />
                         <h:inputText id="tempsEffect" value="#{programmesController.entrainement.tempsEffect}" title="tempsEffect" required="true" requiredMessage="Le temps est obligatoire."/>    
-                    
-                
-                </p:panelGrid>
-                <h:commandButton value="Sauvegarder" action="#{programmesController.saveProgrammeAndExo(comptesController.compteConnecte)}"/>
+                    <br/><br/>
+                <center>
+                    <p:commandButton value="Sauvegarder" action="#{programmesController.saveProgrammeAndExo(comptesController.compteConnecte)}"/>
+                </center>
             </h:form>
         </c:view>
                                       
