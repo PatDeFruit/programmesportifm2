@@ -14,6 +14,10 @@ body{
     font-family: 'Lato', Arial, sans-serif;
 }
 
+.ui-widget-content a{
+    text-decoration: none;
+}
+
 /*---- Connection form--*/
 .formContainer{
                 margin: 150px auto;
@@ -209,7 +213,7 @@ header/*bandeau haut*/
 #sidebar-header {
   height: 100px;
   background: #f6bb4e;
-  text-align: center;
+  text-align: left;
   position: relative; }
   #sidebar-header #logo {
     margin: 12px 0; }
@@ -229,6 +233,8 @@ margin-right: 5px;}
     position: relative; }
     .sidebar-nav .sidebar-scroll-content .sidebar-nav-container {
       padding-bottom: 145px; }
+    
+    
     
 #top-bar-wrapper {
   position: fixed;
@@ -266,9 +272,10 @@ margin-right: 5px;}
         display: inline-block;
         height: 100%;
         width: 80px;
-        text-align: center;
+        text-align: left;
         border-left: 1px solid #d8d8d8;
         font-size: 42px;
+        text-decoration: none;
         color: #9a9a9a;
         cursor: pointer;
         box-sizing: border-box;
@@ -429,6 +436,9 @@ margin-right: 5px;}
     border: none;
     
 }
+
+
+
 
 .ui-panelmenu .ui-menuitem-link{
     background: transparent;

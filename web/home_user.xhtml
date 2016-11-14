@@ -28,16 +28,17 @@
                                 <p:growl id="growl" sticky="true" life="2000" showDetail="true"/>
                                 <p:accordionPanel id="prog" style="width: 175px;" activeIndex="-1">
                                     <p:tab title="Programmes suivis">
-                                        <p:dataList id="progSuivis" value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item">
-                                            <h:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}">
+                                        <p:dataList id="progSuivis" value="#{programmesController.getMyProgrammes(comptesController.compteConnecte.login)}" var="item" type="definition" >
+                                            <h:commandLink value="#{item}" action="#{programmesController.updateSelectedProgramme(item)}" >
                                                 <c:actionListener binding="#{entrainementsController.updateSelectedProgramme(item)}"/>
                                             </h:commandLink>
+                                            <p:separator/>
                                         </p:dataList>
                                     </p:tab>
                                 </p:accordionPanel>
                                 <p:accordionPanel id="defis" style="width: 175px;" activeIndex="-1">
                                     <p:tab title="Défis en cours">
-                                        <p:dataList value="#{defisController.getMyDefis(comptesController.compteConnecte.login)}" var="itemDefis">
+                                        <p:dataList value="#{defisController.getMyDefis(comptesController.compteConnecte.login)}" var="itemDefis" type="definition">
                                             <p:commandLink value="#{itemDefis.nomExercice}" onclick="PF('gestion_defis_recu').show();"/>
                                     </p:dataList>
                                     </p:tab>
@@ -115,7 +116,7 @@
                                                 <th>   <h:outputText value="Exercice" /></th>
                                                 <th>    <h:outputText value="Nombre de répétitions"/></th>
                                                 <th>    <h:outputText value="Nombres de séries"/></th>
-                                                <th>    <h:outputText value="Temps"/></th>
+                                                <th>    <h:outputText value="Temps (en secondes)"/></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -222,7 +223,7 @@
                                 <h:form id="liste_amis">
                                     <h1><h:outputText value="Amis"/></h1>
                                     <p:dataList id="listFriend" value="#{amitieController.getMyFriendsWithLogin(comptesController.compteConnecte.login)}" var="friends">
-                                                #{friends.login}
+                                        <p:commandLink value="#{friends.login}" onclick="PF('view_friend').show()"  action="#{comptesController.updateSelectedFriend(friends.login)}"/>
                                      </p:dataList>                                    
                                     
                                 </h:form>
@@ -252,6 +253,10 @@
                 <p:dialog header="Ajouter un nouveau programme" widgetVar="ajout_new_programme" modal="true" width="70%" height="70%">
                     <f:include src="ajout_new_programme.xhtml" />
                 </p:dialog> 
+                
+                <p:dialog header="Profil de votre ami" widgetVar="view_friend" modal="true" width="40%" height="40%">
+                    <f:include src="view_friend.xhtml" />
+                </p:dialog>
                 
         </div>
     </h:body>

@@ -58,6 +58,7 @@ public class ComptesController implements Serializable{
     private static List<Comptes> listeCompteMDP = new ArrayList<Comptes>();
     
     String login;
+    private Comptes friend_select;
     
     /**
      *  //constructeur
@@ -269,6 +270,25 @@ public class ComptesController implements Serializable{
     public Comptes getOneEmailComptes(String email){
         return comptesDAO.getOneEmailComptes(email);
     }
+    
+    
+       public Comptes getOneComptes(String login){
+        return comptesDAO.getOneComptes(login);
+    }
+
+    public Comptes getFriend_select() {
+        return friend_select;
+    }
+
+    public void setFriend_select(Comptes friend_select) {
+        this.friend_select = friend_select;
+    }
+
+public void updateSelectedFriend(String login){
+    friend_select = comptesDAO.getOneComptes(login);
+    }
+       
+       
      
      /**
      * suppression des exercices
