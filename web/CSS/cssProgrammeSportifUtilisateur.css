@@ -213,7 +213,7 @@ header/*bandeau haut*/
 #sidebar-header {
   height: 100px;
   background: #f6bb4e;
-  text-align: left;
+  text-align: center;
   position: relative; }
   #sidebar-header #logo {
     margin: 12px 0; }
@@ -272,7 +272,7 @@ margin-right: 5px;}
         display: inline-block;
         height: 100%;
         width: 80px;
-        text-align: left;
+        text-align: center;
         border-left: 1px solid #d8d8d8;
         font-size: 42px;
         text-decoration: none;

@@ -98,12 +98,11 @@
             <table class="main-wrapper">
                 <tr>
                     <td style="vertical-align: top">
-                        <div>
+                        <div id="main">
                         <h:form>
                             <h1>Programme : <h:outputText value="#{programmesController.selectedProgramme.nomProgramme}" /></h1>  
                             <p:panel id="basic" header="Aujourd'hui" style="margin-bottom:20px;">  
-                                <c:view>
-                                   
+                                <c:view>    
                                 <h:panelGrid columns="2" cellpadding="10">
                                     <h:commandButton id="add_training" image="rsrc/icon-plus.png" styleClass="iconTraining" onclick="PF('addExo').show()" />
                                     <h:outputText value="Ajouter un entrainement ce jour"/>
